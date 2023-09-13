@@ -78,3 +78,14 @@
 b {
     font-weight: bold;
 }
+
+
+/* Styles for the popup */
+.popup {
+    display: none;
+    position: absolute;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 10px;
+    z-index: 1;
+}
