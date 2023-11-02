@@ -87,14 +87,18 @@
 
 .iconRed {
     font-size: 20px;
-    margin-right: 2px; 
+    margin-right: 3px; 
     color: #f07d88;
 }
 
 .iconBlue {
     font-size: 20px;
-    margin-right: 2px; 
+    margin-right: 3px; 
     color: #55ace3
+}
+
+.ms-Icon {
+    margin-right: 3px;
 }
 
 .custom.fa-table{

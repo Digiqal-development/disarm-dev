@@ -44,6 +44,7 @@ async function insertRedTag() {
     const option2 = document.getElementById('option2');
     const option3 = document.getElementById('option3');
     const saveBtn = document.getElementById('save-btn');
+    console.log("uslo")
 
     option1.value = '';
     option2.value = '';
