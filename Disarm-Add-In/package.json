@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "core-js": "^3.9.1",
+    "node": "^20.6.0",
     "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
@@ -58,6 +59,12 @@
     "webpack-dev-server": "4.13.1"
   },
   "prettier": "office-addin-prettier-config",
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false,
+    "child_process": false
+  },
   "browserslist": [
     "ie 11"
   ]

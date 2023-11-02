@@ -4,6 +4,8 @@
  */
 
 /* global     document, Office, Word */
+const fs = require('fs');
+'use strict';
 
 const pluginDialog = document.getElementById('plugin-dialog');
 const optionSelect = document.getElementById('option-select');
@@ -14,6 +16,10 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
     document.getElementById("insert-red-table").onclick = () => tryCatch(insertRedTable);
+    document.getElementById("insert-blue-table").onclick = () => tryCatch(runPython);
+    document.getElementById("save-btn").onclick = () => tryCatch(saveButton);
+    document.getElementById("close-btn").onclick = () => tryCatch(closeButton);
+
 
     //document.getElementById("sideload-msg").style.display = "none";
     //document.getElementById("app-body").style.display = "flex";
@@ -32,113 +38,270 @@ async function tryCatch(callback) {
 
 async function insertRedTag() {
   await Word.run(async (context) => {
-    
-
-    const doc = context.document;
-    const originalRange = doc.getSelection();
-    originalRange.font.set({highlightColor: "Yellow"});
-
-    const selectedChoices = {
-      option1: null,
-      option2: null,
-      option3: [],
-    };
-
-
 
     const pluginContainer = document.getElementById('plugin-container');
     const option1 = document.getElementById('option1');
     const option2 = document.getElementById('option2');
     const option3 = document.getElementById('option3');
-    const option4 = document.getElementById('option4');
     const saveBtn = document.getElementById('save-btn');
 
-  // Show the div as a popup
+    option1.value = '';
+    option2.value = '';
+    option2.innerHTML = '';
+    option3.style.display = 'none';
+
     pluginContainer.style.display = 'block';
 
-  // Listen for changes in the first dropdown
+    $.ajax({
+      dataType: "json",
+      url: "https://api.jsonbin.io/v3/b/651a869054105e766fbc92de",
+      data: {
+        'X-Master-Key': '111111$2a$10$aGFnKNoSPkQ7mmpPofdEqe9aZSNnEVBqKCXEkuwyl5OWz8kDfPbw',
+      },
+      success: function (result, status, xhr) {
+    
+          dataObject = result.record
+          dataObject1 = dataObject.plan
+          planOption = dataObject.plan
+          chosenOption = planOption
+          
+          
+      },
+      error: function (xhr, status, error) {
+              console.log(error) 
+      }})
+
     option1.addEventListener('change', function() {
-      // Get the selected option
       selectedOption = option1.value;
 
-      // Simulate loading options based on the selection
-      // Here, we'll populate the second dropdown with different values based on the first pick
       if (selectedOption === 'option1') {
-          option2.innerHTML = '<option value="suboption11">Plan Strategy</option><option value="suboption12">Plan Objectives</option><option value="suboption13">Target Audience Analysis</option>';
+        planOption = dataObject.plan
+        chosenOption = planOption
+        jsonArray = Object.keys(planOption)
+          
       } else if (selectedOption === 'option2') {
-          option2.innerHTML = '<option value="suboption21">Develop Narratives</option><option value="suboption22">Develop Content</option><option value="suboption23">Establish Social Assets</option><option value="suboption24">Establish Legitimacy</option><option value="suboption25">Microtarget</option><option value="suboption26">Select Channels And Affordances</option>';
+        prepareOption = dataObject.prepare
+        chosenOption = prepareOption
+        jsonArray = Object.keys(prepareOption)
+
       } else if (selectedOption === 'option3'){
-        option2.innerHTML = '<option value="suboption31">Condunt Pump Priming</option><option value="suboption32">Deliver Content</option><option value="suboption33">Maximize Exposure</option><option value="suboption34">Drive Online Harms</option><option value="suboption35">Drive Offline Activity</option><option value="suboption36">Persist in the Information Enviroment</option>';
+        executeOption = dataObject.execute
+        chosenOption = executeOption
+        jsonArray = Object.keys(executeOption)
+
+
       } else if (selectedOption === 'option4'){
-        option2.innerHTML = '<option value="suboption41">Asses Effectiveness</option>';
-      } else {
+        assessOption = dataObject.assess
+        chosenOption = assessOption
+        jsonArray = Object.keys(assessOption)
+      } else { 
           option2.innerHTML = '';
       }
 
       // Show the second dropdown
+      option2.innerHTML = ''
+      jsonArray.forEach(item => { option2.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"});
+        
       option2.style.display = 'block';
+      option2.value = '';
   });
 
-  // Listen for changes in the second dropdown
   option2.addEventListener('change', function() {
       // Show the third subcomponent
       selectedOption.option2 = option2.value;
       option3.style.display = 'block';
-  });
 
-  const checkboxes = option3.querySelectorAll('input[type="checkbox"]');
-  checkboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-          // Update the selected choices in the third subcomponent
-          selectedChoices.option3 = Array.from(checkboxes)
-              .filter(checkbox => checkbox.checked)
-              .map(checkbox => checkbox.value);
-      });
-  });
-
-  // Listen for the Save button click
-  saveBtn.addEventListener('click', function() {
-      // Hide the div
-
-      redTags.push(selectedChoices);
-      
-
-      pluginContainer.style.display = 'none';
-
-      // Clear selections and reset visibility
-      option1.value = '';
-      option2.value = '';
-      option3.style.display = 'none';
-  });
-
+      let value = option2.value;
+      let array = chosenOption[value]
+      option3.innerHTML = ''
+      array.forEach(item => { option3.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(item)[0] +"\">" + Object.values(item)[0] + "</label><br>"})
  
-    await context.sync();
+
+  });
+
+
   });
 }
 
 async function insertRedTable() {
+
   await Word.run(async (context) => {
 
-      // TODO1: Queue commands to get a reference to the paragraph
-      //        that will precede the table.
-      const secondParagraph = context.document.body.paragraphs.getFirst().getNext();
+    const doc = context.document
+    
+    $.ajax({
+      dataType: "json",
+      url: "https://api.jsonbin.io/v3/b/6527deaf12a5d376598ac60e",
+      headers: {'X-Master-Key': '$2a$10$aGFnKNoSPkQ7mmpPofdEqe9aZSNnEVBqKCXEkuwyl5OWz8kDfPbw.' },
+      data: {
+        'X-Master-Key': '$2a$10$aGFnKNoSPkQ7mmpPofdEqe9aZSNnEVBqKCXEkuwyl5OWz8kDfPbw.',
+      },
+      success: async function (result, status, xhr) {
+    
+          dataObject = result.record
 
-      // TODO2: Queue commands to create a table and populate it with data.
-
-      const tableData = [
-        ["Name", "ID", "Birth City"],
-        ["Bob", "434", "Chicago"],
-        ["Sue", "719", "Havana"],
-
-
-    ];
+      const tag_ids = dataObject.ids
       
+    
+
+    var doc1 = context.document.body
+    doc1.load("text")
+    await context.sync();
+
+    var text = doc1.text
+
+    const smallBracketRegex = /\(([^()]*)\)/g;
+    //const foundSmallBrackets1 = text.match(smallBracketRegex);
+
+   const foundSmallBrackets = text.matchAll(/\(([^()]*)\)/g);
+
+
+    const middleBracketRegex = /\[(.*?)\]/g;
+    let foundMiddleBrackets = []
+
+    let table = [["Tecnique title", "ID", "Text", "Use"]]
 
     
-      secondParagraph.insertTable(3, 3, Word.InsertLocation.after, tableData);
 
-      await context.sync();
-  });
+    for (const matches of foundSmallBrackets){
+  
+      foundMiddleBrackets = matches[0].match(middleBracketRegex);
+      const commasNumber = (matches[0].match(/,/g) || []).length;
+      let selectedText = extractText(text, matches.index)
+
+      if (foundMiddleBrackets.length != commasNumber + 1 || foundMiddleBrackets.length == 0) continue;
+
+      for (let j = 0; j < foundMiddleBrackets.length; j++){
+        
+        let tag = foundMiddleBrackets[j].slice(1, -1)
+        let tagObject = tag_ids[tag]
+
+        
+        table.push([tagObject.title, tag, selectedText, tagObject.use])
+        
+      }
+
+
+    }
+
+    drawTable(table)
+
+
+          
+  },
+  error: function (xhr, status, error) {
+          console.log(error) 
+  }})
+
+
+ 
+  }
+
+
+    
+  
+)}
+
+async function drawTable(table){
+  await Word.run(async (context) => {
+  
+
+    const secondParagraph = context.document.body.paragraphs.getFirst().getNext()
+
+
+    const insertedTable = secondParagraph.insertTable(table.length, 4, Word.InsertLocation.after, table);
+    insertedTable.styleBuiltIn = Word.BuiltInStyleName.listTable3_Accent1;
+})
+
+};
+
+async function saveButton(){
+  await Word.run(async (context) => {
+
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const pluginContainer = document.getElementById('plugin-container');
+
+      let text = '('
+
+      checkboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            text += checkbox.nextSibling.textContent.trim() + " [" + checkbox.value + "], "
+        }
+
+        
+      
+    });
+
+    
+    text = text.slice(0, -2); 
+
+    text += ')'
+
+    pluginContainer.style.display = 'none';
+
+      // Clear selections and reset visibility
+    option1.value = '';
+    option2.value = '';
+    option3.style.display = 'none';
+ 
+
+    
+ 
+
+  var doc = context.document.getSelection();
+  context.load(doc)
+  var selectedLenth = await context.sync().then(() => {return doc.text.length })
+
+
+  if (selectedLenth < 1){
+   var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
+   context.load(doc1);
+    //var sentence = await context.sync().then(() => {return doc1.items[0].text;})
+  
+   doc =  await context.sync().then(() => { return doc1.items[0]})
+   
+
+  
+  }
+
+  doc.font.set({highlightColor: "Yellow"});
+    
+
+   doc.insertText(text, Word.InsertLocation.end);
+    text = ''
+
+
+
+    await context.sync(); 
+  })
+
 }
 
+async function closeButton(){
+  await Word.run(async (context) => {
+    const pluginContainer = document.getElementById('plugin-container');
+    pluginContainer.style.display = 'none';
+  })
+}
 
+function extractText(str, endIndex) {
+  const pattern = /[.!?]/;
+  let s = str.substring(0, endIndex - 2)
+  let index = s.lastIndexOf(pattern.exec(s)) + 1
+
+  return str.substring(index, endIndex);
+}
+
+async function runPython(){
+  console.log("funkcijs")
+  var  {spawn}  = require('child_process');
+const temperatures = []; // Store readings
+
+const sensor = spawn('python', ['python.py']);
+sensor.stdout.on('data', function(data) {
+
+    // convert Buffer object to Float
+    
+    console.log("uspjelo");
+});
+}

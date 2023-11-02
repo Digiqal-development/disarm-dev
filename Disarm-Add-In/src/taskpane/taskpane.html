@@ -11,25 +11,29 @@
     <title>Contoso Task Pane Add-in</title>
 
     <!-- Office JavaScript API -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js"></script>
 
     <!-- For more information on Fluent UI, visit https://developer.microsoft.com/fluentui#/. -->
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"/>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
+   
 </head>
 
-<body class="ms-font-m ms-welcome ms-Fabric">
-    <header class="ms-welcome__header ms-bgColor-neutralLighter">
-        <img width="90" height="90" src="../../assets/logo-filled.png" alt="Contoso" title="Contoso" />
-        <h1 class="ms-font-su">Welcome</h1>
-    </header>
 
-    <button class="ms-Button" id="insert-red-tag">Insert Red Tag</button><br/><br/>
+<body class="ms-font-m ms-welcome ms-Fabric">
+   
+
+ <p id="lines">Tags</p>
+
+    <button class="ms-Button" id="insert-red-tag"><div class="iconRed">&#9632;</div>Insert Red Tag</button>
 
     <div id="plugin-container" class="popup">
-        <h3>To which phase does the behavior belong?</h3>
+        <span class="close" id="close-btn"></span>
+        <p>To which phase does the behavior belong?</p>
         <select id="option1">
             <option value="option1">Plan</option>
             <option value="option2">Prepare</option>
@@ -37,23 +41,32 @@
             <option value="option4">Assess</option>
         </select>
 
-        <h3>To which tactic does the behavior belong?</h3>
+        <p>To which tactic does the behavior belong?</p>
         <select id="option2" style="display: none;">
             
             <!-- Options will be dynamically loaded based on the selection of the first dropdown -->
         </select>
-        <h3>Which technique(s) capture the behavior?</h3>
-        <div id="option3" style="display: none;">
+        <p>Which technique(s) capture the behavior?<p>
+        <div class="scrollable-box" >
+            <div class="checkbox-container" id="option3" style="display: none;"> </div>
             
-            <label><input type="checkbox" value="item1"> Item 1</label><br>
-            <label><input type="checkbox" value="item2"> Item 2</label><br>
-            <label><input type="checkbox" value="item3"> Item 3</label><br>
         </div>
-        <button id="save-btn">Save</button>
+        <button id="save-btn">Select technique(s)</button>
     </div>
-   
 
-    <button class="ms-Button" id="insert-red-table">Insert Red Table</button><br/><br/>
+    <button class="ms-Button" id="insert-blue-tag"><div class="iconBlue">&#9632;</div>Insert Blue Tag</button>
+  <p id="lines">Summaries</p> 
+
+    <button class="ms-Button" id="insert-red-table"><i class="fa fa-table custom"></i>Insert Summary Red Table</button>
+    <button class="ms-Button" id="insert-blue-table"><i class="fa fa-table custom"></i>Insert Summary Blue Table</button>
+    <p id="lines">Settings</p>
+
+    <button class="ms-Button" id="formatting"><i class="fas fa-fill-drip"></i>Formatting</button>
+    <button class="ms-Button" id="clear-history">Clear History</button>
+    <p id="lines">Explore</p>
+
+    <button class="ms-Button" id="explorer">Explorer</button>
+    <button class="ms-Button" id="github">GitHub</button>
 </body>
 
 </html>
