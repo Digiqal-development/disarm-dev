@@ -12,18 +12,17 @@ const optionSelect = document.getElementById('option-select');
 const applyBtn = document.getElementById('apply-btn');
 const redTags = []
 
+var redTagColorGlobal = "#FFFF00";
+
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
     document.getElementById("insert-red-table").onclick = () => tryCatch(insertRedTable);
-    document.getElementById("insert-blue-table").onclick = () => tryCatch(runPython);
+    document.getElementById("format-red-tag-color").onclick = () => tryCatch(changeRedTagColor);
     document.getElementById("save-btn").onclick = () => tryCatch(saveButton);
+    document.getElementById("save-btn1").onclick = () => tryCatch(changeRedTagColorSaveBtn);
     document.getElementById("close-btn").onclick = () => tryCatch(closeButton);
-
-
-    //document.getElementById("sideload-msg").style.display = "none";
-    //document.getElementById("app-body").style.display = "flex";
-    //document.getElementById("run").onclick = run;
+    document.getElementById("close-btn1").onclick = () => tryCatch(closeButton);
   }
 });
 
@@ -44,7 +43,7 @@ async function insertRedTag() {
     const option2 = document.getElementById('option2');
     const option3 = document.getElementById('option3');
     const saveBtn = document.getElementById('save-btn');
-    console.log("uslo")
+
 
     option1.value = '';
     option2.value = '';
@@ -205,11 +204,8 @@ async function insertRedTable() {
 
 async function drawTable(table){
   await Word.run(async (context) => {
-  
 
     const secondParagraph = context.document.body.paragraphs.getFirst().getNext()
-
-
     const insertedTable = secondParagraph.insertTable(table.length, 4, Word.InsertLocation.after, table);
     insertedTable.styleBuiltIn = Word.BuiltInStyleName.listTable3_Accent1;
 })
@@ -229,7 +225,6 @@ async function saveButton(){
             text += checkbox.nextSibling.textContent.trim() + " [" + checkbox.value + "], "
         }
 
-        
       
     });
 
@@ -265,7 +260,7 @@ async function saveButton(){
   
   }
 
-  doc.font.set({highlightColor: "Yellow"});
+  doc.font.set({highlightColor: redTagColorGlobal});
     
 
    doc.insertText(text, Word.InsertLocation.end);
@@ -282,6 +277,9 @@ async function closeButton(){
   await Word.run(async (context) => {
     const pluginContainer = document.getElementById('plugin-container');
     pluginContainer.style.display = 'none';
+
+    const pluginContainer1 = document.getElementById('plugin-container-red-tag');
+    pluginContainer1.style.display = 'none';
   })
 }
 
@@ -293,16 +291,19 @@ function extractText(str, endIndex) {
   return str.substring(index, endIndex);
 }
 
-async function runPython(){
-  console.log("funkcijs")
-  var  {spawn}  = require('child_process');
-const temperatures = []; // Store readings
+function changeRedTagColor(){
+  const pluginContainer = document.getElementById('plugin-container-red-tag');
+  const colorPicker = document.getElementById('colorPicker');
+  colorPicker.value = redTagColorGlobal;
 
-const sensor = spawn('python', ['python.py']);
-sensor.stdout.on('data', function(data) {
+  pluginContainer.style.display = 'block';
 
-    // convert Buffer object to Float
-    
-    console.log("uspjelo");
-});
 }
+
+async function changeRedTagColorSaveBtn(){
+  const pluginContainer = document.getElementById('plugin-container-red-tag');
+  var selectedColor = document.getElementById('colorPicker').value;
+  redTagColorGlobal = selectedColor;
+  pluginContainer.style.display = 'none';
+}
+
