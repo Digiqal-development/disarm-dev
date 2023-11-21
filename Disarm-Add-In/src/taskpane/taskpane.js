@@ -17,12 +17,15 @@ var redTagColorGlobal = "#FFFF00";
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
+    document.getElementById("search-red-tag").onclick = () => tryCatch(searchRedTag);
     document.getElementById("insert-red-table").onclick = () => tryCatch(insertRedTable);
     document.getElementById("format-red-tag-color").onclick = () => tryCatch(changeRedTagColor);
     document.getElementById("save-btn").onclick = () => tryCatch(saveButton);
-    document.getElementById("save-btn1").onclick = () => tryCatch(changeRedTagColorSaveBtn);
+    document.getElementById("save-btn1").onclick = () => tryCatch(displaySearchTechniques);
+    document.getElementById("save-btn2").onclick = () => tryCatch(changeRedTagColorSaveBtn);
     document.getElementById("close-btn").onclick = () => tryCatch(closeButton);
     document.getElementById("close-btn1").onclick = () => tryCatch(closeButton);
+    document.getElementById("close-btn2").onclick = () => tryCatch(closeButton);
   }
 });
 
@@ -118,7 +121,6 @@ async function insertRedTag() {
  
 
   });
-
 
   });
 }
@@ -280,6 +282,12 @@ async function closeButton(){
 
     const pluginContainer1 = document.getElementById('plugin-container-red-tag');
     pluginContainer1.style.display = 'none';
+
+    const pluginContainer2 = document.getElementById('plugin-container-search-techniques');
+    pluginContainer2.style.display = 'none';
+
+
+    
   })
 }
 
@@ -305,5 +313,18 @@ async function changeRedTagColorSaveBtn(){
   var selectedColor = document.getElementById('colorPicker').value;
   redTagColorGlobal = selectedColor;
   pluginContainer.style.display = 'none';
+}
+
+async function searchRedTag(){
+  const pluginContainer = document.getElementById('plugin-container-search-techniques');
+  pluginContainer.style.display = 'block';
+}
+
+async function displaySearchTechniques(){
+  const pluginContainer = document.getElementById('plugin-container-search-techniques');
+  pluginContainer.style.display = 'none';
+
+  const pluginContainer1 = document.getElementById('plugin-container-search-techniques-list');
+  pluginContainer1.style.display = 'block';
 }
 

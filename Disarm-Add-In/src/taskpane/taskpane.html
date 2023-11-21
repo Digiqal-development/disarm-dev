@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css">
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
@@ -56,11 +57,61 @@
     </div>
 
     <button class="ms-Button" id="search-red-tag"><div class="iconRed">&#9632;</div>Search Technique(s)</button>
+    <div id="plugin-container-search-techniques" class="popup">
+        <span class="close" id="close-btn2"></span>
+        <p>To which phase does the behavior belong? (OPTIONAL)</p>
+        <select id="option1">
+            <option value="option0">All</option>
+            <option value="option1">Plan</option>
+            <option value="option2">Prepare</option>
+            <option value="option3">Execute</option>
+            <option value="option4">Assess</option>
+        </select>
+
+        <p>To which tactic does the behavior belong? (OPTIONAL)</p>
+        <select id="option2" style="display: none;">
+            
+            <!-- Options will be dynamically loaded based on the selection of the first dropdown -->
+        </select>
+        <p>Specify search term to find technique(s) which capture the behavior (REQUIRED)<p>
+        <input type="text" id="lname" name="lname"><br><br>
+
+        <label><input type="checkbox" value=search-description>Also look in technique descriptions</label><br>
+        
+        <button class="save-btn" id="save-btn1">Search</button>
+    </div>
+
+    <div id="plugin-container-search-techniques-list" class="popup">
+        <span class="close" id="close-btn1"></span>
+    
+    <table class="sortable">
+        <tr>
+          <th>Phase</th>
+          <th>Tactic</th>
+          <th>Technique</th>
+        </tr>
+      
+        <tr class="item">
+          <td>user:0001</td>
+          <td>UK</td>
+          <td>Melissa</td>
+        </tr>
+        <tr class="item">
+          <td>user:0002</td>
+          <td>France</td>
+          <td>Justin</td>
+        </tr>
+       
+      
+      </table>
+
+      <button class="save-btn" id="save-btn3">Save</button>
+    </div>
 
     <p id="lines">Insert Blue Tag</p>
 
     <button class="ms-Button" id="insert-blue-tag"><div class="iconBlue">&#9632;</div>Choose Countermeasure(s)</button>
-    <button class="ms-Button" id="insert-blue-tag"><div class="iconBlue">&#9632;</div>Search Countermeasure(s)</button>
+    <button class="ms-Button" id="search-blue-tag"><div class="iconBlue">&#9632;</div>Search Countermeasure(s)</button>
     <p id="lines">Summaries</p> 
 
     <button class="ms-Button" id="insert-red-table"><i class="ms-Icon ms-font-l ms-Icon--Table ms-fontColor-neutralSecondary"></i>Insert Summary Red Table</button>
@@ -76,8 +127,9 @@
             <div class="overlay-text">(sample technique [T.....])</div>
         </div>
         
-        <button class="save-btn" id="save-btn1">Save</button>
-    </div>    
+        <button class="save-btn" id="save-btn2">Save</button>
+    </div>   
+    
     
 
 
