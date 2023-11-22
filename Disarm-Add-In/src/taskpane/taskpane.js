@@ -206,14 +206,79 @@ async function getTechniques(){
 async function searchRedTag(){
   const popup = document.getElementById('popup-search-techniques');
   popup.style.display = 'block';
+
+  const option1 = document.getElementById('option1-search');
+  const option2 = document.getElementById('option2-search');
+
+  option2.innerHTML = '';
+
+  if (jsonTechniques == '') await getTechniques();
+
+    planOption = jsonTechniques.plan
+    chosenOption = planOption
+
+    //listening for a change in the first dropdown
+    option1.addEventListener('change', function() {
+      selectedOption = option1.value;
+
+      if (selectedOption === 'Plan') {
+        planOption = jsonTechniques.plan
+        chosenOption = planOption
+        jsonArray = Object.keys(planOption)
+          
+      } else if (selectedOption === 'Prepare') {
+        prepareOption = jsonTechniques.prepare
+        chosenOption = prepareOption
+        jsonArray = Object.keys(prepareOption)
+
+      } else if (selectedOption === 'Execute'){
+        executeOption = jsonTechniques.execute
+        chosenOption = executeOption
+        jsonArray = Object.keys(executeOption)
+
+      } else if (selectedOption === 'Assess'){
+        assessOption = jsonTechniques.assess
+        chosenOption = assessOption
+        jsonArray = Object.keys(assessOption)
+
+      } else { 
+          option2.innerHTML = '';
+      }
+
+      // showing the change in the second dropdown
+      option2.innerHTML = ''
+
+      jsonArray.forEach(item => { option2.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"});
+
+      if (selectedOption === 'All') option2.innerHTML = '';
+        
+      option2.style.display = 'block';
+      option2.value = '';
+    });
+
 }
 
 async function displaySearchTechniques(){
+
+  const option1 = document.getElementById('option1-search');
+  const option2 = document.getElementById('option2-search');
+  const checkbox = document.getElementById('search-description');
+  const textBox = document.getElementById('search-bar');
   const popup1 = document.getElementById('popup-search-techniques');
+  const popup2 = document.getElementById('popup-search-techniques-list');
+
   popup1.style.display = 'none';
 
-  const popup2 = document.getElementById('popup-search-techniques-list');
+  searchTechniquesFromJson(option1.value, option2.value, checkbox.checked, textBox.value)
+
   popup2.style.display = 'block';
+}
+
+async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
+  console.log(phase)
+  console.log(tactic)
+  console.log(checkbox)
+  console.log(textbox)
 }
 
 

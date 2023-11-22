@@ -44,8 +44,7 @@
 
         <p>To which tactic does the behavior belong?</p>
         <select id="option2" style="display: none;">
-            
-            <!-- Options will be dynamically loaded based on the selection of the first dropdown -->
+           
         </select>
         <p>Which technique(s) capture the behavior?<p>
         <div class="scrollable-box" >
@@ -59,23 +58,23 @@
     <div id="popup-search-techniques" class="popup">
         <span class="close" id="close2"></span>
         <p>To which phase does the behavior belong? (OPTIONAL)</p>
-        <select id="option1">
-            <option value="option0">All</option>
-            <option value="option1">Plan</option>
-            <option value="option2">Prepare</option>
-            <option value="option3">Execute</option>
-            <option value="option4">Assess</option>
+        <select id="option1-search">
+            <option value="All">All</option>
+            <option value="Plan">Plan</option>
+            <option value="Prepare">Prepare</option>
+            <option value="Execute">Execute</option>
+            <option value="Assess">Assess</option>
         </select>
 
         <p>To which tactic does the behavior belong? (OPTIONAL)</p>
-        <select id="option2" style="display: none;">
+        <select id="option2-search" style="display: none;">
             
-            <!-- Options will be dynamically loaded based on the selection of the first dropdown -->
+           
         </select>
         <p>Specify search term to find technique(s) which capture the behavior (REQUIRED)<p>
-        <input type="text" id="lname" name="lname"><br><br>
+        <input type="text" id="search-bar" name="search-bar"><br><br>
 
-        <label><input type="checkbox" value=search-description>Also look in technique descriptions</label><br>
+        <label><input type="checkbox" id=search-description>Also look in technique descriptions</label><br>
         
         <button class="save-btn" id="save-btn1">Search</button>
     </div>

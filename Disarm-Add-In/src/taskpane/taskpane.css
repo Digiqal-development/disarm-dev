@@ -218,3 +218,9 @@ p {
     top: 25%;
     left: 25%;
 }
+
+#search-bar {
+    width: 88%;
+    height: 35px;
+    font-size: smaller;
+}

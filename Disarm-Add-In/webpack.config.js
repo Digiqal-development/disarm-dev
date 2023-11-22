@@ -14,6 +14,7 @@ async function getHttpsOptions() {
 
 module.exports = async (env, options) => {
   const dev = options.mode === "development";
+
   const config = {
     devtool: "source-map",
     entry: {
@@ -93,7 +94,7 @@ module.exports = async (env, options) => {
         options: env.WEBPACK_BUILD || options.https !== undefined ? options.https : await getHttpsOptions(),
       },
       port: process.env.npm_package_config_dev_server_port || 3000,
-    },
+    }
   };
 
   return config;
