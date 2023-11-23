@@ -269,16 +269,46 @@ async function displaySearchTechniques(){
 
   popup1.style.display = 'none';
 
-  searchTechniquesFromJson(option1.value, option2.value, checkbox.checked, textBox.value)
+  await searchTechniquesFromJson(option1.value, option2.value, checkbox.checked, textBox.value)
 
   popup2.style.display = 'block';
 }
 
 async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
-  console.log(phase)
-  console.log(tactic)
-  console.log(checkbox)
-  console.log(textbox)
+
+  var resultTechniques = []
+  if (reverseJsonTechniques == "") await searchTechniques()
+  
+  const newJson = reverseJsonTechniques.ids;
+  for (const key in newJson){
+    
+    const value = newJson[key] 
+    var found = false   
+
+    //check if phase and tactic match the row
+    if ((phase == "All" || phase == value.phase) && (tactic == "" || value.use.includes(tactic))){
+
+      //check if the title includes the search term
+      if (value.title.toLowerCase().includes(textbox.toLowerCase())){
+        resultTechniques.push(key)
+        found = true
+      }
+
+      //if technique is not found check the description (if checked)
+      if (!found && checkbox && value.description.toLowerCase().includes(textbox.toLowerCase())){
+        resultTechniques.push(key)
+      }
+    }
+  }
+
+  drawFoundTechniquesTable(resultTechniques)
+  console.log(resultTechniques)
+  
+
+}
+
+function drawFoundTechniquesTable(results){
+
 }
 
 
