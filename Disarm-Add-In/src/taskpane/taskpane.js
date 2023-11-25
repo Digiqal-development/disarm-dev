@@ -16,6 +16,9 @@ var redTagColorGlobal = "#FFFF00";
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
 
+    getTechniques();
+    searchTechniques();
+
     //red tag
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
     document.getElementById("search-red-tag").onclick = () => tryCatch(searchRedTag);
@@ -30,6 +33,8 @@ Office.onReady((info) => {
     document.getElementById("save-btn").onclick = () => tryCatch(saveButton);
     document.getElementById("save-btn1").onclick = () => tryCatch(displaySearchTechniques);
     document.getElementById("save-btn2").onclick = () => tryCatch(changeRedTagColorSaveBtn);
+    document.getElementById("save-btn3").onclick = () => tryCatch(saveButtonSearchTecniques);
+
 
     //close
     document.querySelectorAll('.close').forEach(element => element.onclick = () => tryCatch(closeButton));
@@ -317,7 +322,7 @@ async function drawFoundTechniquesTable(results){
   for (const tag in results){
     let tag_object = tag_ids[results[tag]]
 
-    table.innerHTML += "<tr class=\"item\"><td>" + tag_object.phase + "</td><td>" 
+    table.innerHTML += "<tr class=\"item\" id=\"" + results[tag] + "\"><td>" + tag_object.phase + "</td><td>" 
     + tag_object.use + "</td><td>" + tag_object.title + "</td></tr>"
 
   }
@@ -331,6 +336,54 @@ function changeTableColorOnSelect(){
   else { 
     $(this).css('background', 'white');
   }
+}
+
+async function saveButtonSearchTecniques(){
+  await Word.run(async (context) => {
+
+    const popup = document.getElementById('popup-search-techniques-list');
+    const table = document.getElementById('search-results-table');
+
+    let text = '('
+
+    //iterate through the table
+    for (let i = 0; i < table.rows.length; i++) {
+      const row = table.rows[i];
+
+      //if row is colored add its content to the text
+      if (row.style.background == "rgb(85, 172, 227)") {
+        
+        const thirdTd = row.cells[2];
+        text +=  thirdTd.textContent + " [" + row.id + "], ";       
+      }
+    }
+    
+    text = text.slice(0, -2); 
+
+    text += ')'
+
+    popup.style.display = 'none';
+
+    var doc = context.document.getSelection();
+    context.load(doc)
+    var selectedLength = await context.sync().then(() => {return doc.text.length })
+
+    // if nothing is selected get the entire sentence
+    if (selectedLength < 1){
+      var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
+      context.load(doc1);
+      doc =  await context.sync().then(() => { return doc1.items[0]})
+    }
+
+    //highlght the text
+    doc.font.set({highlightColor: redTagColorGlobal});
+    
+    //insert text with tags
+    doc.insertText(text, Word.InsertLocation.end);
+    text = ''
+
+    await context.sync(); 
+  })
 }
 
 
