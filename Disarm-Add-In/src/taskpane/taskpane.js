@@ -37,6 +37,7 @@ Office.onReady((info) => {
   }
 });
 
+$(document).on('click','tr',function(e) { changeTableColorOnSelect.call(this) }); 
 
 async function tryCatch(callback) {
   try {
@@ -301,14 +302,35 @@ async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
     }
   }
 
-  drawFoundTechniquesTable(resultTechniques)
-  console.log(resultTechniques)
-  
-
+  await drawFoundTechniquesTable(resultTechniques)
 }
 
-function drawFoundTechniquesTable(results){
+async function drawFoundTechniquesTable(results){
 
+  const table = document.getElementById('search-results-table');
+  
+  if (reverseJsonTechniques == '') await searchTechniques();
+  const tag_ids = reverseJsonTechniques.ids
+
+  table.innerHTML = "<tr><th>Phase</th><th>Tactic</th><th>Technique</th></tr>"
+
+  for (const tag in results){
+    let tag_object = tag_ids[results[tag]]
+
+    table.innerHTML += "<tr class=\"item\"><td>" + tag_object.phase + "</td><td>" 
+    + tag_object.use + "</td><td>" + tag_object.title + "</td></tr>"
+
+  }
+}
+
+function changeTableColorOnSelect(){
+ 
+  if ((this.style.background == "" || this.style.background =="white") && this.classList.toString() == "item"){
+    $(this).css('background', '#55ace3');
+  }
+  else { 
+    $(this).css('background', 'white');
+  }
 }
 
 
@@ -413,6 +435,8 @@ async function changeRedTagColorSaveBtn(){
   redTagColorGlobal = selectedColor;
   popup.style.display = 'none';
 }
+
+
 
 
 
