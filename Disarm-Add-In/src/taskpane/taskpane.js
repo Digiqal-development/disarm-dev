@@ -16,6 +16,7 @@ var redTagColorGlobal = "#FFFF00";
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
 
+    //get json files with listed tecniques and tags
     getTechniques();
     searchTechniques();
 
@@ -33,7 +34,7 @@ Office.onReady((info) => {
     document.getElementById("save-btn").onclick = () => tryCatch(saveButton);
     document.getElementById("save-btn1").onclick = () => tryCatch(displaySearchTechniques);
     document.getElementById("save-btn2").onclick = () => tryCatch(changeRedTagColorSaveBtn);
-    document.getElementById("save-btn3").onclick = () => tryCatch(saveButtonSearchTecniques);
+    document.getElementById("save-btn3").onclick = () => tryCatch(saveButtonSearchTechniques);
 
 
     //close
@@ -313,6 +314,7 @@ async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
 async function drawFoundTechniquesTable(results){
 
   const table = document.getElementById('search-results-table');
+ 
   
   if (reverseJsonTechniques == '') await searchTechniques();
   const tag_ids = reverseJsonTechniques.ids
@@ -321,11 +323,24 @@ async function drawFoundTechniquesTable(results){
 
   for (const tag in results){
     let tag_object = tag_ids[results[tag]]
+    let use = tag_object.use.replace(/\s*\[.*?\]\s*/, '');
 
     table.innerHTML += "<tr class=\"item\" id=\"" + results[tag] + "\"><td>" + tag_object.phase + "</td><td>" 
-    + tag_object.use + "</td><td>" + tag_object.title + "</td></tr>"
+    + use + "</td><td>" + tag_object.title + "</td></tr>"
 
   }
+
+  //
+  
+  //table.toString().replace(/<\/?tbody>/g, '');
+  //table.toString().replace(/<\/?thead>/g, '');
+
+  var newTable = document.getElementById('search-results-table')
+  sorttable.makeSortable(newTable);
+
+  
+
+  
 }
 
 function changeTableColorOnSelect(){
@@ -338,7 +353,7 @@ function changeTableColorOnSelect(){
   }
 }
 
-async function saveButtonSearchTecniques(){
+async function saveButtonSearchTechniques(){
   await Word.run(async (context) => {
 
     const popup = document.getElementById('popup-search-techniques-list');
