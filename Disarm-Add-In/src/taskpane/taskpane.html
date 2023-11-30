@@ -19,6 +19,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css">
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css">
     
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
@@ -80,9 +82,11 @@
     </div>
 
     <div id="popup-search-techniques-list" class="popup">
-        <span class="close" id="close3"></span>
-    
-        <table class="sortable" id="search-results-table"></table>
+        <span class="close" id="close3"></span>    
+        
+        <table class="sorttable" id="search-results-table">
+            <thead><tr><th>Phase</th><th>Tactic</th><th>Technique</th></tr></thead>
+        </table>
         <button class="save-btn" id="save-btn3">Save</button>
     </div>
 

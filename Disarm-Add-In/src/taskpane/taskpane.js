@@ -12,6 +12,7 @@ var jsonTechniques = '';
 var reverseJsonTechniques = '';
 
 var redTagColorGlobal = "#FFFF00";
+var searchTechniquesArray = []
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
@@ -36,7 +37,6 @@ Office.onReady((info) => {
     document.getElementById("save-btn2").onclick = () => tryCatch(changeRedTagColorSaveBtn);
     document.getElementById("save-btn3").onclick = () => tryCatch(saveButtonSearchTechniques);
 
-
     //close
     document.querySelectorAll('.close').forEach(element => element.onclick = () => tryCatch(closeButton));
 
@@ -44,6 +44,12 @@ Office.onReady((info) => {
 });
 
 $(document).on('click','tr',function(e) { changeTableColorOnSelect.call(this) }); 
+$(document).on('click', 'th', function(e) {
+  e.stopPropagation(); 
+  sortTechniquesTable.call(this);
+});
+
+
 
 async function tryCatch(callback) {
   try {
@@ -67,6 +73,11 @@ async function closeButton(){
     const popup4 = document.getElementById('popup-search-techniques-list');
     popup4.style.display = 'none';
 
+    const option1 = document.getElementById('option1-search');
+    const option2 = document.getElementById('option2-search');
+
+    option1.value = 'All';
+    option2.value = '';
   })
 }
 
@@ -308,48 +319,63 @@ async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
     }
   }
 
-  await drawFoundTechniquesTable(resultTechniques)
-}
-
-async function drawFoundTechniquesTable(results){
-
-  const table = document.getElementById('search-results-table');
- 
-  
   if (reverseJsonTechniques == '') await searchTechniques();
   const tag_ids = reverseJsonTechniques.ids
 
-  table.innerHTML = "<tr><th>Phase</th><th>Tactic</th><th>Technique</th></tr>"
-
-  for (const tag in results){
-    let tag_object = tag_ids[results[tag]]
+  for (const tag in resultTechniques){
+    let tag_object = tag_ids[resultTechniques[tag]]
     let use = tag_object.use.replace(/\s*\[.*?\]\s*/, '');
 
-    table.innerHTML += "<tr class=\"item\" id=\"" + results[tag] + "\"><td>" + tag_object.phase + "</td><td>" 
-    + use + "</td><td>" + tag_object.title + "</td></tr>"
-
+    searchTechniquesArray.push({ id: resultTechniques[tag], phase: tag_object.phase, use: use, title: tag_object.title, color: "white" });
   }
 
-  //
-  
-  //table.toString().replace(/<\/?tbody>/g, '');
-  //table.toString().replace(/<\/?thead>/g, '');
+  drawFoundTechniquesTable()
 
-  var newTable = document.getElementById('search-results-table')
-  sorttable.makeSortable(newTable);
+}
 
-  
+function drawFoundTechniquesTable(){
 
-  
+  const table = document.getElementById('search-results-table');
+ 
+  table.innerHTML = "<thead><tr><th>Phase</th><th>Tactic</th><th>Technique</th></tr></thead>"
+
+  for (const row in searchTechniquesArray){
+
+    var color = searchTechniquesArray[row].color
+    if (color == "blue") color = "rgb(85, 172, 227)"
+    
+    table.innerHTML += "<tbody><tr class=\"item\" id=\"" + searchTechniquesArray[row].id 
+    + "\"" + "style=\"background: " + color + "\"" +
+    "><td>" + 
+    searchTechniquesArray[row].phase + "</td><td>" 
+     + searchTechniquesArray[row].use + "</td><td>" + searchTechniquesArray[row].title + "</td></tr></tbody>"
+
+  }
+}
+
+function sortTechniquesTable(){
+  var column = $(this).text().trim();
+
+  if (column == "Phase") searchTechniquesArray.sort((a,b) => a.phase.localeCompare(b.phase))
+  else if (column == "Tactic") searchTechniquesArray.sort((a,b) => a.use.localeCompare(b.use))
+  else if (column == "Technique") searchTechniquesArray.sort((a,b) => a.title.localeCompare(b.title))
+  drawFoundTechniquesTable()
+ 
 }
 
 function changeTableColorOnSelect(){
  
   if ((this.style.background == "" || this.style.background =="white") && this.classList.toString() == "item"){
     $(this).css('background', '#55ace3');
+    for (var i = 0; i < searchTechniquesArray.length; i++) {
+      if (searchTechniquesArray[i].id === this.id) searchTechniquesArray[i].color = "blue";
+   }
   }
   else { 
     $(this).css('background', 'white');
+    for (var i = 0; i < searchTechniquesArray.length; i++) {
+      if (searchTechniquesArray[i].id === this.id) searchTechniquesArray[i].color = "white";
+   }
   }
 }
 
@@ -358,6 +384,8 @@ async function saveButtonSearchTechniques(){
 
     const popup = document.getElementById('popup-search-techniques-list');
     const table = document.getElementById('search-results-table');
+    const option1 = document.getElementById('option1-search');
+    const option2 = document.getElementById('option2-search');
 
     let text = '('
 
@@ -378,6 +406,10 @@ async function saveButtonSearchTechniques(){
     text += ')'
 
     popup.style.display = 'none';
+    option1.value = 'All';
+    option2.value = '';
+
+
 
     var doc = context.document.getSelection();
     context.load(doc)
@@ -400,7 +432,6 @@ async function saveButtonSearchTechniques(){
     await context.sync(); 
   })
 }
-
 
 //summaries
 
