@@ -78,6 +78,7 @@ async function closeButton(){
 
     option1.value = 'All';
     option2.value = '';
+    document.body.classList.remove('blur-background');
   })
 }
 
@@ -93,6 +94,8 @@ async function insertRedTag() {
     const option2 = document.getElementById('option2');
     const option3 = document.getElementById('option3');
     const saveBtn = document.getElementById('save-btn');
+
+    document.body.classList.add('blur-background');
 
     option1.value = '';
     option2.value = '';
@@ -179,6 +182,8 @@ async function saveButton(){
 
     text += ')'
 
+    if (text.length < 3) text = '';
+
     popup.style.display = 'none';
     option1.value = '';
     option2.value = '';
@@ -201,6 +206,8 @@ async function saveButton(){
     //insert text with tags
     doc.insertText(text, Word.InsertLocation.end);
     text = ''
+
+    document.body.classList.remove('blur-background');
 
     await context.sync(); 
   })
@@ -227,6 +234,8 @@ async function searchRedTag(){
 
   const option1 = document.getElementById('option1-search');
   const option2 = document.getElementById('option2-search');
+
+  document.body.classList.add('blur-background');
 
   option2.innerHTML = '';
 
@@ -405,9 +414,12 @@ async function saveButtonSearchTechniques(){
 
     text += ')'
 
+    if (text.length < 3) text = '';
+
     popup.style.display = 'none';
     option1.value = 'All';
     option2.value = '';
+    document.body.classList.remove('blur-background');
 
 
 
@@ -525,6 +537,7 @@ function changeRedTagColor(){
   colorPicker.value = redTagColorGlobal;
 
   popup.style.display = 'block';
+  document.body.classList.add('blur-background');
 
 }
 
@@ -533,6 +546,7 @@ async function changeRedTagColorSaveBtn(){
   var selectedColor = document.getElementById('colorPicker').value;
   redTagColorGlobal = selectedColor;
   popup.style.display = 'none';
+  document.body.classList.remove('blur-background');
 }
 
 
