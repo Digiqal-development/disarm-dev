@@ -8,7 +8,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Contoso Task Pane Add-in</title>
+    <title>Disarm</title>
 
     <!-- Office JavaScript API -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -20,7 +20,8 @@
     <link rel="stylesheet" href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/9.6.1/css/fabric.min.css">
     <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.default.min.css">
+   
     
     <!-- Template styles -->
     <link href="taskpane.css" rel="stylesheet" type="text/css" />
@@ -59,7 +60,7 @@
     <button class="ms-Button" id="search-red-tag"><div class="iconRed">&#9632;</div>Search Technique(s)</button>
     <div id="popup-search-techniques" class="popup">
         <span class="close" id="close2"></span>
-        <p>To which phase does the behavior belong? (OPTIONAL)</p>
+        <p>To which phase does the behavior belong?</p>
         <select id="option1-search">
             <option value="All">All</option>
             <option value="Plan">Plan</option>
@@ -68,17 +69,21 @@
             <option value="Assess">Assess</option>
         </select>
 
-        <p>To which tactic does the behavior belong? (OPTIONAL)</p>
-        <select id="option2-search" style="display: none;">
-            
-           
-        </select>
-        <p>Specify search term to find technique(s) which capture the behavior (REQUIRED)<p>
+        <p>To which tactic does the behavior belong?</p>
+        <select id="option2-search" style="display: none;"></select>
+
+
+        <p>Specify search term to find technique(s) which capture the behavior<p>
+        <p id="alert"></p>
+
         <input type="text" id="search-bar" name="search-bar"><br><br>
+        
 
         <label><input type="checkbox" id=search-description>Also look in technique descriptions</label><br>
+        <button class="save-btn" id="save-btn1" type="submit">Search</button>
         
-        <button class="save-btn" id="save-btn1">Search</button>
+       
+          
     </div>
 
     <div id="popup-search-techniques-list" class="popup">
@@ -120,6 +125,10 @@
 
     <button class="ms-Button" id="explorer"><i class="ms-Icon ms-font-l ms-Icon--SearchAndApps ms-fontColor-neutralSecondary"></i>Explorer</button>
     <button class="ms-Button" id="github"><i class="ms-Icon ms-font-l ms-Icon--OpenEnrollment ms-fontColor-neutralSecondary"></i>GitHub</button>
+    
+
 </body>
+
+
 
 </html>

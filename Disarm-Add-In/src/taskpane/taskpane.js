@@ -294,11 +294,21 @@ async function displaySearchTechniques(){
   const popup1 = document.getElementById('popup-search-techniques');
   const popup2 = document.getElementById('popup-search-techniques-list');
 
-  popup1.style.display = 'none';
+  
 
-  await searchTechniquesFromJson(option1.value, option2.value, checkbox.checked, textBox.value)
+  if (textBox.value == "") {
+    const alert = document.getElementById("alert")
+    alert.innerHTML = 'Please fill out this field!';
+  }
+  else {
+    
+    popup1.style.display = 'none';
+    await searchTechniquesFromJson(option1.value, option2.value, checkbox.checked, textBox.value)
+   
+    popup2.style.display = 'block';
+  }
 
-  popup2.style.display = 'block';
+
 }
 
 async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){

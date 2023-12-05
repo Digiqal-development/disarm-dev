@@ -262,3 +262,8 @@ tr:nth-child(even) {
     filter: blur(3px);
     
   }
+
+#alert {
+    font-size: xx-small;
+    color: red;
+}
