@@ -11,7 +11,7 @@ const fs = require('fs');
 var jsonTechniques = '';
 var reverseJsonTechniques = '';
 
-var redTagColorGlobal = "#FFFF00";
+var redTagColorGlobal = "#FFFE00"; 
 var searchTechniquesArray = []
 
 Office.onReady((info) => {
@@ -24,6 +24,10 @@ Office.onReady((info) => {
     //red tag
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
     document.getElementById("search-red-tag").onclick = () => tryCatch(searchRedTag);
+
+    //blue tag
+    document.getElementById("insert-blue-tag").onclick = () => tryCatch(test1);
+    document.getElementById("search-blue-tag").onclick = () => tryCatch(test2);
 
     //summaries
     document.getElementById("insert-red-table").onclick = () => tryCatch(insertRedTable);
@@ -78,7 +82,19 @@ async function closeButton(){
 
     option1.value = 'All';
     option2.value = '';
+
+    const checkbox = document.getElementById('search-description');
+    const textBox = document.getElementById('search-bar');
+    const alertSearchBox = document.getElementById("alert")
+    
+
+    textBox.value = '';
+    checkbox.checked = ''
+    alertSearchBox.innerHTML = ''
+
     document.body.classList.remove('blur-background');
+
+    searchTechniquesArray = []
   })
 }
 
@@ -190,6 +206,7 @@ async function saveButton(){
     option3.style.display = 'none';
 
     var doc = context.document.getSelection();
+  
     context.load(doc)
     var selectedLength = await context.sync().then(() => {return doc.text.length })
 
@@ -297,8 +314,8 @@ async function displaySearchTechniques(){
   
 
   if (textBox.value == "") {
-    const alert = document.getElementById("alert")
-    alert.innerHTML = 'Please fill out this field!';
+    const alertSearchBox = document.getElementById("alert")
+    alertSearchBox.innerHTML = 'Please fill out this field!';
   }
   else {
     
@@ -306,6 +323,9 @@ async function displaySearchTechniques(){
     await searchTechniquesFromJson(option1.value, option2.value, checkbox.checked, textBox.value)
    
     popup2.style.display = 'block';
+    textBox.value = '';
+    checkbox.checked = ''
+    alertSearchBox.innerHTML = ''
   }
 
 
@@ -451,6 +471,8 @@ async function saveButtonSearchTechniques(){
     doc.insertText(text, Word.InsertLocation.end);
     text = ''
 
+    searchTechniquesArray = []
+
     await context.sync(); 
   })
 }
@@ -506,7 +528,7 @@ async function insertRedTable() {
 async function drawTable(table){
   await Word.run(async (context) => {
 
-    const secondParagraph = context.document.body.paragraphs.getFirst().getNext()
+    const secondParagraph = context.document.body.paragraphs.getLast()
     const insertedTable = secondParagraph.insertTable(table.length, 4, Word.InsertLocation.after, table);
     insertedTable.styleBuiltIn = Word.BuiltInStyleName.listTable3_Accent1;
 })
@@ -557,6 +579,62 @@ async function changeRedTagColorSaveBtn(){
   redTagColorGlobal = selectedColor;
   popup.style.display = 'none';
   document.body.classList.remove('blur-background');
+}
+
+
+//test
+async function test1(){
+  await Word.run(async (context) => {
+    const originalXml =
+      "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
+    const customXmlPart = context.document.customXmlParts.add(originalXml);
+    customXmlPart.load("id");
+    const xmlBlob = customXmlPart.getXml();
+
+    await context.sync();
+
+    const readableXml = addLineBreaksToXML(xmlBlob.value);
+    console.log("Added custom XML part:");
+    console.log(readableXml);
+
+    // Store the XML part's ID in a setting so the ID is available to other functions.
+    const settings = context.document.settings;
+    settings.add("ContosoReviewXmlPartId", customXmlPart.id);
+
+    await context.sync();
+  });
+}
+
+function addLineBreaksToXML( xmlBlob) {
+  const replaceValue = new RegExp(">");
+  return xmlBlob.replace(/></g, "> <");
+}
+
+async function test2(){
+  // Queries a custom XML part for elements matching the search terms.
+  await Word.run(async (context) => {
+    const settings = context.document.settings;
+    const xmlPartIDSetting = settings.getItemOrNullObject("ContosoReviewXmlPartId").load("value");
+
+    await context.sync();
+
+    if (xmlPartIDSetting.value) {
+      const customXmlPart = context.document.customXmlParts.getItem(xmlPartIDSetting.value);
+      const xpathToQueryFor = "/Locations/Location";
+      const clientResult = customXmlPart.query(xpathToQueryFor, {
+        contoso: "http://schemas.contoso.com/review/1.0"
+      });
+
+      await context.sync();
+
+      console.log(`Queried custom XML part for ${xpathToQueryFor} and found ${clientResult.value.length} matches:`);
+      for (let i = 0; i < clientResult.value.length; i++) {
+        console.log(clientResult.value[i]);
+      }
+    } else {
+      console.warn("Didn't find custom XML part to query");
+    }
+  });
 }
 
 

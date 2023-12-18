@@ -1,6 +1,8 @@
 import spacy
 nlp = spacy.load('en_core_web_sm')
+import sys
 #sentence = "He eats cheese, but he won't eat ice cream."
+#main_part("All these accounts used fake personas, including one account claiming to be an Afghan man")
 #sentence = "TTPs employed by the accounts included sharing identical content across platforms, coordinated posting times, using GAN-generated faces, and creating fake profile pictures"
 
         
@@ -43,9 +45,9 @@ def main_part(sentence):
     for token in doc:
         ancestors = [t.text for t in token.ancestors]
         children = [t.text for t in token.children]
-        print(token.text, "\t", token.i, "\t", 
-            token.pos_, "\t", token.dep_, "\t",
-            ancestors, "\t", children)
+        #print(token.text, "\t", token.i, "\t", 
+        #    token.pos_, "\t", token.dep_, "\t",
+        #    ancestors, "\t", children)
         
     root_token = find_root_of_sentence(doc)
     other_verbs = find_other_verbs(doc, root_token)
@@ -71,6 +73,16 @@ def main_part(sentence):
     clauses_text = [clause.text for clause in sentence_clauses]
     print(clauses_text)
 
-    return(main_part("All these accounts used fake personas, including one account claiming to be an Afghan man"))
+
+if __name__ == "__main__":
+   
+    if len(sys.argv) != 2:
+        print("Usage: python capitalize_strincaluseg.py <input_string>")
+        sys.exit(1)
+
+    input_string = sys.argv[1]
+    main_part(input_string)
+
+
 
 

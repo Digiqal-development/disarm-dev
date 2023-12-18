@@ -255,6 +255,7 @@ tr:nth-child(even) {
 
 #search-results-table{
     border-spacing: 0;
+    padding: 3px;
     width: 100%;
 }
   
