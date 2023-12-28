@@ -1,0 +1,13 @@
+﻿@Disarm-Server_HostAddress = https://localhost:7225
+
+GET {{Disarm-Server_HostAddress}}/techniques
+
+###
+
+POST {{Disarm-Server_HostAddress}}/clauses
+
+###
+
+POST {{Disarm-Server_HostAddress}}/clauses/{esma}
+
+###

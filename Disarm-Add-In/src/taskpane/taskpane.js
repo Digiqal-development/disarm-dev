@@ -583,7 +583,7 @@ async function changeRedTagColorSaveBtn(){
 
 
 //test
-async function test1(){
+async function test11(){
   await Word.run(async (context) => {
     const originalXml =
       "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
@@ -603,6 +603,27 @@ async function test1(){
 
     await context.sync();
   });
+}
+
+async function test1(){
+  
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: 'https://disarm-test.housepilot.de/tags',
+    contentType: 'application/json',
+   // data: JSON.stringify({
+   //   sentence: 'All these accounts used fake personas, including one account claiming to be an Afghan man',
+   //   result: 'string'
+   // }),
+    success: function(result, status, xhr) {
+      console.log(result);
+    },
+    error: function(xhr, status, error) {
+      console.log(error);
+    }
+  });
+  
 }
 
 function addLineBreaksToXML( xmlBlob) {
