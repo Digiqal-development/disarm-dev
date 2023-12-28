@@ -215,6 +215,10 @@ async function saveButton(){
       var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
       context.load(doc1);
       doc =  await context.sync().then(() => { return doc1.items[0]})
+      
+      //send sentence to backend for clauses extraction
+      var clauses = await getClauses(doc);
+      //console.log(clauses)
     }
 
     //highlght the text
@@ -230,15 +234,33 @@ async function saveButton(){
   })
 }
 
-async function getTechniques(){
+async function getClauses(sentence){
   $.ajax({
-    dataType: "json",
-    url: "https://api.jsonbin.io/v3/b/651a869054105e766fbc92de",
-    data: {
-      'X-Master-Key': '111111$2a$10$aGFnKNoSPkQ7mmpPofdEqe9aZSNnEVBqKCXEkuwyl5OWz8kDfPbw',
+    type: 'POST',
+    dataType: 'json',
+    url: 'https://disarm-test.housepilot.de/clauses/text',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      sentence: sentence.text,
+      result: 'string'
+    }),
+    success: function(result, status, xhr) {
+      console.log(result);
     },
+    error: function(xhr, status, error) {
+      console.log(error);
+    }
+  });
+}
+
+async function getTechniques(){
+  
+  $.ajax({
+    type: 'GET',
+    dataType: "json",
+    url: "https://disarm-test.housepilot.de/techniques",
     success: function (result, status, xhr) {
-      jsonTechniques = result.record
+      jsonTechniques = result
     },
     error: function (xhr, status, error) {
       console.log(error) 
@@ -310,11 +332,11 @@ async function displaySearchTechniques(){
   const textBox = document.getElementById('search-bar');
   const popup1 = document.getElementById('popup-search-techniques');
   const popup2 = document.getElementById('popup-search-techniques-list');
+  const alertSearchBox = document.getElementById("alert")
 
   
 
   if (textBox.value == "") {
-    const alertSearchBox = document.getElementById("alert")
     alertSearchBox.innerHTML = 'Please fill out this field!';
   }
   else {
@@ -546,14 +568,12 @@ function extractTextFromBrackets(str, endIndex) {
 async function searchTechniques(){
   
   $.ajax({
+    type: 'GET',
     dataType: "json",
-    url: "https://api.jsonbin.io/v3/b/655cf2010574da7622c9d82b",
-    data: {
-      'X-Master-Key': '111111$2a$10$aGFnKNoSPkQ7mmpPofdEqe9aZSNnEVBqKCXEkuwyl5OWz8kDfPbw',
-    },
+    url: "https://disarm-test.housepilot.de/tags",
     success: function (result, status, xhr) {
-      var resp = result.record
-      reverseJsonTechniques =resp
+      var resp = result
+      reverseJsonTechniques = resp
     },
     error: function (xhr, status, error) {
       console.log(error) 
@@ -583,7 +603,7 @@ async function changeRedTagColorSaveBtn(){
 
 
 //test
-async function test11(){
+async function test1(){
   await Word.run(async (context) => {
     const originalXml =
       "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
@@ -605,26 +625,6 @@ async function test11(){
   });
 }
 
-async function test1(){
-  
-  $.ajax({
-    type: 'GET',
-    dataType: 'json',
-    url: 'https://disarm-test.housepilot.de/tags',
-    contentType: 'application/json',
-   // data: JSON.stringify({
-   //   sentence: 'All these accounts used fake personas, including one account claiming to be an Afghan man',
-   //   result: 'string'
-   // }),
-    success: function(result, status, xhr) {
-      console.log(result);
-    },
-    error: function(xhr, status, error) {
-      console.log(error);
-    }
-  });
-  
-}
 
 function addLineBreaksToXML( xmlBlob) {
   const replaceValue = new RegExp(">");

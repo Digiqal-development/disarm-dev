@@ -22,13 +22,12 @@ app.UseCors(builder => builder
 );
 
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI();
+
+app.UseDeveloperExceptionPage();
+app.UseSwagger();
+app.UseSwaggerUI();
    
-}
+
 
 
 
@@ -47,7 +46,7 @@ app.MapGet("/tags", () =>
 
 
 
-app.MapPost("/clauses/{sentence}", async (ToDo input) =>
+app.MapPost("/clauses", async (ToDo input) =>
 {
     var process = new System.Diagnostics.Process
     {
