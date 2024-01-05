@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Disarm-Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e7ec27035cb1ed52d61de80632e8ef24db9f7b1b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+88c98bc8e8295d9592ff091a8d98169ca3ec4e33")]
 [assembly: System.Reflection.AssemblyProductAttribute("Disarm-Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Disarm-Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

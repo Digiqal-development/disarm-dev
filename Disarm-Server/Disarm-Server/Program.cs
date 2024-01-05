@@ -1,5 +1,6 @@
 using Disarm_Server;
 using Microsoft.AspNetCore.Hosting.Server;
+using Python.Runtime;
 using System.Diagnostics;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -48,23 +49,32 @@ app.MapGet("/tags", () =>
 
 app.MapPost("/clauses", async (ToDo input) =>
 {
-    var process = new System.Diagnostics.Process
+ 
+    Runtime.PythonDLL = @"C:\Python311\python311.dll";
+    var pathToVirtualEnv = @"C:\Users\esmak\Desktop\add_in\disarm-dev\Disarm-Server\Disarm-Server\pyvenv.cfg";
+
+    var path = Environment.GetEnvironmentVariable("PATH").TrimEnd(';');
+    path = string.IsNullOrEmpty(path) ? pathToVirtualEnv : path + ";" + pathToVirtualEnv;
+    Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.Process);
+    Environment.SetEnvironmentVariable("PATH", pathToVirtualEnv, EnvironmentVariableTarget.Process);
+    Environment.SetEnvironmentVariable("PYTHONPATH", $"{pathToVirtualEnv}\\Lib\\site-packages;{pathToVirtualEnv}\\Lib", EnvironmentVariableTarget.Process);
+
+    PythonEngine.Initialize();
+
+    PythonEngine.PythonHome = pathToVirtualEnv;
+    PythonEngine.PythonPath = Environment.GetEnvironmentVariable("PYTHONPATH", EnvironmentVariableTarget.Process);
+
+    using (Py.GIL())
     {
-        StartInfo = new System.Diagnostics.ProcessStartInfo
-        {
-            FileName = Directory.GetCurrentDirectory() + "/python.exe",
-            Arguments = Directory.GetCurrentDirectory() + "/clause.py " + "\"" + input.Sentence + "\"",
-            RedirectStandardOutput = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        }
-    };
-    process.Start();
+        
+        var fromFile = Py.Import(Path.GetFileNameWithoutExtension(@"C:\Users\esmak\Desktop\add_in\disarm-dev\Disarm-Server\Disarm-Server\clause.py"));
+        var result = fromFile.InvokeMethod("main_part", Py.kw("sentence", input.Sentence));
+        input.Result = result.ToString();
+        
 
+    }
 
-
-    input.Result = await process.StandardOutput.ReadToEndAsync();
-    process.WaitForExit();
+   
 
     return input;
 

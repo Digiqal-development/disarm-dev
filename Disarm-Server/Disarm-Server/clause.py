@@ -32,10 +32,14 @@ def get_clause_token_span_for_verb(verb, doc, all_verbs):
                 last_token_index = child.i
     return(first_token_index, last_token_index)
 
+def testMethod():
+    return 3;
 
 
-def main_part(sentence):
-    
+
+def main_part(text):
+    sentence = text.get('sentence')
+  
     doc = nlp(sentence)
 
     for token in doc:
@@ -65,6 +69,7 @@ def main_part(sentence):
 
     clauses_text = [clause.text for clause in sentence_clauses]
     print(clauses_text)
+    return clauses_text
 
 
 if __name__ == "__main__":
