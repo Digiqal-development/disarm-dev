@@ -7,7 +7,6 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -49,33 +48,25 @@ app.MapGet("/tags", () =>
 
 app.MapPost("/clauses", async (ToDo input) =>
 {
- 
-    Runtime.PythonDLL = @"C:\Python311\python311.dll";
-    var pathToVirtualEnv = @"C:\Users\esmak\Desktop\add_in\disarm-dev\Disarm-Server\Disarm-Server\pyvenv.cfg";
 
-    var path = Environment.GetEnvironmentVariable("PATH").TrimEnd(';');
-    path = string.IsNullOrEmpty(path) ? pathToVirtualEnv : path + ";" + pathToVirtualEnv;
-    Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.Process);
-    Environment.SetEnvironmentVariable("PATH", pathToVirtualEnv, EnvironmentVariableTarget.Process);
-    Environment.SetEnvironmentVariable("PYTHONPATH", $"{pathToVirtualEnv}\\Lib\\site-packages;{pathToVirtualEnv}\\Lib", EnvironmentVariableTarget.Process);
-
-    PythonEngine.Initialize();
-
-    PythonEngine.PythonHome = pathToVirtualEnv;
-    PythonEngine.PythonPath = Environment.GetEnvironmentVariable("PYTHONPATH", EnvironmentVariableTarget.Process);
-
-    using (Py.GIL())
+    var proc = new Process
     {
-        
-        var fromFile = Py.Import(Path.GetFileNameWithoutExtension(@"C:\Users\esmak\Desktop\add_in\disarm-dev\Disarm-Server\Disarm-Server\clause.py"));
-        var result = fromFile.InvokeMethod("main_part", Py.kw("sentence", input.Sentence));
-        input.Result = result.ToString();
-        
+        StartInfo = new ProcessStartInfo
+        {
+            FileName = "C:\\inetpub\\disarm-result-generator\\DisarmPythonResultGenerator.exe",
+            Arguments = "\"" + input.Sentence + "\"",
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = false,
+            CreateNoWindow = true
+        }
+    };
 
-    }
+    proc.Start();
+    await proc.WaitForExitAsync();
 
-   
-
+    var output = await proc.StandardOutput.ReadToEndAsync();
+    input.Result = output;
     return input;
 
 

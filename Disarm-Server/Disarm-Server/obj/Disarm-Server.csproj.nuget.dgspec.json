@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\esmak\\Desktop\\add_in\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {}
+    "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\esmak\\Desktop\\add_in\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {
+    "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\esmak\\Desktop\\add_in\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
+        "projectUniqueName": "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
         "projectName": "Disarm-Server",
-        "projectPath": "C:\\Users\\esmak\\Desktop\\add_in\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
+        "projectPath": "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
         "packagesPath": "C:\\Users\\esmak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\esmak\\Desktop\\add_in\\disarm-dev\\Disarm-Server\\Disarm-Server\\obj\\",
+        "outputPath": "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\esmak\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -34,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -76,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
