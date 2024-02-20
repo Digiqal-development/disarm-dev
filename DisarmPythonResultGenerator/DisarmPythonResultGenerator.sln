@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisarmPythonResultGenerator", "DisarmPythonResultGenerator\DisarmPythonResultGenerator.csproj", "{F9B1D9E8-0EFF-4FEE-972E-A1656E31934C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9B1D9E8-0EFF-4FEE-972E-A1656E31934C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9B1D9E8-0EFF-4FEE-972E-A1656E31934C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9B1D9E8-0EFF-4FEE-972E-A1656E31934C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9B1D9E8-0EFF-4FEE-972E-A1656E31934C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7600B11-DF37-4B97-8B16-3AAF0BA774A3}
+	EndGlobalSection
+EndGlobal

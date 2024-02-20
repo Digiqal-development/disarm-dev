@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DisarmPythonResultGenerator": {
+      "commandName": "Project",
+      "commandLineArgs": "\"All these accounts used fake personas, including one account claiming to be an Afghan man\\r\""
+    }
+  }
+}
