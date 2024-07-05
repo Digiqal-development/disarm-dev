@@ -84,6 +84,14 @@ module.exports = async (env, options) => {
         template: "./src/commands/commands.html",
         chunks: ["polyfill", "commands"],
       }),
+      new CopyWebpackPlugin({
+        patterns: [
+        {
+          from: "src/web.config",
+          to: "src/web.config",
+        },
+       ],
+      }),
     ],
     devServer: {
       headers: {

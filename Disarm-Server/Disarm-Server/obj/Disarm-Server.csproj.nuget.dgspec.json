@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {}
+    "C:\\Users\\esmak\\OneDrive\\Desktop\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {
+    "C:\\Users\\esmak\\OneDrive\\Desktop\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
+        "projectUniqueName": "C:\\Users\\esmak\\OneDrive\\Desktop\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
         "projectName": "Disarm-Server",
-        "projectPath": "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
+        "projectPath": "C:\\Users\\esmak\\OneDrive\\Desktop\\disarm-dev\\Disarm-Server\\Disarm-Server\\Disarm-Server.csproj",
         "packagesPath": "C:\\Users\\esmak\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\esmak\\OneDrive\\Documents\\GitHub\\disarm-dev\\Disarm-Server\\Disarm-Server\\obj\\",
+        "outputPath": "C:\\Users\\esmak\\OneDrive\\Desktop\\disarm-dev\\Disarm-Server\\Disarm-Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\esmak\\AppData\\Roaming\\NuGet\\NuGet.Config",

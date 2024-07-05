@@ -218,7 +218,12 @@ async function saveButton(){
       
       //send sentence to backend for clauses extraction
       var clauses = await getClauses(doc);
-      //console.log(clauses)
+      console.log(clauses)
+      console.log(doc)
+
+      //ovdje treba dodati bojenje klauza u cijeloj recenici
+      //provjeriti doc od cega se sastoji
+      //ukloniti rijeci koje nisu u klauzama
     }
 
     //highlght the text
@@ -238,7 +243,7 @@ async function getClauses(sentence){
   $.ajax({
     type: 'POST',
     dataType: 'json',
-    url: 'https://disarm-test.housepilot.de/clauses/text',
+    url: 'https://disarm-test.housepilot.de/clauses',
     contentType: 'application/json',
     data: JSON.stringify({
       sentence: sentence.text,
@@ -524,7 +529,7 @@ async function insertRedTable() {
     const foundSmallBrackets = text.matchAll(smallBracketRegex);
 
     let foundMiddleBrackets = []
-    let table = [["Tecnique title", "ID", "Text", "Use"]]
+    let table = [["Technique title", "ID", "Text", "Use"]]
 
     for (const matches of foundSmallBrackets){
   
