@@ -10,6 +10,7 @@ const fs = require('fs');
 
 var jsonTechniques = '';
 var reverseJsonTechniques = '';
+var clausesGlobal = 'aaa';
 
 var redTagColorGlobal = "#FFFE00"; 
 var searchTechniquesArray = []
@@ -213,24 +214,44 @@ async function saveButton(){
     // if nothing is selected get the entire sentence
     if (selectedLength < 1){
       var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
+      
       context.load(doc1);
       doc =  await context.sync().then(() => { return doc1.items[0]})
-      
-      //send sentence to backend for clauses extraction
-      var clauses = await getClauses(doc);
-      console.log(clauses)
-      console.log(doc)
 
-      //ovdje treba dodati bojenje klauza u cijeloj recenici
-      //provjeriti doc od cega se sastoji
-      //ukloniti rijeci koje nisu u klauzama
-    }
-
-    //highlght the text
-    doc.font.set({highlightColor: redTagColorGlobal});
+      var getClausesResult = await getClauses(doc);
+      var clauses = getClausesResult.result
     
-    //insert text with tags
-    doc.insertText(text, Word.InsertLocation.end);
+      clauses = clauses.replace(/'/g, '"'); 
+   
+
+      var clausesArray = JSON.parse(clauses);
+      console.log(clausesArray[0])
+
+      var rangeToHighlight = doc.search(clausesArray[0]);
+
+      rangeToHighlight.load('items');
+      await context.sync();
+     
+      rangeToHighlight.items[0].font.set({highlightColor: redTagColorGlobal});
+
+      
+      var newRange = doc.getRange("End")
+      context.load(newRange)
+      
+      
+      newRange.insertText(text, Word.InsertLocation.end);
+      newRange.font.set({highlightColor: redTagColorGlobal});
+
+   
+    }
+    else {
+
+      //highlght the text
+      doc.font.set({highlightColor: redTagColorGlobal});
+    
+      //insert text with tags
+      doc.insertText(text, Word.InsertLocation.end);
+    }
     text = ''
 
     document.body.classList.remove('blur-background');
@@ -239,24 +260,25 @@ async function saveButton(){
   })
 }
 
-async function getClauses(sentence){
-  $.ajax({
-    type: 'POST',
-    dataType: 'json',
-    url: 'https://disarm-test.housepilot.de/clauses',
-    contentType: 'application/json',
-    data: JSON.stringify({
-      sentence: sentence.text,
-      result: 'string'
-    }),
-    success: function(result, status, xhr) {
-      console.log(result);
-    },
-    error: function(xhr, status, error) {
-      console.log(error);
-    }
-  });
+async function getClauses(sentence) {
+  try {
+    const result = await $.ajax({
+      type: 'POST',
+      dataType: 'json',
+      url: 'https://disarm-test.housepilot.de/clauses',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        sentence: sentence.text,
+        result: 'string'
+      })
+    });
+    return result;
+  } catch (error) {
+    console.error('Error fetching clauses:', error);
+    throw error; 
+  }
 }
+
 
 async function getTechniques(){
   
@@ -608,7 +630,7 @@ async function changeRedTagColorSaveBtn(){
 
 
 //test
-async function test1(){
+async function test12(){
   await Word.run(async (context) => {
     const originalXml =
       "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
@@ -628,6 +650,43 @@ async function test1(){
 
     await context.sync();
   });
+}
+
+async function test1(){
+  await Word.run(async (context) => {
+  var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
+      
+  context.load(doc1);
+  doc =  await context.sync().then(() => { return doc1.items[0]})
+
+  //doc.text = "nesto drugo"
+  
+  //send sentence to backend for clauses extraction
+  //await getClauses(doc).then(()=>  console.log(clausesGlobal));
+
+  var clauses = await getClauses(doc);
+  var string = clauses.result
+
+
+  let jsonString = string.replace(/'/g, '"'); // Removes leading and trailing single quotes
+
+
+// Step 2: Use JSON.parse() to convert the JSON string to an array
+  let array = JSON.parse(jsonString);
+
+
+  
+  var rangeToHighlight = doc.search(array[0]);
+
+  rangeToHighlight.load('items');
+  await context.sync();
+  console.log(rangeToHighlight.items[0].text);
+  rangeToHighlight.items[0].font.color = 'red';
+
+  //var clausesArray = JSON.parse(clauses.result)
+  //console.log(clausesArray[0])
+  await context.sync();
+  })
 }
 
 
