@@ -217,41 +217,16 @@ async function saveButton(){
       
       context.load(doc1);
       doc =  await context.sync().then(() => { return doc1.items[0]})
-
-      var getClausesResult = await getClauses(doc);
-      var clauses = getClausesResult.result
-    
-      clauses = clauses.replace(/'/g, '"'); 
-   
-
-      var clausesArray = JSON.parse(clauses);
-      console.log(clausesArray[0])
-
-      var rangeToHighlight = doc.search(clausesArray[0]);
-
-      rangeToHighlight.load('items');
-      await context.sync();
-     
-      rangeToHighlight.items[0].font.set({highlightColor: redTagColorGlobal});
-
-      
-      var newRange = doc.getRange("End")
-      context.load(newRange)
-      
-      
-      newRange.insertText(text, Word.InsertLocation.end);
-      newRange.font.set({highlightColor: redTagColorGlobal});
-
    
     }
-    else {
+  
 
       //highlght the text
-      doc.font.set({highlightColor: redTagColorGlobal});
+    doc.font.set({highlightColor: redTagColorGlobal});
     
       //insert text with tags
-      doc.insertText(text, Word.InsertLocation.end);
-    }
+    doc.insertText(text, Word.InsertLocation.end);
+    
     text = ''
 
     document.body.classList.remove('blur-background');
