@@ -206,52 +206,26 @@ async function saveButton(){
     option2.value = '';
     option3.style.display = 'none';
 
+    //get sentence
     var doc = context.document.getSelection();
   
     context.load(doc)
-    var selectedLength = await context.sync().then(() => {return doc.text.length })
 
-    // if nothing is selected get the entire sentence
-    if (selectedLength < 1){
-      var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
+    var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
       
-      context.load(doc1);
-      doc =  await context.sync().then(() => { return doc1.items[0]})
+    context.load(doc1);
+    doc =  await context.sync().then(() => { return doc1.items[0]})
 
-      var getClausesResult = await getClauses(doc);
-      var clauses = getClausesResult.result
-    
-      clauses = clauses.replace(/'/g, '"'); 
+    //get end of sentence  
+    var newRange = doc.getRange("End")
+    context.load(newRange)
+      
+    //insert tag text to end of sentence
+    newRange.insertText(text, Word.InsertLocation.end);
+
+    //change highlight color of the tag
+    newRange.font.set({highlightColor: redTagColorGlobal});
    
-
-      var clausesArray = JSON.parse(clauses);
-      console.log(clausesArray[0])
-
-      var rangeToHighlight = doc.search(clausesArray[0]);
-
-      rangeToHighlight.load('items');
-      await context.sync();
-     
-      rangeToHighlight.items[0].font.set({highlightColor: redTagColorGlobal});
-
-      
-      var newRange = doc.getRange("End")
-      context.load(newRange)
-      
-      
-      newRange.insertText(text, Word.InsertLocation.end);
-      newRange.font.set({highlightColor: redTagColorGlobal});
-
-   
-    }
-    else {
-
-      //highlght the text
-      doc.font.set({highlightColor: redTagColorGlobal});
-    
-      //insert text with tags
-      doc.insertText(text, Word.InsertLocation.end);
-    }
     text = ''
 
     document.body.classList.remove('blur-background');
@@ -542,7 +516,9 @@ async function insertRedTable() {
     var wholeDocument = context.document.body
     wholeDocument.load("text")
     await context.sync();
+    console.log(wholeDocument)
     var text = wholeDocument.text
+    
 
     //match cases using regular expressions
     const smallBracketRegex = /\(([^()]*)\)/g;
@@ -554,7 +530,6 @@ async function insertRedTable() {
     let table = [["Technique title", "ID", "Text", "Use"]]
 
     for (const matches of foundSmallBrackets){
-  
       foundMiddleBrackets = matches[0].match(middleBracketRegex);
       const commasNumber = (matches[0].match(/,/g) || []).length;
       let selectedText = extractTextFromBrackets(text, matches.index)
@@ -584,10 +559,18 @@ async function drawTable(table){
 
 };
 
-function extractTextFromBrackets(str, endIndex) {
-  const pattern = /[.!?]/;
-  let s = str.substring(0, endIndex - 2)
-  let index = s.lastIndexOf(pattern.exec(s)) + 1
+function extractTextFromBrackets(str, endIndex) {  
+  //pattern to match evenrything that ends a sentence
+  const pattern = /[.!?\n\t]/;
+
+  //pattern to match ]) - in case that after a sentence there is a tag
+  const patternBrackets = /]\)/;
+
+  //taking string from the beginning to end index
+  let s = str.substring(0, endIndex - 1)
+
+  //taking the latest index of these patterns
+  let index = (s.lastIndexOf(pattern.exec(s))> s.lastIndexOf(patternBrackets.exec(s))) ? s.lastIndexOf(pattern.exec(s)) + 1 : s.lastIndexOf(patternBrackets.exec(s)) + 1;
 
   return str.substring(index, endIndex);
 }
