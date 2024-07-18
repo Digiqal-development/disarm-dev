@@ -516,7 +516,6 @@ async function insertRedTable() {
     var wholeDocument = context.document.body
     wholeDocument.load("text")
     await context.sync();
-    console.log(wholeDocument)
     var text = wholeDocument.text
     
 
@@ -567,7 +566,14 @@ function extractTextFromBrackets(str, endIndex) {
   const patternBrackets = /]\)/;
 
   //taking string from the beginning to end index
-  let s = str.substring(0, endIndex - 1)
+  let s = str.substring(0, endIndex - 2)
+
+  console.log("TEKST:", s)
+  console.log(patternBrackets.exec(s))
+  console.log(pattern.exec(s))
+
+
+  
 
   //taking the latest index of these patterns
   let index = (s.lastIndexOf(pattern.exec(s))> s.lastIndexOf(patternBrackets.exec(s))) ? s.lastIndexOf(pattern.exec(s)) + 1 : s.lastIndexOf(patternBrackets.exec(s)) + 1;
