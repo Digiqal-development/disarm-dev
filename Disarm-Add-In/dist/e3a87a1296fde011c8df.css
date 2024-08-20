@@ -258,6 +258,15 @@ tr:nth-child(even) {
     padding: 3px;
     width: 100%;
 }
+
+.disabled{
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
   
 .blur-background > *:not(.popup) {
     filter: blur(3px);

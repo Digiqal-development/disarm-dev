@@ -173,7 +173,7 @@ async function insertRedTag() {
       let value = option2.value;
       let array = chosenOption[value]
       option3.innerHTML = ''
-      array.forEach(item => { option3.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(item)[0] +"\">" + Object.values(item)[0] + "</label><br>"})
+      array.forEach(item => { option3.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(item)[0] +"\">[" + Object.keys(item)[0] + "] " + Object.values(item)[0] + "</label><br>"})
  
     });
   });
@@ -186,47 +186,46 @@ async function saveButton(){
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const popup = document.getElementById('popup-insert-red-tag');
 
-    let text = '('
+    //create string that represents the tag 
+    let tagText = '('
 
     checkboxes.forEach(checkbox => {
       if (checkbox.checked) {
-          text += checkbox.nextSibling.textContent.trim() + " [" + checkbox.value + "], "
+        var checkboxText = checkbox.nextSibling.textContent.trim()
+        tagText += checkboxText.indexOf(' ') === -1 ? checkboxText : checkboxText.substring(checkboxText.indexOf(' ') + 1) + " [" + checkbox.value + "], "
+        
         }
     });
 
-    
-    text = text.slice(0, -2); 
+    tagText = tagText.slice(0, -2); 
+    tagText += ')'
+    if (tagText.length < 3) tagText = '';
 
-    text += ')'
-
-    if (text.length < 3) text = '';
-
+    //clear all selectctions
     popup.style.display = 'none';
     option1.value = '';
     option2.value = '';
     option3.style.display = 'none';
 
     //get sentence
-    var doc = context.document.getSelection();
-  
-    context.load(doc)
+    var sentenceInitialRange = context.document.getSelection().getTextRanges(['\n', '.', '?'], true);
+    context.load(sentenceInitialRange);
+    var sentenceRange =  await context.sync().then(() => { return sentenceInitialRange.items[0]})
 
-    var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
-      
-    context.load(doc1);
-    doc =  await context.sync().then(() => { return doc1.items[0]})
-
-    //get end of sentence  
-    var newRange = doc.getRange("End")
-    context.load(newRange)
-      
+    var sentenceWithoutDot = (sentenceRange.text).slice(0, -1); 
+     
     //insert tag text to end of sentence
-    newRange.insertText(text, Word.InsertLocation.end);
+    sentenceRange.insertText(sentenceWithoutDot + ' ' + tagText + '.', Word.InsertLocation.replace);
 
-    //change highlight color of the tag
-    newRange.font.set({highlightColor: redTagColorGlobal});
+    //search tag inside range to highlight
+    var rangeToHighlight = sentenceRange.search(tagText);
+    rangeToHighlight.load('items');
+    await context.sync();
    
-    text = ''
+    //change highlight color of the tag
+    rangeToHighlight.items[0].font.set({highlightColor: redTagColorGlobal});
+   
+    tagText = ''
 
     document.body.classList.remove('blur-background');
 
@@ -239,7 +238,7 @@ async function getClauses(sentence) {
     const result = await $.ajax({
       type: 'POST',
       dataType: 'json',
-      url: 'https://disarm-test.housepilot.de/clauses',
+      url: 'https://localhost:7225/clauses',
       contentType: 'application/json',
       data: JSON.stringify({
         sentence: sentence.text,
@@ -258,8 +257,13 @@ async function getTechniques(){
   
   $.ajax({
     type: 'GET',
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+    },
     dataType: "json",
-    url: "https://disarm-test.housepilot.de/techniques",
+    url: "https://localhost:7225/techniques",
     success: function (result, status, xhr) {
       jsonTechniques = result
     },
@@ -410,7 +414,7 @@ function drawFoundTechniquesTable(){
     + "\"" + "style=\"background: " + color + "\"" +
     "><td>" + 
     searchTechniquesArray[row].phase + "</td><td>" 
-     + searchTechniquesArray[row].use + "</td><td>" + searchTechniquesArray[row].title + "</td></tr></tbody>"
+     + searchTechniquesArray[row].use + "</td><td>" + "["+searchTechniquesArray[row].id+"] "+searchTechniquesArray[row].title + "</td></tr></tbody>"
 
   }
 }
@@ -449,7 +453,7 @@ async function saveButtonSearchTechniques(){
     const option1 = document.getElementById('option1-search');
     const option2 = document.getElementById('option2-search');
 
-    let text = '('
+    let tagText = '('
 
     //iterate through the table
     for (let i = 0; i < table.rows.length; i++) {
@@ -458,16 +462,15 @@ async function saveButtonSearchTechniques(){
       //if row is colored add its content to the text
       if (row.style.background == "rgb(85, 172, 227)") {
         
-        const thirdTd = row.cells[2];
-        text +=  thirdTd.textContent + " [" + row.id + "], ";       
+        const tableTagText = row.cells[2].textContent;
+        tagText += tableTagText.indexOf(' ') === -1 ? tableTagText : tableTagText.substring(tableTagText.indexOf(' ') + 1) + " [" + row.id + "], ";    
+           
       }
     }
     
-    text = text.slice(0, -2); 
-
-    text += ')'
-
-    if (text.length < 3) text = '';
+    tagText = tagText.slice(0, -2); 
+    tagText += ')'
+    if (tagText.length < 3) tagText = '';
 
     popup.style.display = 'none';
     option1.value = 'All';
@@ -476,23 +479,25 @@ async function saveButtonSearchTechniques(){
 
 
 
-    var doc = context.document.getSelection();
-    context.load(doc)
-    var selectedLength = await context.sync().then(() => {return doc.text.length })
+    //get sentence
+    var sentenceInitialRange = context.document.getSelection().getTextRanges(['\n', '.', '?'], true);
+    context.load(sentenceInitialRange);
+    var sentenceRange =  await context.sync().then(() => { return sentenceInitialRange.items[0]})
 
-    // if nothing is selected get the entire sentence
-    if (selectedLength < 1){
-      var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
-      context.load(doc1);
-      doc =  await context.sync().then(() => { return doc1.items[0]})
-    }
+    var sentenceWithoutDot = (sentenceRange.text).slice(0, -1); 
+     
+    //insert tag text to end of sentence
+    sentenceRange.insertText(sentenceWithoutDot + ' ' + tagText + '.', Word.InsertLocation.replace);
 
-    //highlght the text
-    doc.font.set({highlightColor: redTagColorGlobal});
-    
-    //insert text with tags
-    doc.insertText(text, Word.InsertLocation.end);
-    text = ''
+    //search tag inside range to highlight
+    var rangeToHighlight = sentenceRange.search(tagText);
+    rangeToHighlight.load('items');
+    await context.sync();
+   
+    //change highlight color of the tag
+    rangeToHighlight.items[0].font.set({highlightColor: redTagColorGlobal});
+
+    tagText = ''
 
     searchTechniquesArray = []
 
@@ -577,7 +582,8 @@ function extractTextFromBrackets(str, endIndex) {
 
   //taking the latest index of these patterns
   let index = (s.lastIndexOf(pattern.exec(s))> s.lastIndexOf(patternBrackets.exec(s))) ? s.lastIndexOf(pattern.exec(s)) + 1 : s.lastIndexOf(patternBrackets.exec(s)) + 1;
-
+   
+  console.log(str.substring(index, endIndex))
   return str.substring(index, endIndex);
 }
 
@@ -585,8 +591,13 @@ async function searchTechniques(){
   
   $.ajax({
     type: 'GET',
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'Expires': '0'
+  },
     dataType: "json",
-    url: "https://disarm-test.housepilot.de/tags",
+    url: "https://localhost:7225/tags",
     success: function (result, status, xhr) {
       var resp = result
       reverseJsonTechniques = resp
