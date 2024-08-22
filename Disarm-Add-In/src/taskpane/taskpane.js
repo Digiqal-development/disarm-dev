@@ -4,6 +4,9 @@
  */
 /* global     document, Office, Word */
 
+import { getTechniques, searchTechniques, getClauses } from './../services/apiServices.js';
+import { extractTextFromBrackets, sortRedSummariesTable, removeExtraTagFromText } from './../utils/helpers.js';
+//import { changeRedTagColor } from './../components/formattingComponent.js';
 
 const fs = require('fs');
 'use strict';
@@ -15,12 +18,34 @@ var clausesGlobal = 'aaa';
 var redTagColorGlobal = "#FFFE00"; 
 var searchTechniquesArray = []
 
+const SEARCH_TABLE_SELECT_COLOR = "rgb(85, 172, 227)"
+
+const popup = document.getElementById('popup-insert-red-tag');
+const option1 = document.getElementById('option1');
+const option2 = document.getElementById('option2');
+const option3 = document.getElementById('option3');
+const saveBtn = document.getElementById('save-btn');
+
+
+const popup1 = document.getElementById('popup-search-techniques');
+const option1search = document.getElementById('option1-search');
+const option2search = document.getElementById('option2-search');
+
+
+const checkbox = document.getElementById('search-description');
+const textBox = document.getElementById('search-bar');
+
+const popup2 = document.getElementById('popup-search-techniques-list');
+const alertSearchBox = document.getElementById("alert")
+
+const table = document.getElementById('search-results-table');
+const popupRed = document.getElementById('popup-red-tag-formatting');
+  const colorPicker = document.getElementById('colorPicker');
+
+
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
 
-    //get json files with listed tecniques and tags
-    getTechniques();
-    searchTechniques();
 
     //red tag
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
@@ -42,8 +67,10 @@ Office.onReady((info) => {
     document.getElementById("save-btn2").onclick = () => tryCatch(changeRedTagColorSaveBtn);
     document.getElementById("save-btn3").onclick = () => tryCatch(saveButtonSearchTechniques);
 
+
     //close
     document.querySelectorAll('.close').forEach(element => element.onclick = () => tryCatch(closeButton));
+
 
   }
 });
@@ -93,11 +120,13 @@ async function closeButton(){
     checkbox.checked = ''
     alertSearchBox.innerHTML = ''
 
-    document.body.classList.remove('blur-background');
+    unblurBackground();
 
     searchTechniquesArray = []
   })
 }
+
+
 
 
 //red tag 
@@ -105,14 +134,7 @@ async function closeButton(){
 async function insertRedTag() {
   await Word.run(async (context) => {
 
-    //initialization of used components
-    const popup = document.getElementById('popup-insert-red-tag');
-    const option1 = document.getElementById('option1');
-    const option2 = document.getElementById('option2');
-    const option3 = document.getElementById('option3');
-    const saveBtn = document.getElementById('save-btn');
-
-    document.body.classList.add('blur-background');
+    blurBackground();
 
     option1.value = '';
     option2.value = '';
@@ -122,42 +144,35 @@ async function insertRedTag() {
     popup.style.display = 'block';
 
     //getting data from the server only once
-    if (jsonTechniques == '') await getTechniques();
+    if (jsonTechniques == '') jsonTechniques = await getTechniques();
 
-    planOption = jsonTechniques.plan
-    chosenOption = planOption
+    var selectedOption = option1.value;
+    var chosenOption = jsonTechniques.plan;
 
     //listening for a change in the first dropdown
     option1.addEventListener('change', function() {
-      selectedOption = option1.value;
-
-      if (selectedOption === 'option1') {
-        planOption = jsonTechniques.plan
-        chosenOption = planOption
-        jsonArray = Object.keys(planOption)
-          
-      } else if (selectedOption === 'option2') {
-        prepareOption = jsonTechniques.prepare
-        chosenOption = prepareOption
-        jsonArray = Object.keys(prepareOption)
-
-      } else if (selectedOption === 'option3'){
-        executeOption = jsonTechniques.execute
-        chosenOption = executeOption
-        jsonArray = Object.keys(executeOption)
-
-      } else if (selectedOption === 'option4'){
-        assessOption = jsonTechniques.assess
-        chosenOption = assessOption
-        jsonArray = Object.keys(assessOption)
-
-      } else { 
-          option2.innerHTML = '';
-      }
+      
+      switch (selectedOption) {
+        case 'option1':
+            chosenOption = jsonTechniques.plan;
+            break;
+        case 'option2':
+            chosenOption = jsonTechniques.prepare;
+            break;
+        case 'option3':
+            chosenOption = jsonTechniques.execute;
+            break;
+        case 'option4':
+            chosenOption = jsonTechniques.assess;
+            break;
+        default:
+            option2.innerHTML = '';
+            break;
+    }  
 
       // showing the change in the second dropdown
       option2.innerHTML = ''
-
+      var jsonArray = Object.keys(chosenOption)
       jsonArray.forEach(item => { option2.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"});
         
       option2.style.display = 'block';
@@ -167,7 +182,7 @@ async function insertRedTag() {
     option2.addEventListener('change', function() {
       // showing the techniques in a list of checkboxes
 
-      selectedOption.option2 = option2.value;
+      selectedOption = option2.value;
       option3.style.display = 'block';
 
       let value = option2.value;
@@ -183,17 +198,14 @@ async function saveButton(){
   await Word.run(async (context) => {
 
     // get values from checkboxes
+    
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    const popup = document.getElementById('popup-insert-red-tag');
-
     //create string that represents the tag 
     let tagText = '('
 
     checkboxes.forEach(checkbox => {
       if (checkbox.checked) {
-        var checkboxText = checkbox.nextSibling.textContent.trim()
-        tagText += checkboxText.indexOf(' ') === -1 ? checkboxText : checkboxText.substring(checkboxText.indexOf(' ') + 1) + " [" + checkbox.value + "], "
-        
+        tagText += removeExtraTagFromText(checkbox.nextSibling.textContent.trim()) + " [" + checkbox.value + "], "  
         }
     });
 
@@ -227,141 +239,78 @@ async function saveButton(){
    
     tagText = ''
 
-    document.body.classList.remove('blur-background');
+    unblurBackground();
 
     await context.sync(); 
   })
 }
 
-async function getClauses(sentence) {
-  try {
-    const result = await $.ajax({
-      type: 'POST',
-      dataType: 'json',
-      url: 'https://localhost:7225/clauses',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        sentence: sentence.text,
-        result: 'string'
-      })
-    });
-    return result;
-  } catch (error) {
-    console.error('Error fetching clauses:', error);
-    throw error; 
-  }
-}
-
-
-async function getTechniques(){
-  
-  $.ajax({
-    type: 'GET',
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Pragma': 'no-cache',
-      'Expires': '0'
-    },
-    dataType: "json",
-    url: "https://localhost:7225/techniques",
-    success: function (result, status, xhr) {
-      jsonTechniques = result
-    },
-    error: function (xhr, status, error) {
-      console.log(error) 
-  }})
-}
-
 async function searchRedTag(){
-  const popup = document.getElementById('popup-search-techniques');
-  popup.style.display = 'block';
+  
+  popup1.style.display = 'block';
 
-  const option1 = document.getElementById('option1-search');
-  const option2 = document.getElementById('option2-search');
+  blurBackground()
 
-  document.body.classList.add('blur-background');
+  option2search.innerHTML = '';
 
-  option2.innerHTML = '';
+  if (jsonTechniques == '') jsonTechniques = await getTechniques();
 
-  if (jsonTechniques == '') await getTechniques();
+  var selectedOption = option1.value;
+  var chosenOption = jsonTechniques.plan;
 
-    planOption = jsonTechniques.plan
-    chosenOption = planOption
-
-    //listening for a change in the first dropdown
-    option1.addEventListener('change', function() {
-      selectedOption = option1.value;
-
-      if (selectedOption === 'Plan') {
-        planOption = jsonTechniques.plan
-        chosenOption = planOption
-        jsonArray = Object.keys(planOption)
-          
-      } else if (selectedOption === 'Prepare') {
-        prepareOption = jsonTechniques.prepare
-        chosenOption = prepareOption
-        jsonArray = Object.keys(prepareOption)
-
-      } else if (selectedOption === 'Execute'){
-        executeOption = jsonTechniques.execute
-        chosenOption = executeOption
-        jsonArray = Object.keys(executeOption)
-
-      } else if (selectedOption === 'Assess'){
-        assessOption = jsonTechniques.assess
-        chosenOption = assessOption
-        jsonArray = Object.keys(assessOption)
-
-      } else { 
-          option2.innerHTML = '';
-      }
+  //listening for a change in the first dropdown
+  option1search.addEventListener('change', function() {
+    
+    switch (selectedOption) {
+      case 'option1':
+          chosenOption = jsonTechniques.plan;
+          break;
+      case 'option2':
+          chosenOption = jsonTechniques.prepare;
+          break;
+      case 'option3':
+          chosenOption = jsonTechniques.execute;
+          break;
+      case 'option4':
+          chosenOption = jsonTechniques.assess;
+          break;
+      default:
+          option2search.innerHTML = '';
+          break;
+  }  
 
       // showing the change in the second dropdown
-      option2.innerHTML = ''
+      option2search.innerHTML = ''
+      var jsonArray = Object.keys(chosenOption)
+      jsonArray.forEach(item => { option2search.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"});
 
-      jsonArray.forEach(item => { option2.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"});
-
-      if (selectedOption === 'All') option2.innerHTML = '';
+      if (selectedOption === 'All') option2search.innerHTML = '';
         
-      option2.style.display = 'block';
-      option2.value = '';
+      option2search.style.display = 'block';
+      option2search.value = '';
     });
 
 }
 
 async function displaySearchTechniques(){
 
-  const option1 = document.getElementById('option1-search');
-  const option2 = document.getElementById('option2-search');
-  const checkbox = document.getElementById('search-description');
-  const textBox = document.getElementById('search-bar');
-  const popup1 = document.getElementById('popup-search-techniques');
-  const popup2 = document.getElementById('popup-search-techniques-list');
-  const alertSearchBox = document.getElementById("alert")
-
-  
-
   if (textBox.value == "") {
     alertSearchBox.innerHTML = 'Please fill out this field!';
   }
   else {
-    
     popup1.style.display = 'none';
-    await searchTechniquesFromJson(option1.value, option2.value, checkbox.checked, textBox.value)
-   
+    await searchTechniquesFromJson(option1search.value, option2search.value, checkbox.checked, textBox.value)
     popup2.style.display = 'block';
     textBox.value = '';
     checkbox.checked = ''
     alertSearchBox.innerHTML = ''
   }
-
-
 }
 
 async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
 
   var resultTechniques = []
-  if (reverseJsonTechniques == "") await searchTechniques()
+  if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques()
   
   const newJson = reverseJsonTechniques.ids;
   for (const key in newJson){
@@ -408,7 +357,7 @@ function drawFoundTechniquesTable(){
   for (const row in searchTechniquesArray){
 
     var color = searchTechniquesArray[row].color
-    if (color == "blue") color = "rgb(85, 172, 227)"
+    if (color == "blue") color = SEARCH_TABLE_SELECT_COLOR;
     
     table.innerHTML += "<tbody><tr class=\"item\" id=\"" + searchTechniquesArray[row].id 
     + "\"" + "style=\"background: " + color + "\"" +
@@ -448,11 +397,6 @@ function changeTableColorOnSelect(){
 async function saveButtonSearchTechniques(){
   await Word.run(async (context) => {
 
-    const popup = document.getElementById('popup-search-techniques-list');
-    const table = document.getElementById('search-results-table');
-    const option1 = document.getElementById('option1-search');
-    const option2 = document.getElementById('option2-search');
-
     let tagText = '('
 
     //iterate through the table
@@ -460,10 +404,9 @@ async function saveButtonSearchTechniques(){
       const row = table.rows[i];
 
       //if row is colored add its content to the text
-      if (row.style.background == "rgb(85, 172, 227)") {
-        
-        const tableTagText = row.cells[2].textContent;
-        tagText += tableTagText.indexOf(' ') === -1 ? tableTagText : tableTagText.substring(tableTagText.indexOf(' ') + 1) + " [" + row.id + "], ";    
+      if (row.style.background == SEARCH_TABLE_SELECT_COLOR) {
+
+        tagText += removeExtraTagFromText(row.cells[2].textContent) + " [" + row.id + "], ";    
            
       }
     }
@@ -472,10 +415,10 @@ async function saveButtonSearchTechniques(){
     tagText += ')'
     if (tagText.length < 3) tagText = '';
 
-    popup.style.display = 'none';
-    option1.value = 'All';
-    option2.value = '';
-    document.body.classList.remove('blur-background');
+    popup2.style.display = 'none';
+    option1search.value = 'All';
+    option2search.value = '';
+    unblurBackground();
 
 
 
@@ -512,7 +455,7 @@ async function insertRedTable() {
   await Word.run(async (context) => {
     
     //get search json only once
-    if (reverseJsonTechniques == '') await searchTechniques();
+    if (reverseJsonTechniques == '') reverseJsonTechniques = await searchTechniques();
     
 
     const tag_ids = reverseJsonTechniques.ids
@@ -534,6 +477,7 @@ async function insertRedTable() {
     let table = [["Technique title", "ID", "Text", "Use"]]
 
     for (const matches of foundSmallBrackets){
+
       foundMiddleBrackets = matches[0].match(middleBracketRegex);
       const commasNumber = (matches[0].match(/,/g) || []).length;
       let selectedText = extractTextFromBrackets(text, matches.index)
@@ -544,11 +488,14 @@ async function insertRedTable() {
         
         let tag = foundMiddleBrackets[j].slice(1, -1)
         let tagObject = tag_ids[tag]
+
+        selectedText = selectedText.replace(/^\s*/, '');
         
         // add matched cases into table
         table.push([tagObject.title, tag, selectedText, tagObject.use]) 
       }
     }
+    table = sortRedSummariesTable(table);
     drawTable(table)
   }
 )}
@@ -563,167 +510,26 @@ async function drawTable(table){
 
 };
 
-function extractTextFromBrackets(str, endIndex) {  
-  //pattern to match evenrything that ends a sentence
-  const pattern = /[.!?\n\t]/;
-
-  //pattern to match ]) - in case that after a sentence there is a tag
-  const patternBrackets = /]\)/;
-
-  //taking string from the beginning to end index
-  let s = str.substring(0, endIndex - 2)
-
-  console.log("TEKST:", s)
-  console.log(patternBrackets.exec(s))
-  console.log(pattern.exec(s))
-
-
-  
-
-  //taking the latest index of these patterns
-  let index = (s.lastIndexOf(pattern.exec(s))> s.lastIndexOf(patternBrackets.exec(s))) ? s.lastIndexOf(pattern.exec(s)) + 1 : s.lastIndexOf(patternBrackets.exec(s)) + 1;
-   
-  console.log(str.substring(index, endIndex))
-  return str.substring(index, endIndex);
-}
-
-async function searchTechniques(){
-  
-  $.ajax({
-    type: 'GET',
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Pragma': 'no-cache',
-      'Expires': '0'
-  },
-    dataType: "json",
-    url: "https://localhost:7225/tags",
-    success: function (result, status, xhr) {
-      var resp = result
-      reverseJsonTechniques = resp
-    },
-    error: function (xhr, status, error) {
-      console.log(error) 
-  }})
-}
-
 
 //formatting
 
 function changeRedTagColor(){
-  const popup = document.getElementById('popup-red-tag-formatting');
-  const colorPicker = document.getElementById('colorPicker');
   colorPicker.value = redTagColorGlobal;
-
-  popup.style.display = 'block';
-  document.body.classList.add('blur-background');
-
+  popupRed.style.display = 'block';
+  blurBackground()
 }
 
 async function changeRedTagColorSaveBtn(){
-  const popup = document.getElementById('popup-red-tag-formatting');
-  var selectedColor = document.getElementById('colorPicker').value;
+  var selectedColor = colorPicker.value;
   redTagColorGlobal = selectedColor;
-  popup.style.display = 'none';
+  popupRed.style.display = 'none';
+  unblurBackground()
+}
+
+function blurBackground(){
+  document.body.classList.add('blur-background');
+}
+
+function unblurBackground(){
   document.body.classList.remove('blur-background');
 }
-
-
-//test
-async function test12(){
-  await Word.run(async (context) => {
-    const originalXml =
-      "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
-    const customXmlPart = context.document.customXmlParts.add(originalXml);
-    customXmlPart.load("id");
-    const xmlBlob = customXmlPart.getXml();
-
-    await context.sync();
-
-    const readableXml = addLineBreaksToXML(xmlBlob.value);
-    console.log("Added custom XML part:");
-    console.log(readableXml);
-
-    // Store the XML part's ID in a setting so the ID is available to other functions.
-    const settings = context.document.settings;
-    settings.add("ContosoReviewXmlPartId", customXmlPart.id);
-
-    await context.sync();
-  });
-}
-
-async function test1(){
-  await Word.run(async (context) => {
-  var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
-      
-  context.load(doc1);
-  doc =  await context.sync().then(() => { return doc1.items[0]})
-
-  //doc.text = "nesto drugo"
-  
-  //send sentence to backend for clauses extraction
-  //await getClauses(doc).then(()=>  console.log(clausesGlobal));
-
-  var clauses = await getClauses(doc);
-  var string = clauses.result
-
-
-  let jsonString = string.replace(/'/g, '"'); // Removes leading and trailing single quotes
-
-
-// Step 2: Use JSON.parse() to convert the JSON string to an array
-  let array = JSON.parse(jsonString);
-
-
-  
-  var rangeToHighlight = doc.search(array[0]);
-
-  rangeToHighlight.load('items');
-  await context.sync();
-  console.log(rangeToHighlight.items[0].text);
-  rangeToHighlight.items[0].font.color = 'red';
-
-  //var clausesArray = JSON.parse(clauses.result)
-  //console.log(clausesArray[0])
-  await context.sync();
-  })
-}
-
-
-function addLineBreaksToXML( xmlBlob) {
-  const replaceValue = new RegExp(">");
-  return xmlBlob.replace(/></g, "> <");
-}
-
-async function test2(){
-  // Queries a custom XML part for elements matching the search terms.
-  await Word.run(async (context) => {
-    const settings = context.document.settings;
-    const xmlPartIDSetting = settings.getItemOrNullObject("ContosoReviewXmlPartId").load("value");
-
-    await context.sync();
-
-    if (xmlPartIDSetting.value) {
-      const customXmlPart = context.document.customXmlParts.getItem(xmlPartIDSetting.value);
-      const xpathToQueryFor = "/Locations/Location";
-      const clientResult = customXmlPart.query(xpathToQueryFor, {
-        contoso: "http://schemas.contoso.com/review/1.0"
-      });
-
-      await context.sync();
-
-      console.log(`Queried custom XML part for ${xpathToQueryFor} and found ${clientResult.value.length} matches:`);
-      for (let i = 0; i < clientResult.value.length; i++) {
-        console.log(clientResult.value[i]);
-      }
-    } else {
-      console.warn("Didn't find custom XML part to query");
-    }
-  });
-}
-
-
-
-
-
-
