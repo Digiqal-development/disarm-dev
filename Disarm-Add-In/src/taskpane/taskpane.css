@@ -259,6 +259,11 @@ tr:nth-child(even) {
     width: 100%;
 }
 
+#option1, #option2{
+    width: 100%;
+    
+}
+
 .disabled{
     pointer-events: none;
     cursor: not-allowed;

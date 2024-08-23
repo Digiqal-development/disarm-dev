@@ -136,9 +136,10 @@ async function insertRedTag() {
 
     blurBackground();
 
-    option1.value = '';
+    option1.innerHTML = drawPhaseOptions();
+
     option2.value = '';
-    option2.innerHTML = '';
+    //option2.innerHTML = '';
     option3.style.display = 'none';
 
     popup.style.display = 'block';
@@ -146,34 +147,40 @@ async function insertRedTag() {
     //getting data from the server only once
     if (jsonTechniques == '') jsonTechniques = await getTechniques();
 
-    var selectedOption = option1.value;
+    var selectedOption = option1.id;
     var chosenOption = jsonTechniques.plan;
 
     //listening for a change in the first dropdown
-    option1.addEventListener('change', function() {
-      
+    option1.addEventListener('click', function() {
+      selectedOption = option1.id;
       switch (selectedOption) {
-        case 'option1':
+        case 'plan':
             chosenOption = jsonTechniques.plan;
             break;
-        case 'option2':
+        case 'prepare':
             chosenOption = jsonTechniques.prepare;
             break;
-        case 'option3':
+        case 'execute':
             chosenOption = jsonTechniques.execute;
             break;
-        case 'option4':
+        case 'assess':
             chosenOption = jsonTechniques.assess;
             break;
         default:
             option2.innerHTML = '';
             break;
     }  
-
+console.log("OK")
       // showing the change in the second dropdown
       option2.innerHTML = ''
       var jsonArray = Object.keys(chosenOption)
-      jsonArray.forEach(item => { option2.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"});
+
+//////////////option2.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"
+      option2.innerHTML = "<table><thead></thead><tbody>"
+      jsonArray.forEach(item => { 
+        option2.innerHTML += "<tr><td>" + item  + "</td></tr>" });
+
+      option2.innerHTML += "</tbody>"
         
       option2.style.display = 'block';
       option2.value = '';
@@ -532,4 +539,8 @@ function blurBackground(){
 
 function unblurBackground(){
   document.body.classList.remove('blur-background');
+}
+
+function drawPhaseOptions(){
+  return "<table id=\"option1\"><thead></thead><tbody><tr id=\"plan\"><td>Plan</td></tr><tr id=\"prepare\"><td>Prepare</td></tr><tr id=\"execute\"><td>Execute</td></tr><tr id=\"assess\"><td>assess</td></tr></tbody></table>"
 }
