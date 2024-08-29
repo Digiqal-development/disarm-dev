@@ -129,84 +129,63 @@ async function closeButton(){
 
 
 
-//red tag 
+//insert red tag 
 
 async function insertRedTag() {
   await Word.run(async (context) => {
 
     blurBackground();
-
-    option1.innerHTML = drawPhaseOptions();
+    showPhaseOptions();
 
     option2.value = '';
-    //option2.innerHTML = '';
     option3.style.display = 'none';
-
     popup.style.display = 'block';
-
-    //getting data from the server only once
-    if (jsonTechniques == '') jsonTechniques = await getTechniques();
-
-    var selectedOption = option1.id;
-    var chosenOption = jsonTechniques.plan;
-
-    //listening for a change in the first dropdown
-    option1.addEventListener('click', function() {
-      selectedOption = option1.id;
-      switch (selectedOption) {
-        case 'plan':
-            chosenOption = jsonTechniques.plan;
-            break;
-        case 'prepare':
-            chosenOption = jsonTechniques.prepare;
-            break;
-        case 'execute':
-            chosenOption = jsonTechniques.execute;
-            break;
-        case 'assess':
-            chosenOption = jsonTechniques.assess;
-            break;
-        default:
-            option2.innerHTML = '';
-            break;
-    }  
-console.log("OK")
-      // showing the change in the second dropdown
-      option2.innerHTML = ''
-      var jsonArray = Object.keys(chosenOption)
-
-//////////////option2.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"
-      option2.innerHTML = "<table><thead></thead><tbody>"
-      jsonArray.forEach(item => { 
-        option2.innerHTML += "<tr><td>" + item  + "</td></tr>" });
-
-      option2.innerHTML += "</tbody>"
-        
-      option2.style.display = 'block';
-      option2.value = '';
-    });
-
-    option2.addEventListener('change', function() {
-      // showing the techniques in a list of checkboxes
-
-      selectedOption = option2.value;
-      option3.style.display = 'block';
-
-      let value = option2.value;
-      let array = chosenOption[value]
-      option3.innerHTML = ''
-      array.forEach(item => { option3.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(item)[0] +"\">[" + Object.keys(item)[0] + "] " + Object.values(item)[0] + "</label><br>"})
- 
-    });
   });
+}
+
+
+function showPhaseOptions(){
+  var phases = ["Plan", "Prepare", "Execute", "Assess"]
+  for(let i = 0; i < phases.length; i++){
+    let row = document.createElement('tr');
+    row.addEventListener('click', function() {showTacticOptions(phases[i].toLowerCase())});
+    let cols = '<td>' + phases[i] + '</td>';
+    row.innerHTML = cols;
+    option1.appendChild(row);
+}
+}
+
+function showTacticOptions(phase){
+  option3.innerHTML = ''
+ let tacticsArray = jsonTechniques[phase]
+ option2.innerHTML = '';
+  Object.keys(tacticsArray).forEach(tactic => {
+    let row = document.createElement('tr');
+    row.addEventListener('click', function() {showTechniqueOptions(tacticsArray[tactic])});
+    let cols = '<td>' + tactic + '</td>';
+    row.innerHTML = cols;
+    option2.appendChild(row);
+
+  })
+}
+
+function showTechniqueOptions(techniquesArray){
+  console.log(techniquesArray)
+  option3.innerHTML = '';
+  techniquesArray.forEach(technique => {
+    option3.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(technique)[0] +"\">[" + Object.keys(technique)[0] + "] " + Object.values(technique)[0] + "</label><br>";
+  })
+  option3.style.display = 'block';
+
+
 }
 
 async function saveButton(){
   await Word.run(async (context) => {
 
     // get values from checkboxes
-    
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
     //create string that represents the tag 
     let tagText = '('
 
@@ -251,6 +230,9 @@ async function saveButton(){
     await context.sync(); 
   })
 }
+
+
+//search red tag
 
 async function searchRedTag(){
   
@@ -539,8 +521,4 @@ function blurBackground(){
 
 function unblurBackground(){
   document.body.classList.remove('blur-background');
-}
-
-function drawPhaseOptions(){
-  return "<table id=\"option1\"><thead></thead><tbody><tr id=\"plan\"><td>Plan</td></tr><tr id=\"prepare\"><td>Prepare</td></tr><tr id=\"execute\"><td>Execute</td></tr><tr id=\"assess\"><td>assess</td></tr></tbody></table>"
 }
