@@ -226,7 +226,7 @@ p {
     font-size: smaller;
 }
 
-tr:hover {
+.list:hover, .resultsTable.selected {
     background-color: #f5f5f5;
     
   }
@@ -248,10 +248,15 @@ td, th {
 
 }
 
-tr:nth-child(even) {
-    background-color: #fafafa;;
+.even-row {
+    background-color: #f2f2f2;
 }
-
+.odd-row {
+    background-color: white; 
+}
+.list.selected, .resultsTable.selected {
+    background-color: #55ace3;
+}
 
 #search-results-table{
     border-spacing: 0;
@@ -259,9 +264,8 @@ tr:nth-child(even) {
     width: 100%;
 }
 
-#option1, #option2{
+#option1, #option2, #option1-search, #option2-search{
     width: 100%;
-    
 }
 
 .disabled{

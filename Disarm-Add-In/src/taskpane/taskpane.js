@@ -40,7 +40,7 @@ const alertSearchBox = document.getElementById("alert")
 
 const table = document.getElementById('search-results-table');
 const popupRed = document.getElementById('popup-red-tag-formatting');
-  const colorPicker = document.getElementById('colorPicker');
+const colorPicker = document.getElementById('colorPicker');
 
 
 Office.onReady((info) => {
@@ -75,7 +75,7 @@ Office.onReady((info) => {
   }
 });
 
-$(document).on('click','tr',function(e) { changeTableColorOnSelect.call(this) }); 
+$(document).on('click','tr',function(e) { handleTableColorOnClick.call(this) }); 
 $(document).on('click', 'th', function(e) {
   e.stopPropagation(); 
   sortTechniquesTable.call(this);
@@ -108,8 +108,14 @@ async function closeButton(){
     const option1 = document.getElementById('option1-search');
     const option2 = document.getElementById('option2-search');
 
-    option1.value = 'All';
-    option2.value = '';
+    option1.innerHTML = "";
+    option2.innerHTML = '';
+
+    const option11 = document.getElementById('option1');
+    const option21 = document.getElementById('option2');
+
+    option11.innerHTML = "";
+    option21.innerHTML = '';
 
     const checkbox = document.getElementById('search-description');
     const textBox = document.getElementById('search-bar');
@@ -135,7 +141,9 @@ async function insertRedTag() {
   await Word.run(async (context) => {
 
     blurBackground();
-    showPhaseOptions();
+    showPhaseOptions(true);
+
+    jsonTechniques = await getTechniques();
 
     option2.value = '';
     option3.style.display = 'none';
@@ -144,27 +152,47 @@ async function insertRedTag() {
 }
 
 
-function showPhaseOptions(){
+function showPhaseOptions(insertTag){
+  var uiField = option1;
+  if (!insertTag) uiField = option1search;
+  uiField.innerHTML = '';
   var phases = ["Plan", "Prepare", "Execute", "Assess"]
   for(let i = 0; i < phases.length; i++){
     let row = document.createElement('tr');
-    row.addEventListener('click', function() {showTacticOptions(phases[i].toLowerCase())});
+    row.addEventListener('click', function() {
+      showTacticOptions(phases[i].toLowerCase(), insertTag);
+    });
     let cols = '<td>' + phases[i] + '</td>';
     row.innerHTML = cols;
-    option1.appendChild(row);
+    row.className += " list option1";
+    if (i % 2 === 0) {
+      row.classList += ' even-row';
+  } else {
+      row.classList+= ' odd-row';
+  }
+    uiField.appendChild(row);
 }
 }
 
-function showTacticOptions(phase){
+function showTacticOptions(phase, insertTag){
   option3.innerHTML = ''
+  var uiField = option2;
+  if (!insertTag) uiField = option2search;
+  uiField.innerHTML = '';
  let tacticsArray = jsonTechniques[phase]
- option2.innerHTML = '';
-  Object.keys(tacticsArray).forEach(tactic => {
+ uiField.innerHTML = '';
+  Object.keys(tacticsArray).forEach((tactic, index) => {
     let row = document.createElement('tr');
-    row.addEventListener('click', function() {showTechniqueOptions(tacticsArray[tactic])});
+    if (insertTag) row.addEventListener('click', function() {showTechniqueOptions(tacticsArray[tactic])});
     let cols = '<td>' + tactic + '</td>';
     row.innerHTML = cols;
-    option2.appendChild(row);
+    row.className += " list option2";
+    if (index % 2 === 0) {
+      row.classList += ' even-row';
+  } else {
+      row.classList+= ' odd-row';
+  }
+    uiField.appendChild(row);
 
   })
 }
@@ -239,16 +267,19 @@ async function searchRedTag(){
   popup1.style.display = 'block';
 
   blurBackground()
+  showPhaseOptions()
+
+  jsonTechniques = await getTechniques();
 
   option2search.innerHTML = '';
 
-  if (jsonTechniques == '') jsonTechniques = await getTechniques();
+  //if (jsonTechniques == '') jsonTechniques = await getTechniques();
 
-  var selectedOption = option1.value;
-  var chosenOption = jsonTechniques.plan;
+  //var selectedOption = option1.value;
+  //var chosenOption = jsonTechniques.plan;
 
   //listening for a change in the first dropdown
-  option1search.addEventListener('change', function() {
+ /* option1search.addEventListener('change', function() {
     
     switch (selectedOption) {
       case 'option1':
@@ -277,7 +308,7 @@ async function searchRedTag(){
         
       option2search.style.display = 'block';
       option2search.value = '';
-    });
+    });*/
 
 }
 
@@ -288,12 +319,20 @@ async function displaySearchTechniques(){
   }
   else {
     popup1.style.display = 'none';
-    await searchTechniquesFromJson(option1search.value, option2search.value, checkbox.checked, textBox.value)
+    await searchTechniquesFromJson(getSelectedRowText(option1search), getSelectedRowText(option2search), checkbox.checked, textBox.value)
     popup2.style.display = 'block';
     textBox.value = '';
     checkbox.checked = ''
     alertSearchBox.innerHTML = ''
   }
+}
+
+function getSelectedRowText(field) {
+  const selectedRow = document.querySelector('selected');
+  if (selectedRow) {
+      return selectedRow.textContent.trim(); 
+  }
+  return '';
 }
 
 async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
@@ -308,7 +347,7 @@ async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
     var found = false   
 
     //check if phase and tactic match the row
-    if ((phase == "All" || phase == value.phase) && (tactic == "" || value.use.includes(tactic))){
+    if ((phase == "" || phase == value.phase) && (tactic == "" || value.use.includes(tactic))){
 
       //check if the title includes the search term
       if (value.title.toLowerCase().includes(textbox.toLowerCase())){
@@ -348,9 +387,8 @@ function drawFoundTechniquesTable(){
     var color = searchTechniquesArray[row].color
     if (color == "blue") color = SEARCH_TABLE_SELECT_COLOR;
     
-    table.innerHTML += "<tbody><tr class=\"item\" id=\"" + searchTechniquesArray[row].id 
-    + "\"" + "style=\"background: " + color + "\"" +
-    "><td>" + 
+    table.innerHTML += "<tbody><tr class=\"resultsTable\" id=\"" + searchTechniquesArray[row].id 
+    + "\"" + "><td>" + 
     searchTechniquesArray[row].phase + "</td><td>" 
      + searchTechniquesArray[row].use + "</td><td>" + "["+searchTechniquesArray[row].id+"] "+searchTechniquesArray[row].title + "</td></tr></tbody>"
 
@@ -367,18 +405,46 @@ function sortTechniquesTable(){
  
 }
 
-function changeTableColorOnSelect(){
- 
-  if ((this.style.background == "" || this.style.background =="white") && this.classList.toString() == "item"){
-    $(this).css('background', '#55ace3');
+function handleTableColorOnClick(){
+  if (this.classList.toString() == "resultsTable") handleColorOnClickResultsTable(this);
+  else if (this.classList.toString().includes("list")) handleColorOnClickPhaseTactic(this);
+  else return;
+  
+  
+}
+
+function handleColorOnClickPhaseTactic(this1){
+  if (this1.classList.toString().includes("selected")){
+    this1.classList.remove("selected")
+
+  }
+  else {
+
+    if (this1.classList.toString().includes("option1")){
+      document.querySelectorAll('.option1.list.selected').forEach(row => {row.classList.remove('selected');});
+    }
+    else {
+      document.querySelectorAll('.option2.list.selected').forEach(row => {row.classList.remove('selected');});
+    }
+    
+    this1.classList.add("selected")
+    
+  }
+
+}
+
+function handleColorOnClickResultsTable(this1){
+  if (!this1.classList.toString().includes("selected")){
+    this1.classList.add("selected")
+    console.log(searchTechniquesArray)
     for (var i = 0; i < searchTechniquesArray.length; i++) {
-      if (searchTechniquesArray[i].id === this.id) searchTechniquesArray[i].color = "blue";
+      if (searchTechniquesArray[i].id === this1.id) searchTechniquesArray[i].color = "blue";
    }
   }
   else { 
-    $(this).css('background', 'white');
+    this1.classList.remove("selected")
     for (var i = 0; i < searchTechniquesArray.length; i++) {
-      if (searchTechniquesArray[i].id === this.id) searchTechniquesArray[i].color = "white";
+      if (searchTechniquesArray[i].id === this1.id) searchTechniquesArray[i].color = "white";
    }
   }
 }
@@ -393,7 +459,7 @@ async function saveButtonSearchTechniques(){
       const row = table.rows[i];
 
       //if row is colored add its content to the text
-      if (row.style.background == SEARCH_TABLE_SELECT_COLOR) {
+      if (row.classList.toString().includes('selected')) {
 
         tagText += removeExtraTagFromText(row.cells[2].textContent) + " [" + row.id + "], ";    
            
