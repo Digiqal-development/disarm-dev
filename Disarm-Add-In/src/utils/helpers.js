@@ -41,3 +41,51 @@ export function removeExtraTagFromText(text){
   return text.indexOf(' ') === -1 ? text : text.substring(text.indexOf(' ') + 1)
 }
 
+export function searchTechniquesFromJson(phase, tactic, checkbox, textbox, reverseJsonTechniques){
+
+  var resultTechniques = []
+  var searchTechniquesArray = []
+
+  const newJson = reverseJsonTechniques.ids;
+  for (const key in newJson){
+    
+    const value = newJson[key] 
+    var found = false   
+
+    //check if phase and tactic match the row
+    if ((phase == "" || phase == value.phase) && (tactic == "" || value.use.includes(tactic))){
+
+      //check if the title includes the search term
+      if (value.title.toLowerCase().includes(textbox.toLowerCase())){
+        resultTechniques.push(key)
+        found = true
+      }
+
+      //if technique is not found check the description (if checked)
+      if (!found && checkbox && value.description.toLowerCase().includes(textbox.toLowerCase())){
+        resultTechniques.push(key)
+      }
+    }
+  }
+
+  const tag_ids = reverseJsonTechniques.ids
+
+  for (const tag in resultTechniques){
+    let tag_object = tag_ids[resultTechniques[tag]]
+    let use = tag_object.use.replace(/\s*\[.*?\]\s*/, '');
+
+    searchTechniquesArray.push({ id: resultTechniques[tag], phase: tag_object.phase, use: use, title: tag_object.title, color: "white" });
+  }
+
+  return searchTechniquesArray;
+}
+
+export function getSelectedRowText(field) {
+  const selectedRow = field.querySelector('tr.selected');
+  return selectedRow ? selectedRow.textContent.trim() : '';
+}
+
+
+
+
+
