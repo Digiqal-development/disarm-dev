@@ -237,7 +237,7 @@ async function displaySearchTechniques(){
   else {
     searchTechniquesPopup.style.display = 'none';
     if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques()
-    var searchTechniquesArray = helpers.searchTechniquesFromJson(helpers.getSelectedRowText(phaseSearchField), helpers.getSelectedRowText(tacticSearchField), checkbox.checked, textBox.value, reverseJsonTechniques)
+    searchTechniquesArray = helpers.searchTechniquesFromJson(helpers.getSelectedRowText(phaseSearchField), helpers.getSelectedRowText(tacticSearchField), checkbox.checked, textBox.value, reverseJsonTechniques)
     helpersUI.drawFoundTechniquesTable(searchTechniquesArray)
 
     listSearchTechniquesPopup.style.display = 'block';
@@ -250,12 +250,13 @@ async function displaySearchTechniques(){
 
 
 function sortTechniquesTable(){
+
   var column = $(this).text().trim();
 
   if (column == "Phase") searchTechniquesArray.sort((a,b) => a.phase.localeCompare(b.phase))
   else if (column == "Tactic") searchTechniquesArray.sort((a,b) => a.use.localeCompare(b.use))
   else if (column == "Technique") searchTechniquesArray.sort((a,b) => a.title.localeCompare(b.title))
-  helpersUI.drawFoundTechniquesTable()
+  helpersUI.drawFoundTechniquesTable(searchTechniquesArray)
  
 }
 
