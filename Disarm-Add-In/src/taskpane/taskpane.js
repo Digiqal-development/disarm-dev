@@ -3,44 +3,36 @@
  * See LICENSE in the project root for license information.
  */
 /* global     document, Office, Word */
-
+import * as helpers from './../utils/helpers.js';
+import * as helpersUI from './../utils/helpersUI.js';
 import { getTechniques, searchTechniques, getClauses } from './../services/apiServices.js';
-import { extractTextFromBrackets, sortRedSummariesTable, removeExtraTagFromText } from './../utils/helpers.js';
-//import { changeRedTagColor } from './../components/formattingComponent.js';
-
-const fs = require('fs');
-'use strict';
+import { changeRedTagColor, changeRedTagColorSaveBtn, getRedTagColor } from './../components/formattingComponent.js';
 
 var jsonTechniques = '';
 var reverseJsonTechniques = '';
-var clausesGlobal = 'aaa';
 
-var redTagColorGlobal = "#FFFE00"; 
 var searchTechniquesArray = []
 
 const SEARCH_TABLE_SELECT_COLOR = "rgb(85, 172, 227)"
 
-const popup = document.getElementById('popup-insert-red-tag');
-const option1 = document.getElementById('option1');
-const option2 = document.getElementById('option2');
-const option3 = document.getElementById('option3');
-const saveBtn = document.getElementById('save-btn');
+//insert red tag
+const chooseTechniquesPopup = document.getElementById('popup-insert-red-tag');
+const phaseChooseField = document.getElementById('option1');
+const tacticChooseField = document.getElementById('option2');
+const techniqueChooseCheckboxField = document.getElementById('option3');
 
-
-const popup1 = document.getElementById('popup-search-techniques');
-const option1search = document.getElementById('option1-search');
-const option2search = document.getElementById('option2-search');
-
+//search red tag
+const searchTechniquesPopup = document.getElementById('popup-search-techniques');
+const phaseSearchField = document.getElementById('option1-search');
+const tacticSearchField = document.getElementById('option2-search');
 
 const checkbox = document.getElementById('search-description');
 const textBox = document.getElementById('search-bar');
 
-const popup2 = document.getElementById('popup-search-techniques-list');
+const listSearchTechniquesPopup = document.getElementById('popup-search-techniques-list');
 const alertSearchBox = document.getElementById("alert")
 
 const table = document.getElementById('search-results-table');
-const popupRed = document.getElementById('popup-red-tag-formatting');
-const colorPicker = document.getElementById('colorPicker');
 
 
 Office.onReady((info) => {
@@ -67,10 +59,8 @@ Office.onReady((info) => {
     document.getElementById("save-btn2").onclick = () => tryCatch(changeRedTagColorSaveBtn);
     document.getElementById("save-btn3").onclick = () => tryCatch(saveButtonSearchTechniques);
 
-
     //close
     document.querySelectorAll('.close').forEach(element => element.onclick = () => tryCatch(closeButton));
-
 
   }
 });
@@ -80,7 +70,6 @@ $(document).on('click', 'th', function(e) {
   e.stopPropagation(); 
   sortTechniquesTable.call(this);
 });
-
 
 
 async function tryCatch(callback) {
@@ -93,46 +82,12 @@ async function tryCatch(callback) {
 
 async function closeButton(){
   await Word.run(async (context) => {
-    const popup1 = document.getElementById('popup-insert-red-tag');
-    popup1.style.display = 'none';
 
-    const popup2 = document.getElementById('popup-red-tag-formatting');
-    popup2.style.display = 'none';
-
-    const popup3 = document.getElementById('popup-search-techniques');
-    popup3.style.display = 'none';
-
-    const popup4 = document.getElementById('popup-search-techniques-list');
-    popup4.style.display = 'none';
-
-    const option1 = document.getElementById('option1-search');
-    const option2 = document.getElementById('option2-search');
-
-    option1.innerHTML = "";
-    option2.innerHTML = '';
-
-    const option11 = document.getElementById('option1');
-    const option21 = document.getElementById('option2');
-
-    option11.innerHTML = "";
-    option21.innerHTML = '';
-
-    const checkbox = document.getElementById('search-description');
-    const textBox = document.getElementById('search-bar');
-    const alertSearchBox = document.getElementById("alert")
-    
-
-    textBox.value = '';
-    checkbox.checked = ''
-    alertSearchBox.innerHTML = ''
-
-    unblurBackground();
-
-    searchTechniquesArray = []
+    helpersUI.closeAllFields();
+    helpersUI.unblurBackground();
+    searchTechniquesArray = [];
   })
 }
-
-
 
 
 //insert red tag 
@@ -140,21 +95,21 @@ async function closeButton(){
 async function insertRedTag() {
   await Word.run(async (context) => {
 
-    blurBackground();
+    helpersUI.blurBackground();
     showPhaseOptions(true);
 
     jsonTechniques = await getTechniques();
 
-    option2.value = '';
-    option3.style.display = 'none';
-    popup.style.display = 'block';
+    tacticChooseField.innerHTML = '';
+    techniqueChooseCheckboxField.style.display = 'none';
+    chooseTechniquesPopup.style.display = 'block';
   });
 }
 
 
 function showPhaseOptions(insertTag){
-  var uiField = option1;
-  if (!insertTag) uiField = option1search;
+  var uiField = phaseChooseField;
+  if (!insertTag) uiField = phaseSearchField;
   uiField.innerHTML = '';
   var phases = ["Plan", "Prepare", "Execute", "Assess"]
   for(let i = 0; i < phases.length; i++){
@@ -168,16 +123,16 @@ function showPhaseOptions(insertTag){
     if (i % 2 === 0) {
       row.classList += ' even-row';
   } else {
-      row.classList+= ' odd-row';
+      row.classList += ' odd-row';
   }
     uiField.appendChild(row);
 }
 }
 
 function showTacticOptions(phase, insertTag){
-  option3.innerHTML = ''
-  var uiField = option2;
-  if (!insertTag) uiField = option2search;
+  techniqueChooseCheckboxField.innerHTML = ''
+  var uiField = tacticChooseField;
+  if (!insertTag) uiField = tacticSearchField;
   uiField.innerHTML = '';
  let tacticsArray = jsonTechniques[phase]
  uiField.innerHTML = '';
@@ -198,14 +153,11 @@ function showTacticOptions(phase, insertTag){
 }
 
 function showTechniqueOptions(techniquesArray){
-  console.log(techniquesArray)
-  option3.innerHTML = '';
+  techniqueChooseCheckboxField.innerHTML = '';
   techniquesArray.forEach(technique => {
-    option3.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(technique)[0] +"\">[" + Object.keys(technique)[0] + "] " + Object.values(technique)[0] + "</label><br>";
+    techniqueChooseCheckboxField.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(technique)[0] +"\">[" + Object.keys(technique)[0] + "] " + Object.values(technique)[0] + "</label><br>";
   })
-  option3.style.display = 'block';
-
-
+  techniqueChooseCheckboxField.style.display = 'block';
 }
 
 async function saveButton(){
@@ -219,7 +171,7 @@ async function saveButton(){
 
     checkboxes.forEach(checkbox => {
       if (checkbox.checked) {
-        tagText += removeExtraTagFromText(checkbox.nextSibling.textContent.trim()) + " [" + checkbox.value + "], "  
+        tagText += helpers.removeExtraTagFromText(checkbox.nextSibling.textContent.trim()) + " [" + checkbox.value + "], "  
         }
     });
 
@@ -228,10 +180,10 @@ async function saveButton(){
     if (tagText.length < 3) tagText = '';
 
     //clear all selectctions
-    popup.style.display = 'none';
-    option1.value = '';
-    option2.value = '';
-    option3.style.display = 'none';
+    chooseTechniquesPopup.style.display = 'none';
+    phaseChooseField.innerHTML = '';
+    tacticChooseField.innerHTML = '';
+    techniqueChooseCheckboxField.style.display = 'none';
 
     //get sentence
     var sentenceInitialRange = context.document.getSelection().getTextRanges(['\n', '.', '?'], true);
@@ -249,11 +201,11 @@ async function saveButton(){
     await context.sync();
    
     //change highlight color of the tag
-    rangeToHighlight.items[0].font.set({highlightColor: redTagColorGlobal});
+    rangeToHighlight.items[0].font.set({highlightColor: getRedTagColor()});
    
     tagText = ''
 
-    unblurBackground();
+    helpersUI.unblurBackground();
 
     await context.sync(); 
   })
@@ -264,52 +216,11 @@ async function saveButton(){
 
 async function searchRedTag(){
   
-  popup1.style.display = 'block';
-
-  blurBackground()
+  searchTechniquesPopup.style.display = 'block';
+  helpersUI.blurBackground()
   showPhaseOptions()
-
   jsonTechniques = await getTechniques();
-
-  option2search.innerHTML = '';
-
-  //if (jsonTechniques == '') jsonTechniques = await getTechniques();
-
-  //var selectedOption = option1.value;
-  //var chosenOption = jsonTechniques.plan;
-
-  //listening for a change in the first dropdown
- /* option1search.addEventListener('change', function() {
-    
-    switch (selectedOption) {
-      case 'option1':
-          chosenOption = jsonTechniques.plan;
-          break;
-      case 'option2':
-          chosenOption = jsonTechniques.prepare;
-          break;
-      case 'option3':
-          chosenOption = jsonTechniques.execute;
-          break;
-      case 'option4':
-          chosenOption = jsonTechniques.assess;
-          break;
-      default:
-          option2search.innerHTML = '';
-          break;
-  }  
-
-      // showing the change in the second dropdown
-      option2search.innerHTML = ''
-      var jsonArray = Object.keys(chosenOption)
-      jsonArray.forEach(item => { option2search.innerHTML += '<option value=\"' + item +"\">" + item + "</option>"});
-
-      if (selectedOption === 'All') option2search.innerHTML = '';
-        
-      option2search.style.display = 'block';
-      option2search.value = '';
-    });*/
-
+  tacticSearchField.innerHTML = '';
 }
 
 async function displaySearchTechniques(){
@@ -318,119 +229,35 @@ async function displaySearchTechniques(){
     alertSearchBox.innerHTML = 'Please fill out this field!';
   }
   else {
-    popup1.style.display = 'none';
-    await searchTechniquesFromJson(getSelectedRowText(option1search), getSelectedRowText(option2search), checkbox.checked, textBox.value)
-    popup2.style.display = 'block';
+    searchTechniquesPopup.style.display = 'none';
+    if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques()
+    searchTechniquesArray = helpers.searchTechniquesFromJson(helpers.getSelectedRowText(phaseSearchField), helpers.getSelectedRowText(tacticSearchField), checkbox.checked, textBox.value, reverseJsonTechniques)
+    helpersUI.drawFoundTechniquesTable(searchTechniquesArray)
+
+    listSearchTechniquesPopup.style.display = 'block';
     textBox.value = '';
     checkbox.checked = ''
     alertSearchBox.innerHTML = ''
   }
 }
 
-function getSelectedRowText(field) {
-  const selectedRow = document.querySelector('selected');
-  if (selectedRow) {
-      return selectedRow.textContent.trim(); 
-  }
-  return '';
-}
 
-async function searchTechniquesFromJson(phase, tactic, checkbox, textbox){
-
-  var resultTechniques = []
-  if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques()
-  
-  const newJson = reverseJsonTechniques.ids;
-  for (const key in newJson){
-    
-    const value = newJson[key] 
-    var found = false   
-
-    //check if phase and tactic match the row
-    if ((phase == "" || phase == value.phase) && (tactic == "" || value.use.includes(tactic))){
-
-      //check if the title includes the search term
-      if (value.title.toLowerCase().includes(textbox.toLowerCase())){
-        resultTechniques.push(key)
-        found = true
-      }
-
-      //if technique is not found check the description (if checked)
-      if (!found && checkbox && value.description.toLowerCase().includes(textbox.toLowerCase())){
-        resultTechniques.push(key)
-      }
-    }
-  }
-
-  if (reverseJsonTechniques == '') await searchTechniques();
-  const tag_ids = reverseJsonTechniques.ids
-
-  for (const tag in resultTechniques){
-    let tag_object = tag_ids[resultTechniques[tag]]
-    let use = tag_object.use.replace(/\s*\[.*?\]\s*/, '');
-
-    searchTechniquesArray.push({ id: resultTechniques[tag], phase: tag_object.phase, use: use, title: tag_object.title, color: "white" });
-  }
-
-  drawFoundTechniquesTable()
-
-}
-
-function drawFoundTechniquesTable(){
-
-  const table = document.getElementById('search-results-table');
- 
-  table.innerHTML = "<thead><tr><th>Phase</th><th>Tactic</th><th>Technique</th></tr></thead>"
-
-  for (const row in searchTechniquesArray){
-
-    var color = searchTechniquesArray[row].color
-    if (color == "blue") color = SEARCH_TABLE_SELECT_COLOR;
-    
-    table.innerHTML += "<tbody><tr class=\"resultsTable\" id=\"" + searchTechniquesArray[row].id 
-    + "\"" + "><td>" + 
-    searchTechniquesArray[row].phase + "</td><td>" 
-     + searchTechniquesArray[row].use + "</td><td>" + "["+searchTechniquesArray[row].id+"] "+searchTechniquesArray[row].title + "</td></tr></tbody>"
-
-  }
-}
 
 function sortTechniquesTable(){
+
   var column = $(this).text().trim();
 
   if (column == "Phase") searchTechniquesArray.sort((a,b) => a.phase.localeCompare(b.phase))
   else if (column == "Tactic") searchTechniquesArray.sort((a,b) => a.use.localeCompare(b.use))
   else if (column == "Technique") searchTechniquesArray.sort((a,b) => a.title.localeCompare(b.title))
-  drawFoundTechniquesTable()
+  helpersUI.drawFoundTechniquesTable(searchTechniquesArray)
  
 }
 
 function handleTableColorOnClick(){
-  if (this.classList.toString() == "resultsTable") handleColorOnClickResultsTable(this);
-  else if (this.classList.toString().includes("list")) handleColorOnClickPhaseTactic(this);
+  if (this.classList.toString().includes("resultsTable")) handleColorOnClickResultsTable(this);
+  else if (this.classList.toString().includes("list")) helpersUI.handleColorOnClickPhaseTactic(this);
   else return;
-  
-  
-}
-
-function handleColorOnClickPhaseTactic(this1){
-  if (this1.classList.toString().includes("selected")){
-    this1.classList.remove("selected")
-
-  }
-  else {
-
-    if (this1.classList.toString().includes("option1")){
-      document.querySelectorAll('.option1.list.selected').forEach(row => {row.classList.remove('selected');});
-    }
-    else {
-      document.querySelectorAll('.option2.list.selected').forEach(row => {row.classList.remove('selected');});
-    }
-    
-    this1.classList.add("selected")
-    
-  }
-
 }
 
 function handleColorOnClickResultsTable(this1){
@@ -461,7 +288,7 @@ async function saveButtonSearchTechniques(){
       //if row is colored add its content to the text
       if (row.classList.toString().includes('selected')) {
 
-        tagText += removeExtraTagFromText(row.cells[2].textContent) + " [" + row.id + "], ";    
+        tagText += helpers.removeExtraTagFromText(row.cells[2].textContent) + " [" + row.id + "], ";    
            
       }
     }
@@ -470,10 +297,10 @@ async function saveButtonSearchTechniques(){
     tagText += ')'
     if (tagText.length < 3) tagText = '';
 
-    popup2.style.display = 'none';
-    option1search.value = 'All';
-    option2search.value = '';
-    unblurBackground();
+    listSearchTechniquesPopup.style.display = 'none';
+    phaseSearchField.innerHTML = '';
+    tacticSearchField.innerHTML = '';
+    helpersUI.unblurBackground();
 
 
 
@@ -493,7 +320,7 @@ async function saveButtonSearchTechniques(){
     await context.sync();
    
     //change highlight color of the tag
-    rangeToHighlight.items[0].font.set({highlightColor: redTagColorGlobal});
+    rangeToHighlight.items[0].font.set({highlightColor: getRedTagColor()});
 
     tagText = ''
 
@@ -512,7 +339,6 @@ async function insertRedTable() {
     //get search json only once
     if (reverseJsonTechniques == '') reverseJsonTechniques = await searchTechniques();
     
-
     const tag_ids = reverseJsonTechniques.ids
     
     // get text of the entire document
@@ -521,7 +347,6 @@ async function insertRedTable() {
     await context.sync();
     var text = wholeDocument.text
     
-
     //match cases using regular expressions
     const smallBracketRegex = /\(([^()]*)\)/g;
     const middleBracketRegex = /\[(.*?)\]/g;
@@ -535,7 +360,7 @@ async function insertRedTable() {
 
       foundMiddleBrackets = matches[0].match(middleBracketRegex);
       const commasNumber = (matches[0].match(/,/g) || []).length;
-      let selectedText = extractTextFromBrackets(text, matches.index)
+      let selectedText = helpers.extractTextFromBrackets(text, matches.index)
 
       if (foundMiddleBrackets.length != commasNumber + 1 || foundMiddleBrackets.length == 0) continue;
 
@@ -550,7 +375,7 @@ async function insertRedTable() {
         table.push([tagObject.title, tag, selectedText, tagObject.use]) 
       }
     }
-    table = sortRedSummariesTable(table);
+    table = helpers.sortRedSummariesTable(table);
     drawTable(table)
   }
 )}
@@ -566,25 +391,4 @@ async function drawTable(table){
 };
 
 
-//formatting
 
-function changeRedTagColor(){
-  colorPicker.value = redTagColorGlobal;
-  popupRed.style.display = 'block';
-  blurBackground()
-}
-
-async function changeRedTagColorSaveBtn(){
-  var selectedColor = colorPicker.value;
-  redTagColorGlobal = selectedColor;
-  popupRed.style.display = 'none';
-  unblurBackground()
-}
-
-function blurBackground(){
-  document.body.classList.add('blur-background');
-}
-
-function unblurBackground(){
-  document.body.classList.remove('blur-background');
-}
