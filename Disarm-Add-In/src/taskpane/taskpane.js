@@ -3,19 +3,13 @@
  * See LICENSE in the project root for license information.
  */
 /* global     document, Office, Word */
-
-import { getTechniques, searchTechniques, getClauses } from './../services/apiServices.js';
 import * as helpers from './../utils/helpers.js';
 import * as helpersUI from './../utils/helpersUI.js';
+import { getTechniques, searchTechniques, getClauses } from './../services/apiServices.js';
 import { changeRedTagColor, changeRedTagColorSaveBtn, getRedTagColor } from './../components/formattingComponent.js';
-
-
-const fs = require('fs');
-'use strict';
 
 var jsonTechniques = '';
 var reverseJsonTechniques = '';
-var clausesGlobal = 'aaa';
 
 var searchTechniquesArray = []
 
