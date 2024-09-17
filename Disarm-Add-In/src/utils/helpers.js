@@ -85,7 +85,7 @@ export function getSelectedRowText(field) {
   return selectedRow ? selectedRow.textContent.trim() : '';
 }
 
-export function createTagText(checkboxes){
+export function createTagTextInsert(checkboxes){
   const checkboxesArray = Array.from(checkboxes);
   const tagText = checkboxesArray
   .filter(checkbox => checkbox.checked) 
@@ -96,6 +96,20 @@ export function createTagText(checkboxes){
 
   const formattedTagText = tagText ? `(${tagText})` : '';
   return formattedTagText;
+}
+
+export function createTagTextSearch(table){
+
+  var tagText = '';
+  Array.from(table.rows).forEach(row => {
+    if (row.classList.contains('selected')) {
+      const textContent = removeExtraTagFromText(row.cells[2].textContent);
+      tagText += `${textContent} [${row.id}], `;
+    }
+  });
+  
+  tagText = tagText.slice(0, -2) + ')';
+  return tagText.length <= 2 ? '' : tagText;
 }
 
 
