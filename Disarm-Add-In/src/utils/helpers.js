@@ -85,6 +85,19 @@ export function getSelectedRowText(field) {
   return selectedRow ? selectedRow.textContent.trim() : '';
 }
 
+export function createTagText(checkboxes){
+  const checkboxesArray = Array.from(checkboxes);
+  const tagText = checkboxesArray
+  .filter(checkbox => checkbox.checked) 
+  .map(checkbox => 
+    `${removeExtraTagFromText(checkbox.nextSibling.textContent.trim())} [${checkbox.value}]`
+  ) 
+  .join(', '); 
+
+  const formattedTagText = tagText ? `(${tagText})` : '';
+  return formattedTagText;
+}
+
 
 
 

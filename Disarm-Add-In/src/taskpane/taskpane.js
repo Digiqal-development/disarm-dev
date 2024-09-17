@@ -4,36 +4,19 @@
  */
 /* global     document, Office, Word */
 import * as helpers from './../utils/helpers.js';
-import * as helpersUI from './../utils/helpersUI.js';
-import { getTechniques, searchTechniques, getClauses } from './../services/apiServices.js';
-import { changeRedTagColor, changeRedTagColorSaveBtn, getRedTagColor } from './../components/formattingComponent.js';
+import * as helpersUI from '../utils/helpers-ui.js';
+import { getTechniques, searchTechniques } from '../services/api-services.js';
+import { changeRedTagColor, changeRedTagColorSaveBtn, getRedTagColor } from '../components/formatting-component.js';
+import { PHASES} from '../constants/global-variables.js';
+
+import { chooseTechniquesPopup, phaseChooseField, tacticChooseField, techniqueChooseCheckboxField, 
+  searchTechniquesPopup, phaseSearchField, tacticSearchField, checkbox, textBox, 
+  listSearchTechniquesPopup, alertSearchBox, table
+} from '../constants/ui-elements.js';
 
 var jsonTechniques = '';
 var reverseJsonTechniques = '';
-
 var searchTechniquesArray = []
-
-const SEARCH_TABLE_SELECT_COLOR = "rgb(85, 172, 227)"
-
-//insert red tag
-const chooseTechniquesPopup = document.getElementById('popup-insert-red-tag');
-const phaseChooseField = document.getElementById('option1');
-const tacticChooseField = document.getElementById('option2');
-const techniqueChooseCheckboxField = document.getElementById('option3');
-
-//search red tag
-const searchTechniquesPopup = document.getElementById('popup-search-techniques');
-const phaseSearchField = document.getElementById('option1-search');
-const tacticSearchField = document.getElementById('option2-search');
-
-const checkbox = document.getElementById('search-description');
-const textBox = document.getElementById('search-bar');
-
-const listSearchTechniquesPopup = document.getElementById('popup-search-techniques-list');
-const alertSearchBox = document.getElementById("alert")
-
-const table = document.getElementById('search-results-table');
-
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
@@ -97,99 +80,67 @@ async function insertRedTag() {
 
     helpersUI.blurBackground();
     showPhaseOptions(true);
-
     jsonTechniques = await getTechniques();
-
-    tacticChooseField.innerHTML = '';
-    techniqueChooseCheckboxField.style.display = 'none';
-    chooseTechniquesPopup.style.display = 'block';
+    helpersUI.clearInsertRedTagFields();
   });
 }
 
 
 function showPhaseOptions(insertTag){
-  var uiField = phaseChooseField;
-  if (!insertTag) uiField = phaseSearchField;
-  uiField.innerHTML = '';
-  var phases = ["Plan", "Prepare", "Execute", "Assess"]
-  for(let i = 0; i < phases.length; i++){
-    let row = document.createElement('tr');
-    row.addEventListener('click', function() {
-      showTacticOptions(phases[i].toLowerCase(), insertTag);
+  const uiField = insertTag ? phaseChooseField : phaseSearchField;
+  uiField.innerHTML = ''
+
+  PHASES.forEach((phase, index) => {
+    const row = document.createElement('tr');
+  
+    row.addEventListener('click', () => {
+      showTacticOptions(phase.toLowerCase(), insertTag);
     });
-    let cols = '<td>' + phases[i] + '</td>';
-    row.innerHTML = cols;
-    row.className += " list option1";
-    if (i % 2 === 0) {
-      row.classList += ' even-row';
-  } else {
-      row.classList += ' odd-row';
-  }
+  
+    row.innerHTML = `<td>${phase}</td>`;
+    row.classList.add('list', 'option1');
+    row.classList.add(index % 2 === 0 ? 'even-row' : 'odd-row');
+  
     uiField.appendChild(row);
-}
+  });
 }
 
 function showTacticOptions(phase, insertTag){
+  
+  const uiField = insertTag ? tacticChooseField : tacticSearchField;
   techniqueChooseCheckboxField.innerHTML = ''
-  var uiField = tacticChooseField;
-  if (!insertTag) uiField = tacticSearchField;
   uiField.innerHTML = '';
- let tacticsArray = jsonTechniques[phase]
- uiField.innerHTML = '';
+
+  let tacticsArray = jsonTechniques[phase]
+  
   Object.keys(tacticsArray).forEach((tactic, index) => {
-    let row = document.createElement('tr');
-    if (insertTag) row.addEventListener('click', function() {showTechniqueOptions(tacticsArray[tactic])});
-    let cols = '<td>' + tactic + '</td>';
-    row.innerHTML = cols;
-    row.className += " list option2";
-    if (index % 2 === 0) {
-      row.classList += ' even-row';
-  } else {
-      row.classList+= ' odd-row';
-  }
+    const row = document.createElement('tr');
+
+    if (insertTag) {
+      row.addEventListener('click', function() {helpersUI.showTechniqueOptions(tacticsArray[tactic])});
+    } 
+    row.innerHTML = `<td>${tactic}</td>`;
+    row.classList.add('list', 'option2');
+    row.classList.add(index % 2 === 0 ? 'even-row' : 'odd-row');
     uiField.appendChild(row);
 
   })
 }
 
-function showTechniqueOptions(techniquesArray){
-  techniqueChooseCheckboxField.innerHTML = '';
-  techniquesArray.forEach(technique => {
-    techniqueChooseCheckboxField.innerHTML += '<label><input type=\"checkbox\" value=\"' + Object.keys(technique)[0] +"\">[" + Object.keys(technique)[0] + "] " + Object.values(technique)[0] + "</label><br>";
-  })
-  techniqueChooseCheckboxField.style.display = 'block';
-}
 
 async function saveButton(){
   await Word.run(async (context) => {
 
-    // get values from checkboxes
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
-    //create string that represents the tag 
-    let tagText = '('
-
-    checkboxes.forEach(checkbox => {
-      if (checkbox.checked) {
-        tagText += helpers.removeExtraTagFromText(checkbox.nextSibling.textContent.trim()) + " [" + checkbox.value + "], "  
-        }
-    });
-
-    tagText = tagText.slice(0, -2); 
-    tagText += ')'
-    if (tagText.length < 3) tagText = '';
-
-    //clear all selectctions
-    chooseTechniquesPopup.style.display = 'none';
+    const tagText = helpers.createTagText(checkboxes);
+    helpersUI.clearInsertRedTagFields();
     phaseChooseField.innerHTML = '';
-    tacticChooseField.innerHTML = '';
-    techniqueChooseCheckboxField.style.display = 'none';
+    chooseTechniquesPopup.style.display = 'none';
 
     //get sentence
     var sentenceInitialRange = context.document.getSelection().getTextRanges(['\n', '.', '?'], true);
     context.load(sentenceInitialRange);
     var sentenceRange =  await context.sync().then(() => { return sentenceInitialRange.items[0]})
-
     var sentenceWithoutDot = (sentenceRange.text).slice(0, -1); 
      
     //insert tag text to end of sentence
@@ -202,11 +153,8 @@ async function saveButton(){
    
     //change highlight color of the tag
     rangeToHighlight.items[0].font.set({highlightColor: getRedTagColor()});
-   
-    tagText = ''
 
     helpersUI.unblurBackground();
-
     await context.sync(); 
   })
 }
@@ -240,7 +188,6 @@ async function displaySearchTechniques(){
     alertSearchBox.innerHTML = ''
   }
 }
-
 
 
 function sortTechniquesTable(){
@@ -392,3 +339,65 @@ async function drawTable(table){
 
 
 
+//test
+async function test1(){
+  await Word.run(async (context) => {
+    const originalXml =
+      "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
+    const customXmlPart = context.document.customXmlParts.add(originalXml);
+    customXmlPart.load("id");
+    const xmlBlob = customXmlPart.getXml();
+
+    await context.sync();
+
+    const readableXml = addLineBreaksToXML(xmlBlob.value);
+    console.log("Added custom XML part:");
+    console.log(readableXml);
+
+    // Store the XML part's ID in a setting so the ID is available to other functions.
+    const settings = context.document.settings;
+    settings.add("ContosoReviewXmlPartId", customXmlPart.id);
+
+    await context.sync();
+  });
+}
+
+function addLineBreaksToXML( xmlBlob) {
+  const replaceValue = new RegExp(">");
+  return xmlBlob.replace(/></g, "> <");
+}
+
+async function test2(){
+  // Queries a custom XML part for elements matching the search terms.
+  await Word.run(async (context) => {
+    const settings = context.document.settings;
+    const xmlPartIDSetting = settings.getItemOrNullObject("ContosoReviewXmlPartId").load("value");
+
+    await context.sync();
+
+    if (xmlPartIDSetting.value) {
+      const customXmlPart = context.document.customXmlParts.getItem(xmlPartIDSetting.value);
+      const xpathToQueryFor = "/Locations/Location";
+      const clientResult = customXmlPart.query(xpathToQueryFor, {
+        contoso: "http://schemas.contoso.com/review/1.0"
+      });
+
+      
+      var range = context.document.getSelection().paragraphs.getFirst();
+      context.load(range)
+      var sentenceRange =  await context.sync().then(() => { return range})
+      var text = ""
+
+
+      console.log(`Queried custom XML part for ${xpathToQueryFor} and found ${clientResult.value.length} matches:`);
+      for (let i = 0; i < clientResult.value.length; i++) {
+        text += clientResult.value[i] + '\n';
+        
+      }
+      sentenceRange.insertText(text, Word.InsertLocation.start);
+
+    } else {
+      console.warn("Didn't find custom XML part to query");
+    }
+  });
+}
