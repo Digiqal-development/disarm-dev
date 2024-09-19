@@ -280,6 +280,7 @@ tr:last-child {
   
 .blur-background > *:not(.popup) {
     filter: blur(3px);
+    pointer-events: none;
 }
 
 #alert {
