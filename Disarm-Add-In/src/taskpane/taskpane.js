@@ -93,9 +93,7 @@ async function searchRedTag(){
   searchTechniquesPopup.style.display = 'block';
   tacticSearchField.innerHTML = '';
   helpersUI.blurBackground()
-  await showPhaseOptions()
-  jsonTechniques = await getTechniques();
-  
+  await showPhaseOptions()  
 }
 
 async function displaySearchTechniques(){
@@ -105,15 +103,14 @@ async function displaySearchTechniques(){
   }
   else {
     searchTechniquesPopup.style.display = 'none';
-    
     if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques()
 
     searchTechniquesArray = helpers.searchTechniquesFromJson(
-  helpers.getSelectedRowText(phaseSearchField), 
-  helpers.getSelectedRowText(tacticSearchField), 
-  checkbox.checked, 
-  textBox.value, 
-  reverseJsonTechniques)
+      helpers.getSelectedRowText(phaseSearchField), 
+      helpers.getSelectedRowText(tacticSearchField), 
+      checkbox.checked, 
+      textBox.value, 
+      reverseJsonTechniques)
 
     helpersUI.drawFoundTechniquesTable(searchTechniquesArray)
 

@@ -100,7 +100,7 @@ export function createTagTextInsert(checkboxes){
 
 export function createTagTextSearch(table){
 
-  var tagText = '';
+  var tagText = '(';
   Array.from(table.rows).forEach(row => {
     if (row.classList.contains('selected')) {
       const textContent = removeExtraTagFromText(row.cells[2].textContent);

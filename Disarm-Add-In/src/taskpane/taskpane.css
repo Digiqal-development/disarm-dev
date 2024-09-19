@@ -219,9 +219,6 @@ p {
     font-size: smaller;
 }
 
-.list:hover, .resultsTable.selected {
-    background-color: #f5f5f5;
-}
 
 table{
     border-collapse: collapse;
@@ -234,7 +231,7 @@ td {
 
 th {
     font-size: small;
-    background-color: #f5f5f5;
+    background-color: #E0E0E0;
     text-align: left;
 }
 
@@ -252,6 +249,9 @@ tr:last-child {
     border-bottom: none;
 }
 
+.list:hover, .resultsTable:hover {
+    background-color: #f5f5f5;
+}
 
 .even-row {
     background-color: #f2f2f2;

@@ -10,7 +10,8 @@ import { chooseTechniquesPopup, phaseChooseField, tacticChooseField, techniqueCh
   } from '../constants/ui-elements.js';
 
 var jsonTechniques = '';
-
+var reverseJsonTechniques = '';
+var searchTechniquesArray = []
 
 export async function showPhaseOptions(insertTag){
     jsonTechniques = await getTechniques();

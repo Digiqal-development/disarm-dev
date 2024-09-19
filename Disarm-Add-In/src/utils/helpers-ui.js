@@ -32,7 +32,7 @@ export function handleColorOnClickPhaseTactic(this_){
 }
 
 
-export function drawFoundTechniquesTable(searchTechniquesArray){
+export function drawFoundTechniquesTable1(searchTechniquesArray){
    
   UI.table.innerHTML = "<thead><tr><th>Phase</th><th>Tactic</th><th>Technique</th></tr></thead>"
   
@@ -49,6 +49,31 @@ export function drawFoundTechniquesTable(searchTechniquesArray){
       + searchTechniquesArray[row].title + "</td></tr></tbody>"
     }
 }
+
+export function drawFoundTechniquesTable(searchTechniquesArray) {
+  UI.table.innerHTML = "<thead><tr><th>Phase</th><th>Tactic</th><th>Technique</th></tr></thead><tbody>"
+
+  searchTechniquesArray.forEach(({ id, phase, use, title, color }, index) => {
+    const row = document.createElement('tr');
+    
+    //const bgColor = color === "blue" ? "rgb(85, 172, 227)" : color;
+    //row.style.backgroundColor = bgColor;
+    
+    row.classList.add('resultsTable', index % 2 === 0 ? 'odd-row' : 'even-row');
+    row.id = id;
+    row.innerHTML = `
+      <td>${phase}</td>
+      <td>${use}</td>
+      <td>[${id}] ${title}</td>
+    `;
+
+    UI.table.querySelector('tbody').appendChild(row);
+  });
+
+  // Close the tbody tag
+  UI.table.innerHTML += '</tbody>';
+}
+
 
 export function clearInsertRedTagFields(){
   UI.tacticChooseField.innerHTML = '';
