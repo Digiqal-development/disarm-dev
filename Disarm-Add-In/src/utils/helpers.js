@@ -16,25 +16,27 @@ export function extractTextFromBrackets(str, endIndex) {
   }
 
 //sort red table according to kill chain
-export function sortRedSummariesTable(table){
-  // Extract the first row and rest of table
+export function sortRedSummariesTable(table, jsonObject){
+
+  const useOrder = Array.from(new Set(Object.values(jsonObject.ids).map(item => item.use)));
   const firstRow = table[0];
-  const restOfData  = table.slice(1);
-  restOfData.sort((a, b) => {
-    if (extractNumberFromBrackets(a[3]) !== extractNumberFromBrackets(b[3])) {
-        return extractNumberFromBrackets(a[3]) - extractNumberFromBrackets(b[3]); 
-    }
-    return a[1].localeCompare(b[1]); 
-  });
+  const tableData  = table.slice(1);
 
-  //return concated table
-  return [firstRow, ...restOfData];
+  tableData.sort((a, b) => {
+    //sort according to kill chain of tactic id
+    const useComparison = useOrder.indexOf(a[3]) - useOrder.indexOf(b[3]);
+    if (useComparison !== 0) return useComparison;
+
+    //sort by technique id
+    const idComparison = a[1].localeCompare(b[1]);
+    if (idComparison !== 0) return idComparison;
+
+    //sort by text
+    return a[2].localeCompare(b[2]);
+});
+
+  return [firstRow, ...tableData];
 }
-
-function extractNumberFromBrackets(element){ 
-  const match = element.match(/\[TA(\d+)\]/);
-  return match ? parseInt(match[1], 10) : Infinity; 
-};
 
 //remove tags from the start of the tag text
 export function removeExtraTagFromText(text){

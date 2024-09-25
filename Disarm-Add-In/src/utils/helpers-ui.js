@@ -56,9 +56,6 @@ export function drawFoundTechniquesTable(searchTechniquesArray) {
   searchTechniquesArray.forEach(({ id, phase, use, title, color }, index) => {
     const row = document.createElement('tr');
     
-    //const bgColor = color === "blue" ? "rgb(85, 172, 227)" : color;
-    //row.style.backgroundColor = bgColor;
-    
     row.classList.add('resultsTable', index % 2 === 0 ? 'odd-row' : 'even-row');
     row.id = id;
     row.innerHTML = `

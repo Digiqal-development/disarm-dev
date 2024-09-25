@@ -46,7 +46,7 @@ export async function insertRedTable() {
           table.push([tagObject.title, tag, selectedText.slice(0, -1) + ".", tagObject.use]) 
         }
       }
-      table = helpers.sortRedSummariesTable(table);
+      table = helpers.sortRedSummariesTable(table, reverseJsonTechniques);
       drawTable(table)
     }
   )}
