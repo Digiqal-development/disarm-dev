@@ -18,10 +18,6 @@ Office.onReady((info) => {
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
     document.getElementById("search-red-tag").onclick = () => tryCatch(searchRedTag);
 
-    //blue tag
-    document.getElementById("insert-blue-tag").onclick = () => tryCatch(test1);
-    document.getElementById("search-blue-tag").onclick = () => tryCatch(test2);
-
     //summaries
     document.getElementById("insert-red-table").onclick = () => tryCatch(insertRedTable);
 
@@ -50,7 +46,7 @@ async function tryCatch(callback) {
 }
 
 async function closeButton(){
-  
+
   helpersUI.closeAllFields();
   helpersUI.unblurBackground();
   clearSearchTechniquesArray();
