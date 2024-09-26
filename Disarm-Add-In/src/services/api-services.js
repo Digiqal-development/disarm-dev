@@ -1,5 +1,6 @@
 const url = "https://disarm.housepilot.de"
 
+
 export async function getClauses(sentence) {
     try {
         const result = await $.ajax({

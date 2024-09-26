@@ -42,7 +42,7 @@ The code is distributed in the following folders:
 - `/constants` - `global-variables.js` and `ui-elements.js` (all UI components that are used in the project)
 - `/services` - `api-services.js` calls all API endpoints from the server
 - `/taskpane` - where all files are named taskpane, with their corresponding file extensions (.html, .css, .js). `taskpane.js` contains the `Office.OnReady` function calls methods that are triggered by click events. These methods are implemented in components that are imported in this file. 
-- `/utils` - 2 `.js` files with various helper methods
+- `/utils` - 2 .js files with various helper methods
 
 
 One of the security constraints of the Microsoft-Add-In API is that forms and pop-ups are not allowed. This is mediated by encapsulating form content into CSS classes where the visibility is changed based on the clicked button. 
