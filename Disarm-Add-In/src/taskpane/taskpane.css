@@ -76,7 +76,8 @@
     border-color: transparent;
     align-items: center; 
     display: flex;
-    height: 30px
+    height: 30px;
+    padding: 10px;
 }
 
 .ms-Button:hover{
@@ -177,15 +178,15 @@ p {
     font-size: small;
 }
 
-  #lines {
+.lines {
     width: 95%;
     display: flex;
     flex-direction: row;
     font-size: 10px;
     margin-left: 6px;
  }
- #lines:before,
- #lines:after {
+ .lines:before,
+ .lines:after {
     content: "";
     flex: 1 1;
     border-bottom: 0.5px solid grey;
@@ -193,8 +194,14 @@ p {
     margin-bottom: auto;
     margin-left: 5px;
     margin-right: 5px;
+ }   
+ .empty {
+    width: 92%;
+    border-bottom: 0.5px solid grey;
+    margin-left: 12px; 
+    margin-right: 5px;
 
- }     
+}
 
 .color-picker-container {
     position: relative;
@@ -219,9 +226,6 @@ p {
     font-size: smaller;
 }
 
-.list:hover, .resultsTable.selected {
-    background-color: #f5f5f5;
-}
 
 table{
     border-collapse: collapse;
@@ -234,7 +238,7 @@ td {
 
 th {
     font-size: small;
-    background-color: #f5f5f5;
+    background-color: #E0E0E0;
     text-align: left;
 }
 
@@ -252,6 +256,9 @@ tr:last-child {
     border-bottom: none;
 }
 
+.list:hover, .resultsTable:hover {
+    background-color: #f5f5f5;
+}
 
 .even-row {
     background-color: #f2f2f2;
@@ -280,6 +287,7 @@ tr:last-child {
   
 .blur-background > *:not(.popup) {
     filter: blur(3px);
+    pointer-events: none;
 }
 
 #alert {

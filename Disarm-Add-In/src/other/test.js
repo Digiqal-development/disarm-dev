@@ -1,28 +1,6 @@
 
 //test
-async function test12(){
-    await Word.run(async (context) => {
-      const originalXml =
-        "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
-      const customXmlPart = context.document.customXmlParts.add(originalXml);
-      customXmlPart.load("id");
-      const xmlBlob = customXmlPart.getXml();
-  
-      await context.sync();
-  
-      const readableXml = addLineBreaksToXML(xmlBlob.value);
-      console.log("Added custom XML part:");
-      console.log(readableXml);
-  
-      // Store the XML part's ID in a setting so the ID is available to other functions.
-      const settings = context.document.settings;
-      settings.add("ContosoReviewXmlPartId", customXmlPart.id);
-  
-      await context.sync();
-    });
-  }
-  
-  async function test1(){
+  async function test11(){
     await Word.run(async (context) => {
     var doc1 = context.document.getSelection().getTextRanges(['\n', '.', '?'], false);
         
@@ -59,38 +37,70 @@ async function test12(){
     })
   }
   
-  
-  function addLineBreaksToXML( xmlBlob) {
-    const replaceValue = new RegExp(">");
-    return xmlBlob.replace(/></g, "> <");
-  }
-  
-  async function test2(){
-    // Queries a custom XML part for elements matching the search terms.
-    await Word.run(async (context) => {
-      const settings = context.document.settings;
-      const xmlPartIDSetting = settings.getItemOrNullObject("ContosoReviewXmlPartId").load("value");
-  
-      await context.sync();
-  
-      if (xmlPartIDSetting.value) {
-        const customXmlPart = context.document.customXmlParts.getItem(xmlPartIDSetting.value);
-        const xpathToQueryFor = "/Locations/Location";
-        const clientResult = customXmlPart.query(xpathToQueryFor, {
-          contoso: "http://schemas.contoso.com/review/1.0"
-        });
-  
-        await context.sync();
-  
-        console.log(`Queried custom XML part for ${xpathToQueryFor} and found ${clientResult.value.length} matches:`);
-        for (let i = 0; i < clientResult.value.length; i++) {
-          console.log(clientResult.value[i]);
-        }
-      } else {
-        console.warn("Didn't find custom XML part to query");
+ //test
+async function test1(){
+  await Word.run(async (context) => {
+    const originalXml =
+      "<Locations><Location>Juan</Location><Location>Hong</Location><Location>Sally</Location></Locations>";
+    const customXmlPart = context.document.customXmlParts.add(originalXml);
+    customXmlPart.load("id");
+    const xmlBlob = customXmlPart.getXml();
+
+    await context.sync();
+
+    const readableXml = addLineBreaksToXML(xmlBlob.value);
+    console.log("Added custom XML part:");
+    console.log(readableXml);
+
+    // Store the XML part's ID in a setting so the ID is available to other functions.
+    const settings = context.document.settings;
+    settings.add("ContosoReviewXmlPartId", customXmlPart.id);
+
+    await context.sync();
+  });
+}
+
+function addLineBreaksToXML( xmlBlob) {
+  const replaceValue = new RegExp(">");
+  return xmlBlob.replace(/></g, "> <");
+}
+
+async function test2(){
+  // Queries a custom XML part for elements matching the search terms.
+  await Word.run(async (context) => {
+    const settings = context.document.settings;
+    const xmlPartIDSetting = settings.getItemOrNullObject("ContosoReviewXmlPartId").load("value");
+
+    await context.sync();
+
+    if (xmlPartIDSetting.value) {
+      const customXmlPart = context.document.customXmlParts.getItem(xmlPartIDSetting.value);
+      const xpathToQueryFor = "/Locations/Location";
+      const clientResult = customXmlPart.query(xpathToQueryFor, {
+        contoso: "http://schemas.contoso.com/review/1.0"
+      });
+
+      
+      var range = context.document.getSelection().paragraphs.getFirst();
+      context.load(range)
+      var sentenceRange =  await context.sync().then(() => { return range})
+      var text = ""
+
+
+      console.log(`Queried custom XML part for ${xpathToQueryFor} and found ${clientResult.value.length} matches:`);
+      for (let i = 0; i < clientResult.value.length; i++) {
+        text += clientResult.value[i] + '\n';
+        
       }
-    });
-  }
+      sentenceRange.insertText(text, Word.InsertLocation.start);
+
+    } else {
+      console.warn("Didn't find custom XML part to query");
+    }
+  });
+}
+
+  
   
   
   

@@ -36,14 +36,16 @@ The repository is composed of 3 folders:
 ### Disarm-Add-In
 This application contains the majority of the code written for this project. It was created using the Microsoft-Add-In API, and the remainder of the code was added to 3 different files in the application. The user interface was written using only HTML and CSS, and the logic was coded using pure JavaScript. 
 
+The code is distributed in the following folders:
+- `/commands` - initial project library code
+- `/components` - .js files containing code components distributed across functionalities (red tag, red table, formatting...)
+- `/constants` - `global-variables.js` and `ui-elements.js` (all UI components that are used in the project)
+- `/services` - `api-services.js` calls all API endpoints from the server
+- `/taskpane` - where all files are named taskpane, with their corresponding file extensions (.html, .css, .js). `taskpane.js` contains the `Office.OnReady` function calls methods that are triggered by click events. These methods are implemented in components that are imported in this file. 
+- `/utils` - 2 .js files with various helper methods
 
-All written code is contained in the `/src/taskpane directory`, where all files are named taskpane, with their corresponding file extensions (.html, .css, .js).
 
-
-The HTML and CSS files were written by following the design made in the existing DISARM project, with small changes being made because of the constraints created by the  Microsoft-Add-In API. One of the security constraints is that forms and pop-ups are not allowed. This is mediated by encapsulating form content into CSS classes where the visibility is changed based on the clicked button. 
-
-
-`taskpane.js` contains all project logic, and is the most complex. The `Office.OnReady` function calls helper methods that are triggered by click events. These helper methods than call other methods. In total, there are about 20 methods, of varying complexities and lengths. 
+One of the security constraints of the Microsoft-Add-In API is that forms and pop-ups are not allowed. This is mediated by encapsulating form content into CSS classes where the visibility is changed based on the clicked button. 
 
 
 As this is a client-side application, one of its limitations is that it cannot access local files. The existing Disarm project created a Microsoft Excel file for each user on its local machine, and used it to save added tags. In this project, that problem was mediated by scanning the tag's text and id from the Word file content. For saving the tags and their descriptions, two json files were created, with opposite hierarchies. These json files were served by the Disarm-Server application, which is explained in the next section.
