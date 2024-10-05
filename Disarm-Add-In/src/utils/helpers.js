@@ -87,31 +87,44 @@ export function getSelectedRowText(field) {
   return selectedRow ? selectedRow.textContent.trim() : '';
 }
 
-export function createTagTextInsert(checkboxes){
+export function createTagTextInsert(checkboxes, jsonTags){
   const checkboxesArray = Array.from(checkboxes);
   const tagText = checkboxesArray
   .filter(checkbox => checkbox.checked) 
-  .map(checkbox => 
-    `${removeExtraTagFromText(checkbox.nextSibling.textContent.trim())} [${checkbox.value}]`
-  ) 
+  .map(checkbox => {
+    let tagText = removeExtraTagFromText(checkbox.nextSibling.textContent.trim())
+
+    //for sub techniques add prefix
+    if (checkbox.value.includes(".")) tagText = addPrefixForSubTechniques(tagText, checkbox.value, jsonTags.ids)
+  
+    return `${tagText} [${checkbox.value}]`
+  })
   .join(', '); 
 
   const formattedTagText = tagText ? `(${tagText})` : '';
   return formattedTagText;
 }
 
-export function createTagTextSearch(table){
+export function createTagTextSearch(table, jsonTags){
 
   var tagText = '(';
   Array.from(table.rows).forEach(row => {
     if (row.classList.contains('selected')) {
-      const textContent = removeExtraTagFromText(row.cells[2].textContent);
+      var textContent = removeExtraTagFromText(row.cells[2].textContent);
+      //for sub techniques add prefix
+      if (row.id.includes(".")) textContent = addPrefixForSubTechniques(textContent, row.id, jsonTags.ids)
       tagText += `${textContent} [${row.id}], `;
     }
   });
   
   tagText = tagText.slice(0, -2) + ')';
   return tagText.length <= 2 ? '' : tagText;
+}
+
+function addPrefixForSubTechniques(tagText, tagId, jsonTags){
+  var originalTag = tagId.split('.')[0];
+  return jsonTags[originalTag].title + ": " + tagText;
+
 }
 
 
