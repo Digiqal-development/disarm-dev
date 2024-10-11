@@ -73,8 +73,9 @@ function showTacticOptions(phase, insertTag){
 export async function saveButtonInsertTechniques(){
     await Word.run(async (context) => {
   
+      if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques()
       const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-      const tagText = helpers.createTagTextInsert(checkboxes);
+      const tagText = helpers.createTagTextInsert(checkboxes, reverseJsonTechniques);
 
       helpersUI.clearInsertRedTagFields();
       phaseChooseField.innerHTML = '';
@@ -137,7 +138,9 @@ export async function displaySearchTechniques(){
 
 export async function saveButtonSearchTechniques(context){
   await Word.run(async (context) => {
-  const tagText = helpers.createTagTextSearch(table)
+
+    if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques()
+    const tagText = helpers.createTagTextSearch(table, reverseJsonTechniques)
 
     listSearchTechniquesPopup.style.display = 'none';
     phaseSearchField.innerHTML = '';

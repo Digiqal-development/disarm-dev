@@ -18,8 +18,12 @@ export function extractTextFromBrackets(str, endIndex) {
 //sort red table according to kill chain
 export function sortRedSummariesTable(table, jsonObject){
 
-  const useOrder = Array.from(new Set(Object.values(jsonObject.ids).map(item => item.use)));
-  const firstRow = table[0];
+  const useOrder = ['Plan Strategy [TA01]', 'Plan Objectives [TA02]', 'Target Audience Analysis [TA13]', 
+    'Develop Narratives [TA14]', 'Develop Content [TA06]', 'Establish Assets [TA15]', 'Establish Legitimacy [TA16]', 
+    'Microtarget [TA05]', 'Select Channels and Affordances [TA07]', 'Conduct Pump Priming [TA08]', 
+    'Deliver Content [TA09]', 'Maximise Exposure [TA17]',  'Drive Online Harms [TA18]', 'Drive Offline Activity [TA10]', 
+    'Persist in the Information Environment [TA11]','Assess Effectiveness [TA12]'
+]
   const tableData  = table.slice(1);
 
   tableData.sort((a, b) => {
@@ -35,7 +39,7 @@ export function sortRedSummariesTable(table, jsonObject){
     return a[2].localeCompare(b[2]);
 });
 
-  return [firstRow, ...tableData];
+  return tableData
 }
 
 //remove tags from the start of the tag text
@@ -87,31 +91,44 @@ export function getSelectedRowText(field) {
   return selectedRow ? selectedRow.textContent.trim() : '';
 }
 
-export function createTagTextInsert(checkboxes){
+export function createTagTextInsert(checkboxes, jsonTags){
   const checkboxesArray = Array.from(checkboxes);
   const tagText = checkboxesArray
   .filter(checkbox => checkbox.checked) 
-  .map(checkbox => 
-    `${removeExtraTagFromText(checkbox.nextSibling.textContent.trim())} [${checkbox.value}]`
-  ) 
+  .map(checkbox => {
+    let tagText = removeExtraTagFromText(checkbox.nextSibling.textContent.trim())
+
+    //for sub techniques add prefix
+    if (checkbox.value.includes(".")) tagText = addPrefixForSubTechniques(tagText, checkbox.value, jsonTags.ids)
+  
+    return `${tagText} [${checkbox.value}]`
+  })
   .join(', '); 
 
   const formattedTagText = tagText ? `(${tagText})` : '';
   return formattedTagText;
 }
 
-export function createTagTextSearch(table){
+export function createTagTextSearch(table, jsonTags){
 
   var tagText = '(';
   Array.from(table.rows).forEach(row => {
     if (row.classList.contains('selected')) {
-      const textContent = removeExtraTagFromText(row.cells[2].textContent);
+      var textContent = removeExtraTagFromText(row.cells[2].textContent);
+      //for sub techniques add prefix
+      if (row.id.includes(".")) textContent = addPrefixForSubTechniques(textContent, row.id, jsonTags.ids)
       tagText += `${textContent} [${row.id}], `;
     }
   });
   
   tagText = tagText.slice(0, -2) + ')';
   return tagText.length <= 2 ? '' : tagText;
+}
+
+export function addPrefixForSubTechniques(tagText, tagId, jsonTags){
+  var originalTag = tagId.split('.')[0];
+  return jsonTags[originalTag].title + ": " + tagText;
+
 }
 
 
