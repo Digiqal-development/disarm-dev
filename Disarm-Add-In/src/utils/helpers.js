@@ -18,8 +18,12 @@ export function extractTextFromBrackets(str, endIndex) {
 //sort red table according to kill chain
 export function sortRedSummariesTable(table, jsonObject){
 
-  const useOrder = Array.from(new Set(Object.values(jsonObject.ids).map(item => item.use)));
-  const firstRow = table[0];
+  const useOrder = ['Plan Strategy [TA01]', 'Plan Objectives [TA02]', 'Target Audience Analysis [TA13]', 
+    'Develop Narratives [TA14]', 'Develop Content [TA06]', 'Establish Assets [TA15]', 'Establish Legitimacy [TA16]', 
+    'Microtarget [TA05]', 'Select Channels and Affordances [TA07]', 'Conduct Pump Priming [TA08]', 
+    'Deliver Content [TA09]', 'Maximise Exposure [TA17]',  'Drive Online Harms [TA18]', 'Drive Offline Activity [TA10]', 
+    'Persist in the Information Environment [TA11]','Assess Effectiveness [TA12]'
+]
   const tableData  = table.slice(1);
 
   tableData.sort((a, b) => {
@@ -35,7 +39,7 @@ export function sortRedSummariesTable(table, jsonObject){
     return a[2].localeCompare(b[2]);
 });
 
-  return [firstRow, ...tableData];
+  return tableData
 }
 
 //remove tags from the start of the tag text
@@ -121,7 +125,7 @@ export function createTagTextSearch(table, jsonTags){
   return tagText.length <= 2 ? '' : tagText;
 }
 
-function addPrefixForSubTechniques(tagText, tagId, jsonTags){
+export function addPrefixForSubTechniques(tagText, tagId, jsonTags){
   var originalTag = tagId.split('.')[0];
   return jsonTags[originalTag].title + ": " + tagText;
 
