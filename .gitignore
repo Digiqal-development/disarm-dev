@@ -2,4 +2,4 @@
 *.vsidx
 *.vsidx
 *.vsidx
-node_modules
+Disarm-Add-In/node_modules/
