@@ -1,5 +1,5 @@
-const url1 = "https://disarm.housepilot.de"
-const url = "https://localhost:7225"
+const url = "https://disarm.housepilot.de"
+const url1 = "https://localhost:7225"
 
 
 export async function getClauses(sentence) {
