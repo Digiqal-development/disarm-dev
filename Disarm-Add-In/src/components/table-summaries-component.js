@@ -61,62 +61,68 @@ export async function insertRedTable() {
   
       var body = context.document.body;
 
-    // Insert a section break before the new page
-    body.insertBreak(Word.BreakType.sectionNext, Word.InsertLocation.end);
+      // Insert a section break before the new page
+      body.insertBreak(Word.BreakType.sectionNext, Word.InsertLocation.end);
 
-    // Load the new section to modify its properties
-    var sections = context.document.sections;
-    context.load(sections);
+      // Load the new section to modify its properties
+      var sections = context.document.sections;
+      context.load(sections);
 
 
       const secondParagraph = context.document.body.paragraphs.getLast()
       const insertedTable = secondParagraph.insertTable(processedData.length, 3, Word.InsertLocation.after, processedData);
       
-      //centered alignement for table
-      insertedTable.horizontalAlignment = "Centered";
+      try{
+        insertedTable.horizontalAlignment = "Centered";
 
-      //left alignement for third column
-      processedData.forEach((_, index) => {
-        insertedTable.getCell(index, 2).horizontalAlignment = "Left";
-      });
-   
-      //set column widths
-      insertedTable.getCell(0, 0).columnWidth = 150
-      insertedTable.getCell(0, 1).columnWidth = 60;
-      insertedTable.getCell(0, 2).columnWidth = 500;
- 
-      //da ide na novu str/landscap
-      
-      //format first row
-      const firstRow = insertedTable.rows.getFirst();
-      firstRow.load('font');
-      context.sync();
-      firstRow.set({
-        font: {
-            color: "#FFFFFF",
-            bold: true
-        },
-        shadingColor: "#64649b",
-        horizontalAlignment: "Centered"
-      });
-
-      //format header rows
-      headerIndexRows.forEach(rowIndex => {
-        const cell = insertedTable.getCell(rowIndex, 0).parentRow;
-        cell.load('font');
-        context.sync();
-        cell.set({
-          horizontalAlignment: "Centered",
-          shadingColor: "#9bcbfb",
-          font: {
-              bold: true
-          }
+        //left alignement for third column
+        processedData.forEach((_, index) => {
+          insertedTable.getCell(index, 2).horizontalAlignment = "Left";
         });
-      cell.merge();
+   
+        //set column widths
+        insertedTable.getCell(0, 0).columnWidth = 150
+        insertedTable.getCell(0, 1).columnWidth = 60;
+        insertedTable.getCell(0, 2).columnWidth = 500;
+      
+        //format first row
+        const firstRow = insertedTable.rows.getFirst();
+        firstRow.load('font');
+        context.sync();
+        firstRow.set({
+          font: {
+              color: "#FFFFFF",
+              bold: true
+          },
+          shadingColor: "#64649b",
+          horizontalAlignment: "Centered"
+        });
 
-      context.sync();
+        //format header rows
+        headerIndexRows.forEach(rowIndex => {
+          const cell = insertedTable.getCell(rowIndex, 0).parentRow;
+          cell.load('font');
+          context.sync();
+          cell.set({
+            horizontalAlignment: "Centered",
+            shadingColor: "#9bcbfb",
+            font: {
+                bold: true
+            }
+          });
+        cell.merge();
+
+        context.sync();
 
       });
+
+    }
+
+    catch(err){
+      context.sync();
+    }
+
+
     });
   };
 
