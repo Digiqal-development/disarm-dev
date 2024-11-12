@@ -1,16 +1,14 @@
 //extracts the text from the first found tag from the beginning and the endIndex, str is the entire document
 export function extractTextFromBrackets(str, endIndex) {  
     //pattern to match evenrything that ends a sentence
-    const pattern = /[.!?\n\t]/;
-  
-    //pattern to match ]) - in case that after a sentence there is a tag
-    const patternBrackets = /]\)/;
-  
+    const patternNewLine = /[.!?](?:\r\n|\n|\t)*|[\r\n\t]+/;
+    const pattern = /[.!?]/;
+   
     //taking string from the beginning to end index
-    let s = str.substring(0, endIndex - 2)
-  
+    let s = str.substring(0, endIndex)
+
     //taking the latest index of these patterns
-    let index = (s.lastIndexOf(pattern.exec(s))> s.lastIndexOf(patternBrackets.exec(s))) ? s.lastIndexOf(pattern.exec(s)) + 1 : s.lastIndexOf(patternBrackets.exec(s)) + 1;
+    let index = (s.lastIndexOf(pattern.exec(s))> s.lastIndexOf(patternNewLine.exec(s))) ? s.lastIndexOf(pattern.exec(s)) + 1 : s.lastIndexOf(patternNewLine.exec(s)) + 1;
   
     return str.substring(index, endIndex);
   }
