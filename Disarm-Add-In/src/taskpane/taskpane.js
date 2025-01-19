@@ -17,11 +17,12 @@ import { carouselPage1, carouselPage2, carouselPage3,
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
 
-    document.getElementById("main").style.display = "block";
     document.getElementById("first-run-experience").style.display = "none";
-
-      //if (!localStorage.getItem("showedFRE")) {
-        showFirstRunExperience();//  }
+    document.getElementById("main").style.display = "block";
+    
+    if (!localStorage.getItem("showedFRE")) {
+       showFirstRunExperience();
+     }
     
     //carousel
     document.getElementById("welcome-page-button").onclick = () => tryCatch(welcomePage);
@@ -34,7 +35,7 @@ Office.onReady((info) => {
 
     document.getElementById("skip1").onclick = () => tryCatch(skipToFinish);
     document.getElementById("skip2").onclick = () => tryCatch(skipToFinish);
-    document.getElementById("skip3").onclick = () => tryCatch(skipToFinish);
+    document.getElementById("get-started-button").onclick = () => tryCatch(skipToFinish);
       
     //red tag
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);

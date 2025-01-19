@@ -1,11 +1,18 @@
 import * as UI from '../constants/ui-elements.js';
 
 export function blurBackground(){
-  document.body.classList.add('blur-background');
+  const elements = document.body.querySelectorAll('*:not(.popup)');
+
+  elements.forEach(element => {
+    element.classList.add('blur-background');
+  });
 }
   
 export function unblurBackground(){
-  document.body.classList.remove('blur-background');
+  const elements = document.body.querySelectorAll('*:not(.popup)');
+  elements.forEach(element => {
+    element.classList.remove('blur-background');
+  });
 }
 
 export function closeAllFields() {
