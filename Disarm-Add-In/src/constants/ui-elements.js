@@ -20,3 +20,8 @@ export const table = document.getElementById('search-results-table');
 //formatting
 export const popupRed = document.getElementById('popup-red-tag-formatting');
 export const colorPicker = document.getElementById('colorPicker');
+
+//carousel
+export const carouselPage1 = document.getElementById('carousel-page-1');
+export const carouselPage2 = document.getElementById('carousel-page-2');
+export const carouselPage3 = document.getElementById('carousel-page-3');

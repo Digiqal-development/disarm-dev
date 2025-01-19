@@ -9,11 +9,33 @@ import { changeRedTagColor, changeRedTagColorSaveBtn } from '../components/forma
 import { insertRedTag, searchRedTag, saveButtonInsertTechniques, displaySearchTechniques, 
   saveButtonSearchTechniques, clearSearchTechniquesArray } from '../components/red-tag-component.js';
 import { insertRedTable } from '../components/table-summaries-component.js';
+import { carouselPage1, carouselPage2, carouselPage3, 
+  carouselSkip
+} from '../constants/ui-elements.js'
 
 
 Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
 
+    document.getElementById("main").style.display = "block";
+    document.getElementById("first-run-experience").style.display = "none";
+
+      //if (!localStorage.getItem("showedFRE")) {
+        showFirstRunExperience();//  }
+    
+    //carousel
+    document.getElementById("welcome-page-button").onclick = () => tryCatch(welcomePage);
+
+    document.getElementById("prev-btn1").onclick = () => tryCatch(prevPage);
+    document.getElementById("prev-btn2").onclick = () => tryCatch(prevPage);
+
+    document.getElementById("next-btn1").onclick = () => tryCatch(nextPage);
+    document.getElementById("next-btn2").onclick = () => tryCatch(nextPage);
+
+    document.getElementById("skip1").onclick = () => tryCatch(skipToFinish);
+    document.getElementById("skip2").onclick = () => tryCatch(skipToFinish);
+    document.getElementById("skip3").onclick = () => tryCatch(skipToFinish);
+      
     //red tag
     document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
     document.getElementById("search-red-tag").onclick = () => tryCatch(searchRedTag);
@@ -36,6 +58,11 @@ Office.onReady((info) => {
   }
 });
 
+async function showFirstRunExperience() {
+  document.getElementById("first-run-experience").style.display = "block";
+  document.getElementById("main").style.display = "none";
+  localStorage.setItem("showedFRE", true);
+}  
 
 async function tryCatch(callback) {
   try {
@@ -46,12 +73,53 @@ async function tryCatch(callback) {
 }
 
 async function closeButton(){
-
   helpersUI.closeAllFields();
   helpersUI.unblurBackground();
   clearSearchTechniquesArray();
-
 }
+
+async function welcomePage() {
+  document.getElementById("welcome-page").style.display = "none";
+  document.getElementById("carousel").style.display = "block";
+  carouselPage1.style.display = "block";
+  document.getElementById("dot1").classList.add("active");
+}
+
+async function prevPage() {
+  if (carouselPage2.style.display == "block"){
+    carouselPage2.style.display = "none";
+    document.getElementById("dot2").classList.remove("active");
+    carouselPage1.style.display = "block";
+    document.getElementById("dot1").classList.add("active");
+  }
+  else if (carouselPage3.style.display == "block"){
+    carouselPage3.style.display = "none";
+    document.getElementById("dot3").classList.remove("active");
+    carouselPage2.style.display = "block";
+    document.getElementById("dot2").classList.add("active");
+  } 
+}
+
+async function nextPage() {
+  if (carouselPage1.style.display == "block"){
+    carouselPage1.style.display = "none";
+    document.getElementById("dot1").classList.remove("active");
+    carouselPage2.style.display = "block";
+    document.getElementById("dot2").classList.add("active");
+  }
+  else if (carouselPage2.style.display == "block"){
+    carouselPage2.style.display = "none";
+    document.getElementById("dot2").classList.remove("active");
+    carouselPage3.style.display = "block";
+    document.getElementById("dot3").classList.add("active");
+  } 
+}
+
+async function skipToFinish(){
+  document.getElementById("first-run-experience").style.display = "none";
+  document.getElementById("main").style.display = "block";
+}
+
 
 
 

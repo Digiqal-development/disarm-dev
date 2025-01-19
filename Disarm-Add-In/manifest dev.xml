@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
   <Id>5cdf331f-f6db-4379-ac90-7028a57e16e9</Id>
-  <Version>1.0.1.8</Version>
+  <Version>1.0.1.9</Version>
   <ProviderName>Contoso</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="DISARM Add-In"/>
+  <DisplayName DefaultValue="DISARM Add-In for Word"/>
   <Description DefaultValue="A template to get started."/>
   <IconUrl DefaultValue="https://disarm-add-in.housepilot.de/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://disarm-add-in.housepilot.de/assets/icon-64.png"/>
@@ -72,12 +72,12 @@
         <bt:Url id="Taskpane.Url" DefaultValue="https://disarm-add-in.housepilot.de/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with your DISARM Add-In!"/>
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with your DISARM Add-In for Word!"/>
         <bt:String id="CommandsGroup.Label" DefaultValue="Annotations"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Disarm Add-In"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="DISARM Add-In for Word"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your Disarm add-in loaded succesfully. Go to the HOME tab and click the 'Disarm Add-In' button to get started."/>
+        <bt:String id="GetStarted.Description" DefaultValue="Your DISARM Add-In for Word loaded succesfully. Go to the HOME tab and click the 'DISARM Add-In for Word' button to get started."/>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to Show Annotations"/>
       </bt:LongStrings>
     </Resources>
