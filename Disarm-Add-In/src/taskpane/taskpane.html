@@ -32,6 +32,88 @@
 
 <body  class="ms-font-m ms-welcome ms-Fabric">
 
+    
+    <div id="first-run-experience">
+      <div id="welcome-page">
+        <header class="ms-welcome__header ms-bgColor-neutralLighter">
+            <img width="70" height="70" src="../../assets/logo-filled.png" alt="Contoso" title="Contoso" />
+            <span class="ms-font-su" id="welcome">Welcome</h2>
+        </header>
+        
+
+        <ul class="styled-bullet-points">
+            <li>
+                <span class="icon"><i class="ms-Icon ms-font-l ms-Icon--Settings ms-fontColor-neutralSecondary"></i></span> 
+                <span class="text">Choose from a standard set of adversary techniques</span>
+            </li>
+            <li>
+                <span class="icon"><i class="ms-Icon ms-font-l ms-Icon--Add ms-fontColor-neutralSecondary"></i></span> 
+                <span class="text">Annotate your report using the chosen techniques</span>
+            </li>
+            <li>
+                <span class="icon"><i class="ms-Icon ms-font-l ms-Icon--Table ms-fontColor-neutralSecondary"></i></span> 
+                <span class="text">Summarise your annotations to build a profile of the threat</span>
+            </li>
+        </ul>
+    
+    <div role="button" id="run" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl">
+        <span class="ms-Button-label" id="welcome-page-button">Show Example</span>
+    </div>
+      
+</div>
+<div class="carousel-container" id="carousel" style="display: none;">
+    <div class="carousel" >
+       
+      <div class="carousel-slide" id="carousel-page-1" style="display: none;">
+        <div class="skip">
+            <button class="skip-button" id="skip1">Skip ></button>
+        </div>
+        <img src="../../assets/first_run_experience_images/choose_techniques.png" alt="Full Screen Image" class="full-width-image" />
+        <h3 class="ms-font-su carousel-text-title">Choose from a standard set of adversary techniques</h3>
+        <p class="ms-font-su carousel-text">Click on "Choose Technique(s)" or "Search Technique(s)" buttons to find all adversary techniques available in the DISARM framework!</p>
+        
+        
+        <button class="next-btn" id="next-btn1">&#8250;</button>
+
+      </div>
+      <div class="carousel-slide" id="carousel-page-2" style="display: none;">
+        <div class="skip">
+            <button class="skip-button" id="skip2">Skip ></button>
+        </div>
+        <img src="../../assets/first_run_experience_images/show_text.png" alt="Full Screen Image" class="full-width-image" />
+        <h3 class="ms-font-su carousel-text-title">Annotate your report using the chosen techniques</h3>
+        <p class="ms-font-su carousel-text">After you select techniques, find them at the end of your sentence highlighted in the colour of your choosing!</p>
+        
+        <button class="prev-btn" id="prev-btn1" >&#8249;</button>
+        <button class="next-btn" id="next-btn2" >&#8250;</button>
+      </div>
+      <div class="carousel-slide" id="carousel-page-3" style="display: none;">
+        <img src="../../assets/first_run_experience_images/show_table.png" alt="Full Screen Image" class="full-width-image" />
+        <h3 class="ms-font-su carousel-text-title">Summarise your annotations to build a profile of the threat</h3>
+        <p class="ms-font-su carousel-text">Create a summary table of all inserted techniques sorted according to the kill chain in the DISARM framework! </p>
+        
+        <button class="prev-btn" id="prev-btn2">&#8249;</button>
+        <div role="button" id="run" class="ms-welcome__action ms-Button ms-Button--hero ms-font-xl">
+            <span class="ms-Button-label" id="get-started-button">Get Started</span>
+        </div>
+      </div>
+    
+      
+    <div class="carousel-dots" id="carousel-dots" >
+      <span class="dot" id="dot1"></span>
+      <span class="dot" id="dot2"></span>
+      <span class="dot" id="dot3"></span>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+
+  
+    </div>
+
+<div id="main">
  <p class="lines">Insert Red Tag</p>
 
     <button class="ms-Button" id="insert-red-tag"><div class="icon iconRed">&#9632;</div>Choose Technique(s)</button>
@@ -102,7 +184,6 @@
         <button class="save-btn" id="save-btn2">Save</button>
     </div>   
     <p class="empty"></p>
-
-    
+</div>
 </body>
 </html>
