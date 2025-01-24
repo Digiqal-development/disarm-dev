@@ -432,6 +432,60 @@ tr:last-child {
     background-color: #dcdcdc;
 }
 
+.get-help {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    z-index: 1000;
+}
+
+#help {
+        /* width: 25px; */
+    /* height: 25px; */
+    background-color: #f3f3f3;
+    /* color: #fff; */
+    border: none;
+    /* border-radius: 50%; */
+    /* font-size: 16px; */
+    /* font-weight: bold; */
+    text-align: center;
+    cursor: pointer;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); */
+    z-index: 1000;
+    
+}
+
+#help:hover {
+    background-color: #d2d2d2; /* Darker blue on hover */
+    content: "Get Help";
+}
+
+#help::after {
+    content: "Get Help"; /* Text displayed on hover */
+    position: absolute;
+    bottom: 25px; /* Position the text above the button */
+    right: 30px;
+    transform: translateX(50%);
+    background-color: #a1a1a1; /* Semi-transparent black background */
+    color: #fff; /* Text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap; /* Prevent text wrapping */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#help:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+
 
   .disabled{
     pointer-events: none;
