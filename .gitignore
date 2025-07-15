@@ -1,6 +1,5 @@
 *.vsidx
-*.vsidx
-*.vsidx
 **/node_modules/
 **/bin/
 **/obj/
+/Disarm-Server/.vs/Disarm-Server
