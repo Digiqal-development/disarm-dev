@@ -1,2 +1,2 @@
 export const SEARCH_TABLE_SELECT_COLOR = "rgb(85, 172, 227)"
-export const PHASES = ["Plan", "Prepare", "Execute", "Assess"]
+export const PHASES = ['Content', 'Actions', 'Assets']

@@ -1,148 +1,155 @@
-import { searchTechniques } from '../services/api-services.js';
-import * as helpers from './../utils/helpers.js';
+import { searchTechniques } from "../services/api-services.js";
+import * as helpers from "./../utils/helpers.js";
 
-var reverseJsonTechniques = '';
-
+var reverseJsonTechniques = "";
+var tableIds = [];
 export async function insertRedTable() {
+  await Word.run(async (context) => {
+    //get search json only once
+    if (reverseJsonTechniques == "") reverseJsonTechniques = await searchTechniques();
 
-    await Word.run(async (context) => {
-      
-      //get search json only once
-      if (reverseJsonTechniques == '') reverseJsonTechniques = await searchTechniques();
-      
-      const tag_ids = reverseJsonTechniques.ids
-      
-      // get text of the entire document
-      var wholeDocument = context.document.body
-      wholeDocument.load("text")
-      await context.sync();
-      var text = wholeDocument.text
-      
-      //match cases using regular expressions
-      const smallBracketRegex = /\(([^()]*)\)/g;
-      const middleBracketRegex = /\[(.*?)\]/g;
-  
-      const foundSmallBrackets = text.matchAll(smallBracketRegex);
-  
-      let foundMiddleBrackets = []
-      let table = [["Technique title", "ID", "Text", "Use"]]
-  
-      for (const matches of foundSmallBrackets){
-  
-        foundMiddleBrackets = matches[0].match(middleBracketRegex);
-        const commasNumber = (matches[0].match(/,/g) || []).length;
-        let selectedText = helpers.extractTextFromBrackets(text, matches.index)
-  
-        if (foundMiddleBrackets.length != commasNumber + 1 || foundMiddleBrackets.length == 0) continue;
-  
-        for (let j = 0; j < foundMiddleBrackets.length; j++){
-          
-          let tag = foundMiddleBrackets[j].slice(1, -1)
-          let tagObject = tag_ids[tag]
-  
-          selectedText = selectedText.replace(/^\s*/, '');
+    const tag_ids = reverseJsonTechniques.ids;
 
-          var tagTitle = tagObject.title;
-          if (tag.includes(".")) tagTitle = helpers.addPrefixForSubTechniques(tagTitle, tag, reverseJsonTechniques.ids);
-                  
-          // add matched cases into table
-          table.push([tagTitle, tag, selectedText.slice(0, -1) + ".", tagObject.use]) 
-        }
+    // get text of the entire document
+    var wholeDocument = context.document.body;
+    wholeDocument.load("text");
+    await context.sync();
+    var text = wholeDocument.text;
+
+    //match cases using regular expressions
+    const smallBracketRegex = /\(([^()]*)\)/g;
+    const middleBracketRegex = /\[(.*?)\]/g;
+
+    const foundSmallBrackets = text.matchAll(smallBracketRegex);
+
+    let foundMiddleBrackets = [];
+    let table = [["Technique title", "ID", "Text", "Use"]];
+
+    for (const matches of foundSmallBrackets) {
+      foundMiddleBrackets = matches[0].match(middleBracketRegex);
+      const commasNumber = (matches[0].match(/,/g) || []).length;
+      let selectedText = helpers.extractTextFromBrackets(text, matches.index);
+
+      if (foundMiddleBrackets.length != commasNumber + 1 || foundMiddleBrackets.length == 0) continue;
+
+      for (let j = 0; j < foundMiddleBrackets.length; j++) {
+        let tag = foundMiddleBrackets[j].slice(1, -1);
+        let tagObject = tag_ids[tag];
+
+        selectedText = selectedText.replace(/^\s*/, "");
+
+        var tagTitle = tagObject.title;
+        if (tag.includes(".")) tagTitle = helpers.addPrefixForSubTechniques(tagTitle, tag, reverseJsonTechniques.ids);
+
+        // add matched cases into table
+        table.push([tagTitle, tag, selectedText.slice(0, -1) + ".", tagObject.use]);
+        tableIds.push(tag);
       }
-
-      table = helpers.sortRedSummariesTable(table, reverseJsonTechniques);
-      const { processedData, headerIndexRows } = extractHeaderRows(table)
-      drawTable(processedData, headerIndexRows)
     }
-  )}
-  
-  async function drawTable(processedData, headerIndexRows){
-    await Word.run(async (context) => {
-  
-      var body = context.document.body;
 
-      // Insert a section break before the new page
-      body.insertBreak(Word.BreakType.sectionNext, Word.InsertLocation.end);
+    table = helpers.sortRedSummariesTable(table, reverseJsonTechniques);
+    const { processedData, headerIndexRows } = extractHeaderRows(table);
+    drawTable(processedData, headerIndexRows);
+    attachJsonLink();
+  });
+}
 
-      // Load the new section to modify its properties
-      var sections = context.document.sections;
-      context.load(sections);
+async function drawTable(processedData, headerIndexRows) {
+  await Word.run(async (context) => {
+    var body = context.document.body;
 
+    // Insert a section break before the new page
+    body.insertBreak(Word.BreakType.sectionNext, Word.InsertLocation.end);
 
-      const secondParagraph = context.document.body.paragraphs.getLast()
-      const insertedTable = secondParagraph.insertTable(processedData.length, 3, Word.InsertLocation.after, processedData);
-      
-      try{
-        insertedTable.horizontalAlignment = "Centered";
+    // Load the new section to modify its properties
+    var sections = context.document.sections;
+    context.load(sections);
 
-        //left alignement for third column
-        processedData.forEach((_, index) => {
-          insertedTable.getCell(index, 2).horizontalAlignment = "Left";
-        });
-   
-        //set column widths
-        insertedTable.getCell(0, 0).columnWidth = 150
-        insertedTable.getCell(0, 1).columnWidth = 60;
-        insertedTable.getCell(0, 2).columnWidth = 500;
-      
-        //format first row
-        const firstRow = insertedTable.rows.getFirst();
-        firstRow.load('font');
+    const secondParagraph = context.document.body.paragraphs.getLast();
+    const insertedTable = secondParagraph.insertTable(
+      processedData.length,
+      3,
+      Word.InsertLocation.after,
+      processedData
+    );
+
+    try {
+      insertedTable.horizontalAlignment = "Centered";
+
+      //left alignement for third column
+      processedData.forEach((_, index) => {
+        insertedTable.getCell(index, 2).horizontalAlignment = "Left";
+      });
+
+      //set column widths
+      insertedTable.getCell(0, 0).columnWidth = 150;
+      insertedTable.getCell(0, 1).columnWidth = 60;
+      insertedTable.getCell(0, 2).columnWidth = 500;
+
+      //format first row
+      const firstRow = insertedTable.rows.getFirst();
+      firstRow.load("font");
+      context.sync();
+      firstRow.set({
+        font: {
+          color: "#FFFFFF",
+          bold: true,
+        },
+        shadingColor: "#64649b",
+        horizontalAlignment: "Centered",
+      });
+
+      //format header rows
+      headerIndexRows.forEach((rowIndex) => {
+        const cell = insertedTable.getCell(rowIndex, 0).parentRow;
+        cell.load("font");
         context.sync();
-        firstRow.set({
+        cell.set({
+          horizontalAlignment: "Centered",
+          shadingColor: "#9bcbfb",
           font: {
-              color: "#FFFFFF",
-              bold: true
+            bold: true,
           },
-          shadingColor: "#64649b",
-          horizontalAlignment: "Centered"
         });
-
-        //format header rows
-        headerIndexRows.forEach(rowIndex => {
-          const cell = insertedTable.getCell(rowIndex, 0).parentRow;
-          cell.load('font');
-          context.sync();
-          cell.set({
-            horizontalAlignment: "Centered",
-            shadingColor: "#9bcbfb",
-            font: {
-                bold: true
-            }
-          });
         cell.merge();
 
         context.sync();
-
       });
-
-    }
-
-    catch(err){
+    } catch (err) {
       context.sync();
     }
-
-
-    });
-  };
+  });
+}
 
 function extractHeaderRows(table) {
   const result = [["Technique Title", "ID", "Use"]];
   const headerIndexRows = [];
-  let previousUse = '';
+  let previousUse = "";
 
   table.forEach((row, index) => {
-  
-    const [technique, id, text, use] = row;  
+    const [technique, id, text, use] = row;
 
     if (use !== previousUse) {
-        result.push([use, '', '']); 
-        headerIndexRows.push(result.length - 1); 
-        previousUse = use; 
+      result.push([use, "", ""]);
+      headerIndexRows.push(result.length - 1);
+      previousUse = use;
     }
 
     result.push([technique, id, text]);
-    });
+  });
 
-    return {  processedData: result, headerIndexRows };
+  return { processedData: result, headerIndexRows };
+}
+
+function attachJsonLink() {
+  var urlTag = document.getElementById("json-url");
+  const commaSeparatedString = tableIds.map((item) => encodeURIComponent(item)).join(",");
+  const encodedParamValue = encodeURIComponent(commaSeparatedString);
+  const queryParam = `values=${encodedParamValue}`;
+  var endpoint = "/json";
+  var url = "https://localhost:7225";
+  var redirectUrl = `${url}${endpoint}?${queryParam}`;
+  urlTag.innerHTML = "";
+  urlTag.innerHTML = redirectUrl;
+  tableIds = [];
 }

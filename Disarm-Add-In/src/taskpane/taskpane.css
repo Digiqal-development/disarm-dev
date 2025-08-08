@@ -151,7 +151,7 @@ select {
 }
 
 .scrollable-box {
-    height: 150px; 
+    height: 300px; 
     overflow-y: scroll; 
     border: 1px solid #ccc; 
 }
@@ -462,4 +462,57 @@ tr:last-child {
 .blur-background > *:not(.popup):not(.popup *){
     filter: blur(3px);
     pointer-events: none;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px; /* Increased width to fit longer descriptions */
+  background-color: #333; /* Off-black background */
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px; /* Increased padding for better readability */
+  
+  /* Position the tooltip below the element and slightly to the right */
+  position: absolute;
+  z-index: 1;
+  top: 125%; /* Position tooltip below the element */
+  left: 80%; /* Move it a little to the right (adjust percentage as needed) */
+  transform: translateX(-10%); /* Fine-tune horizontal positioning */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1; /* Tooltip fades in on hover */
+}
+  
+
+.suggestions-list {
+  list-style-type: none;
+  padding: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
+  width: 93%;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+.suggestions-list li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
 }
