@@ -17,6 +17,8 @@ import {
 import { insertRedTable } from "../components/table-summaries-component.js";
 import { carouselPage1, carouselPage2, carouselPage3, carouselSkip } from "../constants/ui-elements.js";
 import { searchTechniques } from "../services/api-services.js";
+import { getRedTagColor } from "../components/formatting-component.js";
+
 Office.onReady(async (info) => {
   if (info.host !== Office.HostType.Word) {
     return;
@@ -186,10 +188,11 @@ const showSuggestions = async (query, suggestions) => {
     filteredSuggestions.forEach((suggestion) => {
       const listItem = document.createElement("li");
       listItem.textContent = suggestion.autoCompleteSuggestionText;
+
       listItem.addEventListener("click", async function () {
         let partialSuggestion = suggestion.insertText.replace(query, "");
 
-        await insertTextIntoWord(partialSuggestion);
+        await insertTextIntoWord(partialSuggestion, query);
         suggestionsList.innerHTML = ""; // Clear suggestions after selection
       });
 
@@ -199,7 +202,7 @@ const showSuggestions = async (query, suggestions) => {
 };
 
 // Function to insert selected autocomplete word into the document
-const insertTextIntoWord = async (text) => {
+const insertTextIntoWord = async (text, query) => {
   await Word.run(async (context) => {
     const selection = context.document.getSelection();
     var f = selection.getRange("End");
@@ -214,7 +217,16 @@ const insertTextIntoWord = async (text) => {
     context.load(searchResults, "items/text");
 
     selection.insertText(text, Word.InsertLocation.replace);
+
+    var rangeToHighlight = selection.search(text);
+    rangeToHighlight.load("items/text");
+
+    const rangeBefore = selection.getRange("Start").getTextRanges([".", " ", ","], false);
+    var rangeToHighlight2 = rangeBefore.load("text");
     await context.sync();
+
+    rangeToHighlight.items[0].font.set({ highlightColor: getRedTagColor() });
+    rangeToHighlight2.items[0].font.set({ highlightColor: getRedTagColor() });
   }).catch(function (error) {
     console.error(error);
   });

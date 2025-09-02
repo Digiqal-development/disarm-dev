@@ -16,7 +16,7 @@ module.exports = async (env, options) => {
   const dev = options.mode === "development";
 
   const config = {
-    devtool: "source-map",
+    devtool: "inline-source-map",
     entry: {
       polyfill: ["core-js/stable", "regenerator-runtime/runtime"],
       taskpane: ["./src/taskpane/taskpane.js", "./src/taskpane/taskpane.html"],

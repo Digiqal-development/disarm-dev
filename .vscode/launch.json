@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Start and Debug Office Add-in",
+      "configurations": [
+        "Run Add-in (npm start)",
+        "Attach to Edge"
+      ]
+    }
+  ],
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Run Add-in (npm start)",
+      "request": "launch",
+      "command": "npm run start",
+      "cwd": "${workspaceFolder}\\Disarm-Add-In"
+    },
+    {
+      "name": "Attach to Edge",
+      "type": "msedge",
+      "request": "attach",
+      "port": 3000,
+      "timeout": 60000,
+      "sourceMaps": true
+    },
+    
+  ]
+}
