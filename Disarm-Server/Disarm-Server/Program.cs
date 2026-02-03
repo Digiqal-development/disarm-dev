@@ -3,10 +3,11 @@ using Disarm_Server.Models;
 using Disarm_Server.Services;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Web;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var path = Path.Combine(Directory.GetCurrentDirectory(), "disarmData.json");
+var codes = new Dictionary<string, string>();
+var path = Path.Combine(Directory.GetCurrentDirectory(), "disarmData2.json");
 var disarmDataJson = await File.ReadAllTextAsync(path);
 var disarmTechniqueNames = JsonSerializer.Deserialize<List<DisarmTechniqueName>>(disarmDataJson);
 var wrapper = new DisarmTechniqueNameWrapper { Techniques = disarmTechniqueNames! };
@@ -44,10 +45,16 @@ app.MapGet("/tags", () =>
     return Results.File(Directory.GetCurrentDirectory() + "/tags.json", "application/json");
 });
 
-app.MapGet("/json", (IAttackNavigatorService service, string values) =>
+app.MapGet("/json/{code}", (IAttackNavigatorService service, string code) =>
 {
-    var ids = values.Split(",", StringSplitOptions.TrimEntries).ToArray();
+    if (!codes.TryGetValue(code, out var values))
+    {
+        return Results.NotFound();
+    }
+    var parsedIds = HttpUtility.UrlDecode(values);
+    var ids = parsedIds.Split(",", StringSplitOptions.TrimEntries).ToArray();
     var data = service.GetNavigatorLayerBasedOnTechniqueIds(ids!);
+    
     var json = JsonSerializer.Serialize(data);
     return Results.Content(json, "application/json");
 });
@@ -75,6 +82,12 @@ app.MapPost("/clauses", async (ToDo input) =>
     var output = await proc.StandardOutput.ReadToEndAsync();
     input.Result = output;
     return input;
+});
+
+app.MapPost("/code-store", (CreateCodeRequest request) =>
+{
+    codes.Add(request.Code, request.Ids);
+    return Results.Ok();
 });
 
 app.Run();

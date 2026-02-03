@@ -69,7 +69,7 @@ public class AttackNavigatorLayer
         Description = "";
         Filters = new Filters
         {
-            Platforms = new List<string> { "Windows", "Linux", "Mac" }
+            Platforms = ["Windows", "Linux", "Mac"]
         };
         Sorting = 0;
         Layout = new Layout
@@ -82,8 +82,8 @@ public class AttackNavigatorLayer
             CountUnscored = false
         };
         HideDisabled = false;
-        Techniques = new List<Technique>
-        {
+        Techniques =
+        [
             new Technique
             {
                 TechniqueID = "T0100",
@@ -92,20 +92,20 @@ public class AttackNavigatorLayer
                 Color = "#e60d0d",
                 Comment = "",
                 Enabled = true,
-                Metadata = new List<object>(),
-                Links = new List<object>(),
+                Metadata = [],
+                Links = [],
                 ShowSubtechniques = false
             }
-        };
+        ];
         Gradient = new Gradient
         {
             Colors = new List<string> { "#ff6666ff", "#ffe766ff", "#8ec843ff" },
             MinValue = 0,
             MaxValue = 100
         };
-        LegendItems = new List<object>();
-        Metadata = new List<object>();
-        Links = new List<object>();
+        LegendItems = [];
+        Metadata = [];
+        Links = [];
         ShowTacticRowBackground = false;
         TacticRowBackground = "#dddddd";
         SelectTechniquesAcrossTactics = true;

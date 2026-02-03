@@ -1,6 +1,6 @@
 import { searchTechniques } from "../services/api-services.js";
 import * as helpers from "./../utils/helpers.js";
-
+import { insertCode } from "../services/api-services.js";
 var reverseJsonTechniques = "";
 var tableIds = [];
 export async function insertRedTable() {
@@ -141,15 +141,33 @@ function extractHeaderRows(table) {
   return { processedData: result, headerIndexRows };
 }
 
-function attachJsonLink() {
-  var urlTag = document.getElementById("json-url");
+async function attachJsonLink() {
+  const urlTag = document.getElementById("json-url");
+  const endpoint = "disarm-navigator";
+  const baseUrl = "http://localhost:4200";
+
+  const randomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+
   const commaSeparatedString = tableIds.map((item) => encodeURIComponent(item)).join(",");
   const encodedParamValue = encodeURIComponent(commaSeparatedString);
-  const queryParam = `values=${encodedParamValue}`;
-  var endpoint = "/json";
-  var url = "https://localhost:7225";
-  var redirectUrl = `${url}${endpoint}?${queryParam}`;
-  urlTag.innerHTML = "";
-  urlTag.innerHTML = redirectUrl;
-  tableIds = [];
+
+  const redirectUrl = `${baseUrl}/${endpoint}/${randomCode}`;
+
+  const requestBody = {
+    code: randomCode,
+    ids: commaSeparatedString,
+  };
+
+  try {
+    await insertCode(requestBody);
+    urlTag.href=redirectUrl
+    urlTag.textContent = "Navigator link";
+
+    // 7️⃣ Reset tableIds
+    tableIds = [];
+
+    console.log(`Code '${randomCode}' inserted successfully.`);
+  } catch (error) {
+    console.error("Failed to attach JSON link:", error);
+  }
 }

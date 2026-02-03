@@ -1,1 +1,1957 @@
-[{"Id":"T0002","PhaseName":"plan-objectives","Name":"Facilitate State Propaganda"},{"Id":"T0003","PhaseName":"develop-narratives","Name":"Leverage Existing Narratives"},{"Id":"T0004","PhaseName":"develop-narratives","Name":"Develop Competing Narratives"},{"Id":"T0010","PhaseName":"establish-assets","Name":"Cultivate Ignorant Agents"},{"Id":"T0014","PhaseName":"establish-assets","Name":"Prepare Fundraising Campaigns"},{"Id":"T0014.001","PhaseName":"establish-assets","Name":"Raise Funds from Malign Actors"},{"Id":"T0014.002","PhaseName":"establish-assets","Name":"Raise Funds from Ignorant Agents"},{"Id":"T0015","PhaseName":"develop-content","Name":"Create Hashtags and Search Artefacts"},{"Id":"T0015.001","PhaseName":"develop-content","Name":"Use Existing Hashtag"},{"Id":"T0015.002","PhaseName":"develop-content","Name":"Create New Hashtag"},{"Id":"T0016","PhaseName":"microtarget","Name":"Create Clickbait"},{"Id":"T0017","PhaseName":"drive-offline-activity","Name":"Conduct Fundraising"},{"Id":"T0017.001","PhaseName":"drive-offline-activity","Name":"Conduct Crowdfunding Campaigns"},{"Id":"T0018","PhaseName":"microtarget","Name":"Purchase Targeted Advertisements"},{"Id":"T0020","PhaseName":"conduct-pump-priming","Name":"Trial Content"},{"Id":"T0022","PhaseName":"develop-narratives","Name":"Leverage Conspiracy Theory Narratives"},{"Id":"T0022.001","PhaseName":"develop-narratives","Name":"Amplify Existing Conspiracy Theory Narratives"},{"Id":"T0022.002","PhaseName":"develop-narratives","Name":"Develop Original Conspiracy Theory Narratives"},{"Id":"T0023","PhaseName":"develop-content","Name":"Distort Facts"},{"Id":"T0023.001","PhaseName":"develop-content","Name":"Reframe Context"},{"Id":"T0023.002","PhaseName":"develop-content","Name":"Edit Open-Source Content"},{"Id":"T0029","PhaseName":"select-channels-and-affordances","Name":"Online Polls"},{"Id":"T0039","PhaseName":"maximise-exposure","Name":"Bait Influencer"},{"Id":"T0040","PhaseName":"develop-narratives","Name":"Demand Insurmountable Proof"},{"Id":"T0042","PhaseName":"conduct-pump-priming","Name":"Seed Kernel of Truth"},{"Id":"T0044","PhaseName":"conduct-pump-priming","Name":"Seed Distortions"},{"Id":"T0045","PhaseName":"conduct-pump-priming","Name":"Use Fake Experts"},{"Id":"T0046","PhaseName":"conduct-pump-priming","Name":"Use Search Engine Optimisation"},{"Id":"T0047","PhaseName":"drive-online-harms","Name":"Censor Social Media as a Political Force"},{"Id":"T0048","PhaseName":"drive-online-harms","Name":"Harass"},{"Id":"T0048.001","PhaseName":"drive-online-harms","Name":"Boycott/\u0022Cancel\u0022 Opponents"},{"Id":"T0048.002","PhaseName":"drive-online-harms","Name":"Harass People Based on Identities"},{"Id":"T0048.003","PhaseName":"drive-online-harms","Name":"Threaten to Dox"},{"Id":"T0048.004","PhaseName":"drive-online-harms","Name":"Dox"},{"Id":"T0049","PhaseName":"maximise-exposure","Name":"Flood Information Space"},{"Id":"T0049.001","PhaseName":"maximise-exposure","Name":"Trolls Amplify and Manipulate"},{"Id":"T0049.002","PhaseName":"maximise-exposure","Name":"Flood Existing Hashtag"},{"Id":"T0049.003","PhaseName":"maximise-exposure","Name":"Bots Amplify via Automated Forwarding and Reposting"},{"Id":"T0049.004","PhaseName":"maximise-exposure","Name":"Utilise Spamoflauge"},{"Id":"T0049.005","PhaseName":"maximise-exposure","Name":"Conduct Swarming"},{"Id":"T0049.006","PhaseName":"maximise-exposure","Name":"Conduct Keyword Squatting"},{"Id":"T0049.007","PhaseName":"maximise-exposure","Name":"Inauthentic Sites Amplify News and Narratives"},{"Id":"T0049.008","PhaseName":"maximise-exposure","Name":"Generate Information Pollution"},{"Id":"T0057","PhaseName":"drive-offline-activity","Name":"Organise Events"},{"Id":"T0057.001","PhaseName":"drive-offline-activity","Name":"Pay for Physical Action"},{"Id":"T0057.002","PhaseName":"drive-offline-activity","Name":"Conduct Symbolic Action"},{"Id":"T0059","PhaseName":"persist-in-the-information-environment","Name":"Play the Long Game"},{"Id":"T0060","PhaseName":"persist-in-the-information-environment","Name":"Continue to Amplify"},{"Id":"T0061","PhaseName":"drive-offline-activity","Name":"Sell Merchandise"},{"Id":"T0065","PhaseName":"establish-assets","Name":"Prepare Physical Broadcast Capabilities"},{"Id":"T0066","PhaseName":"plan-objectives","Name":"Degrade Adversary"},{"Id":"T0068","PhaseName":"develop-narratives","Name":"Respond to Breaking News Event or Active Crisis"},{"Id":"T0072","PhaseName":"target-audience-analysis","Name":"Segment Audiences"},{"Id":"T0072.001","PhaseName":"target-audience-analysis","Name":"Geographic Segmentation"},{"Id":"T0072.002","PhaseName":"target-audience-analysis","Name":"Demographic Segmentation"},{"Id":"T0072.003","PhaseName":"target-audience-analysis","Name":"Economic Segmentation"},{"Id":"T0072.004","PhaseName":"target-audience-analysis","Name":"Psychographic Segmentation"},{"Id":"T0072.005","PhaseName":"target-audience-analysis","Name":"Political Segmentation"},{"Id":"T0073","PhaseName":"plan-strategy","Name":"Determine Target Audiences"},{"Id":"T0074","PhaseName":"plan-strategy","Name":"Determine Strategic Ends"},{"Id":"T0074.001","PhaseName":"plan-strategy","Name":"Geopolitical Advantage"},{"Id":"T0074.002","PhaseName":"plan-strategy","Name":"Domestic Political Advantage"},{"Id":"T0074.003","PhaseName":"plan-strategy","Name":"Economic Advantage"},{"Id":"T0074.004","PhaseName":"plan-strategy","Name":"Ideological Advantage"},{"Id":"T0075","PhaseName":"plan-objectives","Name":"Dismiss"},{"Id":"T0075.001","PhaseName":"plan-objectives","Name":"Discredit Credible Sources"},{"Id":"T0076","PhaseName":"plan-objectives","Name":"Distort"},{"Id":"T0077","PhaseName":"plan-objectives","Name":"Distract"},{"Id":"T0078","PhaseName":"plan-objectives","Name":"Dismay"},{"Id":"T0079","PhaseName":"plan-objectives","Name":"Divide"},{"Id":"T0080","PhaseName":"target-audience-analysis","Name":"Map Target Audience Information Environment"},{"Id":"T0080.001","PhaseName":"target-audience-analysis","Name":"Monitor Social Media Analytics"},{"Id":"T0080.002","PhaseName":"target-audience-analysis","Name":"Evaluate Media Surveys"},{"Id":"T0080.003","PhaseName":"target-audience-analysis","Name":"Identify Trending Topics/Hashtags"},{"Id":"T0080.004","PhaseName":"target-audience-analysis","Name":"Conduct Web Traffic Analysis"},{"Id":"T0080.005","PhaseName":"target-audience-analysis","Name":"Assess Degree/Type of Media Access"},{"Id":"T0081","PhaseName":"target-audience-analysis","Name":"Identify Social and Technical Vulnerabilities"},{"Id":"T0081.001","PhaseName":"target-audience-analysis","Name":"Find Echo Chambers"},{"Id":"T0081.002","PhaseName":"target-audience-analysis","Name":"Identify Data Voids"},{"Id":"T0081.003","PhaseName":"target-audience-analysis","Name":"Identify Existing Prejudices"},{"Id":"T0081.004","PhaseName":"target-audience-analysis","Name":"Identify Existing Fissures"},{"Id":"T0081.005","PhaseName":"target-audience-analysis","Name":"Identify Existing Conspiracy Narratives/Suspicions"},{"Id":"T0081.006","PhaseName":"target-audience-analysis","Name":"Identify Wedge Issues"},{"Id":"T0081.007","PhaseName":"target-audience-analysis","Name":"Identify Target Audience Adversaries"},{"Id":"T0081.008","PhaseName":"target-audience-analysis","Name":"Identify Media System Vulnerabilities"},{"Id":"T0082","PhaseName":"develop-narratives","Name":"Develop New Narratives"},{"Id":"T0083","PhaseName":"develop-narratives","Name":"Integrate Target Audience Vulnerabilities into Narrative"},{"Id":"T0084","PhaseName":"develop-content","Name":"Reuse Existing Content"},{"Id":"T0084.001","PhaseName":"develop-content","Name":"Use Copypasta"},{"Id":"T0084.002","PhaseName":"develop-content","Name":"Plagiarise Content"},{"Id":"T0084.003","PhaseName":"develop-content","Name":"Deceptively Labelled or Translated"},{"Id":"T0084.004","PhaseName":"develop-content","Name":"Appropriate Content"},{"Id":"T0085","PhaseName":"develop-content","Name":"Develop Text-Based Content"},{"Id":"T0085.001","PhaseName":"develop-content","Name":"Develop AI-Generated Text"},{"Id":"T0085.003","PhaseName":"develop-content","Name":"Develop Inauthentic News Articles"},{"Id":"T0085.004","PhaseName":"develop-content","Name":"Develop Document"},{"Id":"T0085.005","PhaseName":"develop-content","Name":"Develop Book"},{"Id":"T0085.006","PhaseName":"develop-content","Name":"Develop Opinion Article"},{"Id":"T0085.007","PhaseName":"develop-content","Name":"Create Fake Research"},{"Id":"T0085.008","PhaseName":"develop-content","Name":"Machine Translated Text"},{"Id":"T0086","PhaseName":"develop-content","Name":"Develop Image-Based Content"},{"Id":"T0086.001","PhaseName":"develop-content","Name":"Develop Memes"},{"Id":"T0086.002","PhaseName":"develop-content","Name":"Develop AI-Generated Images (Deepfakes)"},{"Id":"T0086.003","PhaseName":"develop-content","Name":"Deceptively Edit Images (Cheap Fakes)"},{"Id":"T0086.004","PhaseName":"develop-content","Name":"Aggregate Information into Evidence Collages"},{"Id":"T0087","PhaseName":"develop-content","Name":"Develop Video-Based Content"},{"Id":"T0087.001","PhaseName":"develop-content","Name":"Develop AI-Generated Videos (Deepfakes)"},{"Id":"T0087.002","PhaseName":"develop-content","Name":"Deceptively Edit Video (Cheap Fakes)"},{"Id":"T0088","PhaseName":"develop-content","Name":"Develop Audio-Based Content"},{"Id":"T0088.001","PhaseName":"develop-content","Name":"Develop AI-Generated Audio (Deepfakes)"},{"Id":"T0088.002","PhaseName":"develop-content","Name":"Deceptively Edit Audio (Cheap Fakes)"},{"Id":"T0089","PhaseName":"develop-content","Name":"Obtain Private Documents"},{"Id":"T0089.001","PhaseName":"develop-content","Name":"Obtain Authentic Documents"},{"Id":"T0089.003","PhaseName":"develop-content","Name":"Alter Authentic Documents"},{"Id":"T0091","PhaseName":"establish-assets","Name":"Recruit Malign Actors"},{"Id":"T0091.001","PhaseName":"establish-assets","Name":"Recruit Contractors"},{"Id":"T0091.002","PhaseName":"establish-assets","Name":"Recruit Partisans"},{"Id":"T0091.003","PhaseName":"establish-assets","Name":"Enlist Troll Accounts"},{"Id":"T0092","PhaseName":"establish-assets","Name":"Build Network"},{"Id":"T0092.001","PhaseName":"establish-assets","Name":"Create Organisations"},{"Id":"T0092.002","PhaseName":"establish-assets","Name":"Use Follow Trains"},{"Id":"T0092.003","PhaseName":"establish-assets","Name":"Create Community or Sub-Group"},{"Id":"T0093","PhaseName":"establish-assets","Name":"Acquire/Recruit Network"},{"Id":"T0093.001","PhaseName":"establish-assets","Name":"Fund Proxies"},{"Id":"T0093.002","PhaseName":"establish-assets","Name":"Acquire Botnets"},{"Id":"T0094","PhaseName":"establish-assets","Name":"Infiltrate Existing Networks"},{"Id":"T0094.001","PhaseName":"establish-assets","Name":"Identify Susceptible Targets in Networks"},{"Id":"T0094.002","PhaseName":"establish-assets","Name":"Utilise Butterfly Attacks"},{"Id":"T0095","PhaseName":"establish-assets","Name":"Develop Owned Media Assets"},{"Id":"T0096","PhaseName":"establish-assets","Name":"Leverage Content Farms"},{"Id":"T0096.001","PhaseName":"establish-assets","Name":"Create Content Farms"},{"Id":"T0096.002","PhaseName":"establish-assets","Name":"Outsource Content Creation to External Organisations"},{"Id":"T0097","PhaseName":"establish-legitimacy","Name":"Present Persona"},{"Id":"T0097.100","PhaseName":"establish-legitimacy","Name":"Individual Persona"},{"Id":"T0097.101","PhaseName":"establish-legitimacy","Name":"Local Persona"},{"Id":"T0097.102","PhaseName":"establish-legitimacy","Name":"Journalist Persona"},{"Id":"T0097.103","PhaseName":"establish-legitimacy","Name":"Activist Persona"},{"Id":"T0097.104","PhaseName":"establish-legitimacy","Name":"Hacktivist Persona"},{"Id":"T0097.105","PhaseName":"establish-legitimacy","Name":"Military Personnel Persona"},{"Id":"T0097.106","PhaseName":"establish-legitimacy","Name":"Recruiter Persona"},{"Id":"T0097.107","PhaseName":"establish-legitimacy","Name":"Researcher Persona"},{"Id":"T0097.108","PhaseName":"establish-legitimacy","Name":"Expert Persona"},{"Id":"T0097.109","PhaseName":"establish-legitimacy","Name":"Romantic Suitor Persona"},{"Id":"T0097.110","PhaseName":"establish-legitimacy","Name":"Party Official Persona"},{"Id":"T0097.111","PhaseName":"establish-legitimacy","Name":"Government Official Persona"},{"Id":"T0097.112","PhaseName":"establish-legitimacy","Name":"Government Employee Persona"},{"Id":"T0097.200","PhaseName":"establish-legitimacy","Name":"Institutional Persona"},{"Id":"T0097.201","PhaseName":"establish-legitimacy","Name":"Local Institution Persona"},{"Id":"T0097.202","PhaseName":"establish-legitimacy","Name":"News Outlet Persona"},{"Id":"T0097.203","PhaseName":"establish-legitimacy","Name":"Fact Checking Organisation Persona"},{"Id":"T0097.204","PhaseName":"establish-legitimacy","Name":"Think Tank Persona"},{"Id":"T0097.205","PhaseName":"establish-legitimacy","Name":"Business Persona"},{"Id":"T0097.206","PhaseName":"establish-legitimacy","Name":"Government Institution Persona"},{"Id":"T0097.207","PhaseName":"establish-legitimacy","Name":"NGO Persona"},{"Id":"T0097.208","PhaseName":"establish-legitimacy","Name":"Social Cause Persona"},{"Id":"T0098","PhaseName":"establish-legitimacy","Name":"Establish Inauthentic News Sites"},{"Id":"T0098.001","PhaseName":"establish-legitimacy","Name":"Create Inauthentic News Sites"},{"Id":"T0098.002","PhaseName":"establish-legitimacy","Name":"Leverage Existing Inauthentic News Sites"},{"Id":"T0100","PhaseName":"establish-legitimacy","Name":"Co-Opt Trusted Sources"},{"Id":"T0100.001","PhaseName":"establish-legitimacy","Name":"Co-Opt Trusted Individuals"},{"Id":"T0100.002","PhaseName":"establish-legitimacy","Name":"Co-Opt Grassroots Groups"},{"Id":"T0100.003","PhaseName":"establish-legitimacy","Name":"Co-Opt Influencers"},{"Id":"T0101","PhaseName":"microtarget","Name":"Create Localised Content"},{"Id":"T0102","PhaseName":"microtarget","Name":"Leverage Echo Chambers/Filter Bubbles"},{"Id":"T0102.001","PhaseName":"microtarget","Name":"Use Existing Echo Chambers/Filter Bubbles"},{"Id":"T0102.002","PhaseName":"microtarget","Name":"Create Echo Chambers/Filter Bubbles"},{"Id":"T0102.003","PhaseName":"microtarget","Name":"Exploit Data Voids"},{"Id":"T0107","PhaseName":"select-channels-and-affordances","Name":"Bookmarking and Content Curation"},{"Id":"T0109","PhaseName":"select-channels-and-affordances","Name":"Consumer Review Networks"},{"Id":"T0110","PhaseName":"select-channels-and-affordances","Name":"Formal Diplomatic Channels"},{"Id":"T0111","PhaseName":"select-channels-and-affordances","Name":"Traditional Media"},{"Id":"T0111.001","PhaseName":"select-channels-and-affordances","Name":"TV"},{"Id":"T0111.002","PhaseName":"select-channels-and-affordances","Name":"Newspaper"},{"Id":"T0111.003","PhaseName":"select-channels-and-affordances","Name":"Radio"},{"Id":"T0113","PhaseName":"establish-assets","Name":"Employ Commercial Analytic Firms"},{"Id":"T0114","PhaseName":"deliver-content","Name":"Deliver Ads"},{"Id":"T0114.001","PhaseName":"deliver-content","Name":"Social Media"},{"Id":"T0114.002","PhaseName":"deliver-content","Name":"Traditional Media"},{"Id":"T0115","PhaseName":"deliver-content","Name":"Post Content"},{"Id":"T0115.001","PhaseName":"deliver-content","Name":"Share Memes"},{"Id":"T0115.002","PhaseName":"deliver-content","Name":"Post Violative Content to Provoke Takedown and Backlash"},{"Id":"T0115.003","PhaseName":"deliver-content","Name":"One-Way Direct Posting"},{"Id":"T0116","PhaseName":"deliver-content","Name":"Comment or Reply on Content"},{"Id":"T0116.001","PhaseName":"deliver-content","Name":"Post Inauthentic Social Media Comment"},{"Id":"T0117","PhaseName":"deliver-content","Name":"Attract Traditional Media"},{"Id":"T0118","PhaseName":"maximise-exposure","Name":"Amplify Existing Narrative"},{"Id":"T0119","PhaseName":"maximise-exposure","Name":"Cross-Posting"},{"Id":"T0119.001","PhaseName":"maximise-exposure","Name":"Post across Groups"},{"Id":"T0119.002","PhaseName":"maximise-exposure","Name":"Post across Platform"},{"Id":"T0119.003","PhaseName":"maximise-exposure","Name":"Post across Disciplines"},{"Id":"T0120","PhaseName":"maximise-exposure","Name":"Incentivize Sharing"},{"Id":"T0120.001","PhaseName":"maximise-exposure","Name":"Use Affiliate Marketing Programmes"},{"Id":"T0120.002","PhaseName":"maximise-exposure","Name":"Use Contests and Prizes"},{"Id":"T0121","PhaseName":"maximise-exposure","Name":"Manipulate Platform Algorithm"},{"Id":"T0121.001","PhaseName":"maximise-exposure","Name":"Bypass Content Blocking"},{"Id":"T0122","PhaseName":"maximise-exposure","Name":"Direct Users to Alternative Platforms"},{"Id":"T0123","PhaseName":"drive-online-harms","Name":"Control Information Environment through Offensive Cyberspace Operations"},{"Id":"T0123.001","PhaseName":"drive-online-harms","Name":"Delete Opposing Content"},{"Id":"T0123.002","PhaseName":"drive-online-harms","Name":"Block Content"},{"Id":"T0123.003","PhaseName":"drive-online-harms","Name":"Destroy Information Generation Capabilities"},{"Id":"T0123.004","PhaseName":"drive-online-harms","Name":"Conduct Server Redirect"},{"Id":"T0124","PhaseName":"drive-online-harms","Name":"Suppress Opposition"},{"Id":"T0124.001","PhaseName":"drive-online-harms","Name":"Report Non-Violative Opposing Content"},{"Id":"T0124.002","PhaseName":"drive-online-harms","Name":"Goad People into Harmful Action (Stop Hitting Yourself)"},{"Id":"T0124.003","PhaseName":"drive-online-harms","Name":"Exploit Platform TOS/Content Moderation"},{"Id":"T0125","PhaseName":"drive-online-harms","Name":"Platform Filtering"},{"Id":"T0126","PhaseName":"drive-offline-activity","Name":"Encourage Attendance at Events"},{"Id":"T0126.001","PhaseName":"drive-offline-activity","Name":"Call to Action to Attend"},{"Id":"T0126.002","PhaseName":"drive-offline-activity","Name":"Facilitate Logistics or Support for Attendance"},{"Id":"T0127","PhaseName":"drive-offline-activity","Name":"Physical Violence"},{"Id":"T0127.001","PhaseName":"drive-offline-activity","Name":"Conduct Physical Violence"},{"Id":"T0127.002","PhaseName":"drive-offline-activity","Name":"Encourage Physical Violence"},{"Id":"T0128","PhaseName":"persist-in-the-information-environment","Name":"Conceal Information Assets"},{"Id":"T0128.001","PhaseName":"persist-in-the-information-environment","Name":"Use Pseudonyms"},{"Id":"T0128.002","PhaseName":"persist-in-the-information-environment","Name":"Conceal Network Identity"},{"Id":"T0128.003","PhaseName":"persist-in-the-information-environment","Name":"Distance Reputable Individuals from Operation"},{"Id":"T0128.004","PhaseName":"persist-in-the-information-environment","Name":"Launder Information Assets"},{"Id":"T0128.005","PhaseName":"persist-in-the-information-environment","Name":"Change Names of Information Assets"},{"Id":"T0129","PhaseName":"persist-in-the-information-environment","Name":"Conceal Operational Activity"},{"Id":"T0129.001","PhaseName":"persist-in-the-information-environment","Name":"Conceal Network Identity"},{"Id":"T0129.002","PhaseName":"persist-in-the-information-environment","Name":"Generate Content Unrelated to Narrative"},{"Id":"T0129.003","PhaseName":"persist-in-the-information-environment","Name":"Break Association with Content"},{"Id":"T0129.004","PhaseName":"persist-in-the-information-environment","Name":"Delete URLs"},{"Id":"T0129.005","PhaseName":"persist-in-the-information-environment","Name":"Coordinate on Encrypted/Closed Networks"},{"Id":"T0129.006","PhaseName":"persist-in-the-information-environment","Name":"Deny Involvement"},{"Id":"T0129.007","PhaseName":"persist-in-the-information-environment","Name":"Delete Accounts/Account Activity"},{"Id":"T0129.009","PhaseName":"persist-in-the-information-environment","Name":"Remove Post Origins"},{"Id":"T0129.010","PhaseName":"persist-in-the-information-environment","Name":"Misattribute Activity"},{"Id":"T0130","PhaseName":"persist-in-the-information-environment","Name":"Conceal Infrastructure"},{"Id":"T0130.001","PhaseName":"persist-in-the-information-environment","Name":"Conceal Sponsorship"},{"Id":"T0130.002","PhaseName":"persist-in-the-information-environment","Name":"Utilise Bulletproof Hosting"},{"Id":"T0130.003","PhaseName":"persist-in-the-information-environment","Name":"Use Shell Organisations"},{"Id":"T0130.004","PhaseName":"persist-in-the-information-environment","Name":"Use Cryptocurrency"},{"Id":"T0130.005","PhaseName":"persist-in-the-information-environment","Name":"Obfuscate Payment"},{"Id":"T0131","PhaseName":"persist-in-the-information-environment","Name":"Exploit TOS/Content Moderation"},{"Id":"T0131.001","PhaseName":"persist-in-the-information-environment","Name":"Legacy Web Content"},{"Id":"T0131.002","PhaseName":"persist-in-the-information-environment","Name":"Post Borderline Content"},{"Id":"T0132","PhaseName":"assess-effectiveness","Name":"Measure Performance"},{"Id":"T0132.001","PhaseName":"assess-effectiveness","Name":"People Focused"},{"Id":"T0132.002","PhaseName":"assess-effectiveness","Name":"Content Focused"},{"Id":"T0132.003","PhaseName":"assess-effectiveness","Name":"View Focused"},{"Id":"T0133","PhaseName":"assess-effectiveness","Name":"Measure Effectiveness"},{"Id":"T0133.001","PhaseName":"assess-effectiveness","Name":"Behaviour Changes"},{"Id":"T0133.002","PhaseName":"assess-effectiveness","Name":"Content"},{"Id":"T0133.003","PhaseName":"assess-effectiveness","Name":"Awareness"},{"Id":"T0133.004","PhaseName":"assess-effectiveness","Name":"Knowledge"},{"Id":"T0133.005","PhaseName":"assess-effectiveness","Name":"Action/Attitude"},{"Id":"T0134","PhaseName":"assess-effectiveness","Name":"Measure Effectiveness Indicators (or KPIs)"},{"Id":"T0134.001","PhaseName":"assess-effectiveness","Name":"Message Reach"},{"Id":"T0134.002","PhaseName":"assess-effectiveness","Name":"Social Media Engagement"},{"Id":"T0135","PhaseName":"plan-objectives","Name":"Undermine"},{"Id":"T0135.001","PhaseName":"plan-objectives","Name":"Smear"},{"Id":"T0135.002","PhaseName":"plan-objectives","Name":"Thwart"},{"Id":"T0135.003","PhaseName":"plan-objectives","Name":"Subvert"},{"Id":"T0135.004","PhaseName":"plan-objectives","Name":"Polarise"},{"Id":"T0136","PhaseName":"plan-objectives","Name":"Cultivate Support"},{"Id":"T0136.001","PhaseName":"plan-objectives","Name":"Defend Reputaton"},{"Id":"T0136.002","PhaseName":"plan-objectives","Name":"Justify Action"},{"Id":"T0136.003","PhaseName":"plan-objectives","Name":"Energise Supporters"},{"Id":"T0136.004","PhaseName":"plan-objectives","Name":"Boost Reputation"},{"Id":"T0136.005","PhaseName":"plan-objectives","Name":"Cultvate Support for Initiative"},{"Id":"T0136.006","PhaseName":"plan-objectives","Name":"Cultivate Support for Ally"},{"Id":"T0136.007","PhaseName":"plan-objectives","Name":"Recruit Members"},{"Id":"T0136.008","PhaseName":"plan-objectives","Name":"Increase Prestige"},{"Id":"T0137","PhaseName":"plan-objectives","Name":"Make Money"},{"Id":"T0137.001","PhaseName":"plan-objectives","Name":"Generate Ad Revenue"},{"Id":"T0137.002","PhaseName":"plan-objectives","Name":"Scam"},{"Id":"T0137.003","PhaseName":"plan-objectives","Name":"Raise Funds"},{"Id":"T0137.004","PhaseName":"plan-objectives","Name":"Sell Items under False Pretences"},{"Id":"T0137.005","PhaseName":"plan-objectives","Name":"Extort"},{"Id":"T0137.006","PhaseName":"plan-objectives","Name":"Manipulate Stocks"},{"Id":"T0138","PhaseName":"plan-objectives","Name":"Motivate to Act"},{"Id":"T0138.001","PhaseName":"plan-objectives","Name":"Encourage"},{"Id":"T0138.002","PhaseName":"plan-objectives","Name":"Provoke"},{"Id":"T0138.003","PhaseName":"plan-objectives","Name":"Compel"},{"Id":"T0139","PhaseName":"plan-objectives","Name":"Dissuade from Acting"},{"Id":"T0139.001","PhaseName":"plan-objectives","Name":"Discourage"},{"Id":"T0139.002","PhaseName":"plan-objectives","Name":"Silence"},{"Id":"T0139.003","PhaseName":"plan-objectives","Name":"Deter"},{"Id":"T0140","PhaseName":"plan-objectives","Name":"Cause Harm"},{"Id":"T0140.001","PhaseName":"plan-objectives","Name":"Defame"},{"Id":"T0140.002","PhaseName":"plan-objectives","Name":"Intimidate"},{"Id":"T0140.003","PhaseName":"plan-objectives","Name":"Spread Hate"},{"Id":"T0143","PhaseName":"establish-legitimacy","Name":"Persona Legitimacy"},{"Id":"T0143.001","PhaseName":"establish-legitimacy","Name":"Authentic Persona"},{"Id":"T0143.002","PhaseName":"establish-legitimacy","Name":"Fabricated Persona"},{"Id":"T0143.003","PhaseName":"establish-legitimacy","Name":"Impersonated Persona"},{"Id":"T0143.004","PhaseName":"establish-legitimacy","Name":"Parody Persona"},{"Id":"T0144","PhaseName":"establish-legitimacy","Name":"Persona Legitimacy Evidence"},{"Id":"T0144.001","PhaseName":"establish-legitimacy","Name":"Present Persona across Platforms"},{"Id":"T0144.002","PhaseName":"establish-legitimacy","Name":"Persona Template"},{"Id":"T0145","PhaseName":"establish-assets","Name":"Establish Account Imagery"},{"Id":"T0145.001","PhaseName":"establish-assets","Name":"Copy Account Imagery"},{"Id":"T0145.002","PhaseName":"establish-assets","Name":"AI-Generated Account Imagery"},{"Id":"T0145.003","PhaseName":"establish-assets","Name":"Animal Account Imagery"},{"Id":"T0145.004","PhaseName":"establish-assets","Name":"Scenery Account Imagery"},{"Id":"T0145.005","PhaseName":"establish-assets","Name":"Illustrated Character Account Imagery"},{"Id":"T0145.006","PhaseName":"establish-assets","Name":"Attractive Person Account Imagery"},{"Id":"T0145.007","PhaseName":"establish-assets","Name":"Stock Image Account Imagery"},{"Id":"T0146","PhaseName":"establish-assets","Name":"Account Asset"},{"Id":"T0146.001","PhaseName":"establish-assets","Name":"Free Account Asset"},{"Id":"T0146.002","PhaseName":"establish-assets","Name":"Paid Account Asset"},{"Id":"T0146.003","PhaseName":"establish-assets","Name":"Verified Account Asset"},{"Id":"T0146.004","PhaseName":"establish-assets","Name":"Administrator Account Asset"},{"Id":"T0146.005","PhaseName":"establish-assets","Name":"Lookalike Account ID"},{"Id":"T0146.006","PhaseName":"establish-assets","Name":"Open Access Platform"},{"Id":"T0146.007","PhaseName":"establish-assets","Name":"Automated Account Asset"},{"Id":"T0147","PhaseName":"establish-assets","Name":"Software Asset"},{"Id":"T0147.001","PhaseName":"establish-assets","Name":"Game Asset"},{"Id":"T0147.002","PhaseName":"establish-assets","Name":"Game Mod Asset"},{"Id":"T0147.003","PhaseName":"establish-assets","Name":"Malware Asset"},{"Id":"T0147.004","PhaseName":"establish-assets","Name":"Mobile App Asset"},{"Id":"T0148","PhaseName":"establish-assets","Name":"Financial Instrument"},{"Id":"T0148.001","PhaseName":"establish-assets","Name":"Online Banking Platform"},{"Id":"T0148.002","PhaseName":"establish-assets","Name":"Bank Account Asset"},{"Id":"T0148.003","PhaseName":"establish-assets","Name":"Payment Processing Platform"},{"Id":"T0148.004","PhaseName":"establish-assets","Name":"Payment Processing Capability"},{"Id":"T0148.005","PhaseName":"establish-assets","Name":"Subscription Processing Capability"},{"Id":"T0148.006","PhaseName":"establish-assets","Name":"Crowdfunding Platform"},{"Id":"T0148.007","PhaseName":"establish-assets","Name":"eCommerce Platform"},{"Id":"T0148.008","PhaseName":"establish-assets","Name":"Cryptocurrency Exchange Platform"},{"Id":"T0148.009","PhaseName":"establish-assets","Name":"Cryptocurrency Wallet"},{"Id":"T0149","PhaseName":"establish-assets","Name":"Online Infrastructure"},{"Id":"T0149.001","PhaseName":"establish-assets","Name":"Domain Asset"},{"Id":"T0149.002","PhaseName":"establish-assets","Name":"Email Domain Asset"},{"Id":"T0149.003","PhaseName":"establish-assets","Name":"Lookalike Domain"},{"Id":"T0149.004","PhaseName":"establish-assets","Name":"Redirecting Domain Asset"},{"Id":"T0149.005","PhaseName":"establish-assets","Name":"Server Asset"},{"Id":"T0149.006","PhaseName":"establish-assets","Name":"IP Address Asset"},{"Id":"T0149.007","PhaseName":"establish-assets","Name":"VPN Asset"},{"Id":"T0149.008","PhaseName":"establish-assets","Name":"Proxy IP Address Asset"},{"Id":"T0149.009","PhaseName":"establish-assets","Name":"Internet Connected Physical Asset"},{"Id":"T0150","PhaseName":"establish-assets","Name":"Asset Origin"},{"Id":"T0150.001","PhaseName":"establish-assets","Name":"Newly Created Asset"},{"Id":"T0150.002","PhaseName":"establish-assets","Name":"Dormant Asset"},{"Id":"T0150.003","PhaseName":"establish-assets","Name":"Pre-Existing Asset"},{"Id":"T0150.004","PhaseName":"establish-assets","Name":"Repurposed Asset"},{"Id":"T0150.005","PhaseName":"establish-assets","Name":"Compromised Asset"},{"Id":"T0150.006","PhaseName":"establish-assets","Name":"Purchased Asset"},{"Id":"T0150.007","PhaseName":"establish-assets","Name":"Rented Asset"},{"Id":"T0150.008","PhaseName":"establish-assets","Name":"Bulk Created Asset"},{"Id":"T0151","PhaseName":"select-channels-and-affordances","Name":"Digital Community Hosting Asset"},{"Id":"T0151.001","PhaseName":"select-channels-and-affordances","Name":"Social Media Platform"},{"Id":"T0151.002","PhaseName":"select-channels-and-affordances","Name":"Online Community Group"},{"Id":"T0151.003","PhaseName":"select-channels-and-affordances","Name":"Online Community Page"},{"Id":"T0151.004","PhaseName":"select-channels-and-affordances","Name":"Chat Platform"},{"Id":"T0151.005","PhaseName":"select-channels-and-affordances","Name":"Chat Community Server"},{"Id":"T0151.006","PhaseName":"select-channels-and-affordances","Name":"Chat Room"},{"Id":"T0151.007","PhaseName":"select-channels-and-affordances","Name":"Chat Broadcast Group"},{"Id":"T0151.008","PhaseName":"select-channels-and-affordances","Name":"Microblogging Platform"},{"Id":"T0151.009","PhaseName":"select-channels-and-affordances","Name":"Legacy Online Forum Platform"},{"Id":"T0151.010","PhaseName":"select-channels-and-affordances","Name":"Community Forum Platform"},{"Id":"T0151.011","PhaseName":"select-channels-and-affordances","Name":"Community Sub-Forum"},{"Id":"T0151.012","PhaseName":"select-channels-and-affordances","Name":"Image Board Platform"},{"Id":"T0151.013","PhaseName":"select-channels-and-affordances","Name":"Question and Answer Platform"},{"Id":"T0151.014","PhaseName":"select-channels-and-affordances","Name":"Comments Section"},{"Id":"T0151.015","PhaseName":"select-channels-and-affordances","Name":"Online Game Platform"},{"Id":"T0151.016","PhaseName":"select-channels-and-affordances","Name":"Online Game Session"},{"Id":"T0151.017","PhaseName":"select-channels-and-affordances","Name":"Dating Platform"},{"Id":"T0152","PhaseName":"select-channels-and-affordances","Name":"Digital Content Hosting Asset"},{"Id":"T0152.001","PhaseName":"select-channels-and-affordances","Name":"Blogging Platform"},{"Id":"T0152.002","PhaseName":"select-channels-and-affordances","Name":"Blog Asset"},{"Id":"T0152.003","PhaseName":"select-channels-and-affordances","Name":"Website Hosting Platform"},{"Id":"T0152.004","PhaseName":"select-channels-and-affordances","Name":"Website Asset"},{"Id":"T0152.005","PhaseName":"select-channels-and-affordances","Name":"Paste Platform"},{"Id":"T0152.006","PhaseName":"select-channels-and-affordances","Name":"Video Platform"},{"Id":"T0152.007","PhaseName":"select-channels-and-affordances","Name":"Audio Platform"},{"Id":"T0152.008","PhaseName":"select-channels-and-affordances","Name":"Live Streaming Platform"},{"Id":"T0152.009","PhaseName":"select-channels-and-affordances","Name":"Software Delivery Platform"},{"Id":"T0152.010","PhaseName":"select-channels-and-affordances","Name":"File Hosting Platform"},{"Id":"T0152.011","PhaseName":"select-channels-and-affordances","Name":"Wiki Platform"},{"Id":"T0152.012","PhaseName":"select-channels-and-affordances","Name":"Subscription Service Platform"},{"Id":"T0153","PhaseName":"select-channels-and-affordances","Name":"Digital Content Delivery Asset"},{"Id":"T0153.001","PhaseName":"select-channels-and-affordances","Name":"Email Platform"},{"Id":"T0153.002","PhaseName":"select-channels-and-affordances","Name":"Link Shortening Platform"},{"Id":"T0153.003","PhaseName":"select-channels-and-affordances","Name":"Shortened Link Asset"},{"Id":"T0153.004","PhaseName":"select-channels-and-affordances","Name":"QR Code Asset"},{"Id":"T0153.005","PhaseName":"select-channels-and-affordances","Name":"Online Advertising Platform"},{"Id":"T0153.006","PhaseName":"select-channels-and-affordances","Name":"Content Recommendation Algorithm"},{"Id":"T0153.007","PhaseName":"select-channels-and-affordances","Name":"Direct Messaging"},{"Id":"T0154","PhaseName":"select-channels-and-affordances","Name":"Digital Content Creation Asset"},{"Id":"T0154.001","PhaseName":"select-channels-and-affordances","Name":"AI LLM Platform"},{"Id":"T0154.002","PhaseName":"select-channels-and-affordances","Name":"AI Media Platform"},{"Id":"T0155","PhaseName":"select-channels-and-affordances","Name":"Gated Asset"},{"Id":"T0155.001","PhaseName":"select-channels-and-affordances","Name":"Password Gated Asset"},{"Id":"T0155.002","PhaseName":"select-channels-and-affordances","Name":"Invite Gated Asset"},{"Id":"T0155.003","PhaseName":"select-channels-and-affordances","Name":"Approval Gated Asset"},{"Id":"T0155.004","PhaseName":"select-channels-and-affordances","Name":"Geoblocked Asset"},{"Id":"T0155.005","PhaseName":"select-channels-and-affordances","Name":"Paid Access Asset"},{"Id":"T0155.006","PhaseName":"select-channels-and-affordances","Name":"Subscription Access Asset"},{"Id":"T0155.007","PhaseName":"select-channels-and-affordances","Name":"Encrypted Communication Channel"}]
+[
+  {
+    "Id": "T0002",
+    "PhaseName": "plan-objectives",
+    "Name": "Facilitate State Propaganda"
+  },
+  {
+    "Id": "T0003",
+    "PhaseName": "develop-narratives",
+    "Name": "Leverage Existing Narratives"
+  },
+  {
+    "Id": "T0004",
+    "PhaseName": "develop-narratives",
+    "Name": "Develop Competing Narratives"
+  },
+  {
+    "Id": "T0010",
+    "PhaseName": "establish-assets",
+    "Name": "Cultivate Ignorant Agents"
+  },
+  {
+    "Id": "T0014",
+    "PhaseName": "establish-assets",
+    "Name": "Prepare Fundraising Campaigns"
+  },
+  {
+    "Id": "T0014.001",
+    "PhaseName": "establish-assets",
+    "Name": "Raise Funds from Malign Actors"
+  },
+  {
+    "Id": "T0014.002",
+    "PhaseName": "establish-assets",
+    "Name": "Raise Funds from Ignorant Agents"
+  },
+  {
+    "Id": "T0015",
+    "PhaseName": "develop-content",
+    "Name": "Create Hashtags and Search Artefacts"
+  },
+  {
+    "Id": "T0015.001",
+    "PhaseName": "develop-content",
+    "Name": "Use Existing Hashtag"
+  },
+  {
+    "Id": "T0015.002",
+    "PhaseName": "develop-content",
+    "Name": "Create New Hashtag"
+  },
+  {
+    "Id": "T0016",
+    "PhaseName": "microtarget",
+    "Name": "Create Clickbait"
+  },
+  {
+    "Id": "T0017",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Conduct Fundraising"
+  },
+  {
+    "Id": "T0017.001",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Conduct Crowdfunding Campaigns"
+  },
+  {
+    "Id": "T0018",
+    "PhaseName": "microtarget",
+    "Name": "Purchase Targeted Advertisements"
+  },
+  {
+    "Id": "T0020",
+    "PhaseName": "conduct-pump-priming",
+    "Name": "Trial Content"
+  },
+  {
+    "Id": "T0022",
+    "PhaseName": "develop-narratives",
+    "Name": "Leverage Conspiracy Theory Narratives"
+  },
+  {
+    "Id": "T0022.001",
+    "PhaseName": "develop-narratives",
+    "Name": "Amplify Existing Conspiracy Theory Narratives"
+  },
+  {
+    "Id": "T0022.002",
+    "PhaseName": "develop-narratives",
+    "Name": "Develop Original Conspiracy Theory Narratives"
+  },
+  {
+    "Id": "T0023",
+    "PhaseName": "develop-content",
+    "Name": "Distort Facts"
+  },
+  {
+    "Id": "T0023.001",
+    "PhaseName": "develop-content",
+    "Name": "Reframe Context"
+  },
+  {
+    "Id": "T0023.002",
+    "PhaseName": "develop-content",
+    "Name": "Edit Open-Source Content"
+  },
+  {
+    "Id": "T0029",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Online Polls"
+  },
+  {
+    "Id": "T0039",
+    "PhaseName": "maximise-exposure",
+    "Name": "Bait Influencer"
+  },
+  {
+    "Id": "T0040",
+    "PhaseName": "develop-narratives",
+    "Name": "Demand Insurmountable Proof"
+  },
+  {
+    "Id": "T0042",
+    "PhaseName": "conduct-pump-priming",
+    "Name": "Seed Kernel of Truth"
+  },
+  {
+    "Id": "T0044",
+    "PhaseName": "conduct-pump-priming",
+    "Name": "Seed Distortions"
+  },
+  {
+    "Id": "T0045",
+    "PhaseName": "conduct-pump-priming",
+    "Name": "Use Fake Experts"
+  },
+  {
+    "Id": "T0046",
+    "PhaseName": "conduct-pump-priming",
+    "Name": "Use Search Engine Optimisation"
+  },
+  {
+    "Id": "T0047",
+    "PhaseName": "drive-online-harms",
+    "Name": "Censor Social Media as a Political Force"
+  },
+  {
+    "Id": "T0048",
+    "PhaseName": "drive-online-harms",
+    "Name": "Harass"
+  },
+  {
+    "Id": "T0048.001",
+    "PhaseName": "drive-online-harms",
+    "Name": "Boycott/\u0022Cancel\u0022 Opponents"
+  },
+  {
+    "Id": "T0048.002",
+    "PhaseName": "drive-online-harms",
+    "Name": "Harass People Based on Identities"
+  },
+  {
+    "Id": "T0048.003",
+    "PhaseName": "drive-online-harms",
+    "Name": "Threaten to Dox"
+  },
+  {
+    "Id": "T0048.004",
+    "PhaseName": "drive-online-harms",
+    "Name": "Dox"
+  },
+  {
+    "Id": "T0049",
+    "PhaseName": "maximise-exposure",
+    "Name": "Flood Information Space"
+  },
+  {
+    "Id": "T0049.001",
+    "PhaseName": "maximise-exposure",
+    "Name": "Trolls Amplify and Manipulate"
+  },
+  {
+    "Id": "T0049.002",
+    "PhaseName": "maximise-exposure",
+    "Name": "Flood Existing Hashtag"
+  },
+  {
+    "Id": "T0049.003",
+    "PhaseName": "maximise-exposure",
+    "Name": "Bots Amplify via Automated Forwarding and Reposting"
+  },
+  {
+    "Id": "T0049.004",
+    "PhaseName": "maximise-exposure",
+    "Name": "Utilise Spamoflauge"
+  },
+  {
+    "Id": "T0049.005",
+    "PhaseName": "maximise-exposure",
+    "Name": "Conduct Swarming"
+  },
+  {
+    "Id": "T0049.006",
+    "PhaseName": "maximise-exposure",
+    "Name": "Conduct Keyword Squatting"
+  },
+  {
+    "Id": "T0049.007",
+    "PhaseName": "maximise-exposure",
+    "Name": "Inauthentic Sites Amplify News and Narratives"
+  },
+  {
+    "Id": "T0049.008",
+    "PhaseName": "maximise-exposure",
+    "Name": "Generate Information Pollution"
+  },
+  {
+    "Id": "T0057",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Organise Events"
+  },
+  {
+    "Id": "T0057.001",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Pay for Physical Action"
+  },
+  {
+    "Id": "T0057.002",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Conduct Symbolic Action"
+  },
+  {
+    "Id": "T0059",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Play the Long Game"
+  },
+  {
+    "Id": "T0060",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Continue to Amplify"
+  },
+  {
+    "Id": "T0061",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Sell Merchandise"
+  },
+  {
+    "Id": "T0065",
+    "PhaseName": "establish-assets",
+    "Name": "Prepare Physical Broadcast Capabilities"
+  },
+  {
+    "Id": "T0066",
+    "PhaseName": "plan-objectives",
+    "Name": "Degrade Adversary"
+  },
+  {
+    "Id": "T0068",
+    "PhaseName": "develop-narratives",
+    "Name": "Respond to Breaking News Event or Active Crisis"
+  },
+  {
+    "Id": "T0072",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Segment Audiences"
+  },
+  {
+    "Id": "T0072.001",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Geographic Segmentation"
+  },
+  {
+    "Id": "T0072.002",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Demographic Segmentation"
+  },
+  {
+    "Id": "T0072.003",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Economic Segmentation"
+  },
+  {
+    "Id": "T0072.004",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Psychographic Segmentation"
+  },
+  {
+    "Id": "T0072.005",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Political Segmentation"
+  },
+  {
+    "Id": "T0073",
+    "PhaseName": "plan-strategy",
+    "Name": "Determine Target Audiences"
+  },
+  {
+    "Id": "T0074",
+    "PhaseName": "plan-strategy",
+    "Name": "Determine Strategic Ends"
+  },
+  {
+    "Id": "T0074.001",
+    "PhaseName": "plan-strategy",
+    "Name": "Geopolitical Advantage"
+  },
+  {
+    "Id": "T0074.002",
+    "PhaseName": "plan-strategy",
+    "Name": "Domestic Political Advantage"
+  },
+  {
+    "Id": "T0074.003",
+    "PhaseName": "plan-strategy",
+    "Name": "Economic Advantage"
+  },
+  {
+    "Id": "T0074.004",
+    "PhaseName": "plan-strategy",
+    "Name": "Ideological Advantage"
+  },
+  {
+    "Id": "T0075",
+    "PhaseName": "plan-objectives",
+    "Name": "Dismiss"
+  },
+  {
+    "Id": "T0075.001",
+    "PhaseName": "plan-objectives",
+    "Name": "Discredit Credible Sources"
+  },
+  {
+    "Id": "T0076",
+    "PhaseName": "plan-objectives",
+    "Name": "Distort"
+  },
+  {
+    "Id": "T0077",
+    "PhaseName": "plan-objectives",
+    "Name": "Distract"
+  },
+  {
+    "Id": "T0078",
+    "PhaseName": "plan-objectives",
+    "Name": "Dismay"
+  },
+  {
+    "Id": "T0079",
+    "PhaseName": "plan-objectives",
+    "Name": "Divide"
+  },
+  {
+    "Id": "T0080",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Map Target Audience Information Environment"
+  },
+  {
+    "Id": "T0080.001",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Monitor Social Media Analytics"
+  },
+  {
+    "Id": "T0080.002",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Evaluate Media Surveys"
+  },
+  {
+    "Id": "T0080.003",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Trending Topics/Hashtags"
+  },
+  {
+    "Id": "T0080.004",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Conduct Web Traffic Analysis"
+  },
+  {
+    "Id": "T0080.005",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Assess Degree/Type of Media Access"
+  },
+  {
+    "Id": "T0081",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Social and Technical Vulnerabilities"
+  },
+  {
+    "Id": "T0081.001",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Find Echo Chambers"
+  },
+  {
+    "Id": "T0081.002",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Data Voids"
+  },
+  {
+    "Id": "T0081.003",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Existing Prejudices"
+  },
+  {
+    "Id": "T0081.004",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Existing Fissures"
+  },
+  {
+    "Id": "T0081.005",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Existing Conspiracy Narratives/Suspicions"
+  },
+  {
+    "Id": "T0081.006",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Wedge Issues"
+  },
+  {
+    "Id": "T0081.007",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Target Audience Adversaries"
+  },
+  {
+    "Id": "T0081.008",
+    "PhaseName": "target-audience-analysis",
+    "Name": "Identify Media System Vulnerabilities"
+  },
+  {
+    "Id": "T0082",
+    "PhaseName": "develop-narratives",
+    "Name": "Develop New Narratives"
+  },
+  {
+    "Id": "T0083",
+    "PhaseName": "develop-narratives",
+    "Name": "Integrate Target Audience Vulnerabilities into Narrative"
+  },
+  {
+    "Id": "T0084",
+    "PhaseName": "develop-content",
+    "Name": "Reuse Existing Content"
+  },
+  {
+    "Id": "T0084.001",
+    "PhaseName": "develop-content",
+    "Name": "Use Copypasta"
+  },
+  {
+    "Id": "T0084.002",
+    "PhaseName": "develop-content",
+    "Name": "Plagiarise Content"
+  },
+  {
+    "Id": "T0084.003",
+    "PhaseName": "develop-content",
+    "Name": "Deceptively Labelled or Translated"
+  },
+  {
+    "Id": "T0084.004",
+    "PhaseName": "develop-content",
+    "Name": "Appropriate Content"
+  },
+  {
+    "Id": "T0085",
+    "PhaseName": "develop-content",
+    "Name": "Develop Text-Based Content"
+  },
+  {
+    "Id": "T0085.001",
+    "PhaseName": "develop-content",
+    "Name": "Develop AI-Generated Text"
+  },
+  {
+    "Id": "T0085.003",
+    "PhaseName": "develop-content",
+    "Name": "Develop Inauthentic News Articles"
+  },
+  {
+    "Id": "T0085.004",
+    "PhaseName": "develop-content",
+    "Name": "Develop Document"
+  },
+  {
+    "Id": "T0085.005",
+    "PhaseName": "develop-content",
+    "Name": "Develop Book"
+  },
+  {
+    "Id": "T0085.006",
+    "PhaseName": "develop-content",
+    "Name": "Develop Opinion Article"
+  },
+  {
+    "Id": "T0085.007",
+    "PhaseName": "develop-content",
+    "Name": "Create Fake Research"
+  },
+  {
+    "Id": "T0085.008",
+    "PhaseName": "develop-content",
+    "Name": "Machine Translated Text"
+  },
+  {
+    "Id": "T0086",
+    "PhaseName": "develop-content",
+    "Name": "Develop Image-Based Content"
+  },
+  {
+    "Id": "T0086.001",
+    "PhaseName": "develop-content",
+    "Name": "Develop Memes"
+  },
+  {
+    "Id": "T0086.002",
+    "PhaseName": "develop-content",
+    "Name": "Develop AI-Generated Images (Deepfakes)"
+  },
+  {
+    "Id": "T0086.003",
+    "PhaseName": "develop-content",
+    "Name": "Deceptively Edit Images (Cheap Fakes)"
+  },
+  {
+    "Id": "T0086.004",
+    "PhaseName": "develop-content",
+    "Name": "Aggregate Information into Evidence Collages"
+  },
+  {
+    "Id": "T0087",
+    "PhaseName": "develop-content",
+    "Name": "Develop Video-Based Content"
+  },
+  {
+    "Id": "T0087.001",
+    "PhaseName": "develop-content",
+    "Name": "Develop AI-Generated Videos (Deepfakes)"
+  },
+  {
+    "Id": "T0087.002",
+    "PhaseName": "develop-content",
+    "Name": "Deceptively Edit Video (Cheap Fakes)"
+  },
+  {
+    "Id": "T0088",
+    "PhaseName": "develop-content",
+    "Name": "Develop Audio-Based Content"
+  },
+  {
+    "Id": "T0088.001",
+    "PhaseName": "develop-content",
+    "Name": "Develop AI-Generated Audio (Deepfakes)"
+  },
+  {
+    "Id": "T0088.002",
+    "PhaseName": "develop-content",
+    "Name": "Deceptively Edit Audio (Cheap Fakes)"
+  },
+  {
+    "Id": "T0089",
+    "PhaseName": "develop-content",
+    "Name": "Obtain Private Documents"
+  },
+  {
+    "Id": "T0089.001",
+    "PhaseName": "develop-content",
+    "Name": "Obtain Authentic Documents"
+  },
+  {
+    "Id": "T0089.003",
+    "PhaseName": "develop-content",
+    "Name": "Alter Authentic Documents"
+  },
+  {
+    "Id": "T0091",
+    "PhaseName": "establish-assets",
+    "Name": "Recruit Malign Actors"
+  },
+  {
+    "Id": "T0091.001",
+    "PhaseName": "establish-assets",
+    "Name": "Recruit Contractors"
+  },
+  {
+    "Id": "T0091.002",
+    "PhaseName": "establish-assets",
+    "Name": "Recruit Partisans"
+  },
+  {
+    "Id": "T0091.003",
+    "PhaseName": "establish-assets",
+    "Name": "Enlist Troll Accounts"
+  },
+  {
+    "Id": "T0092",
+    "PhaseName": "establish-assets",
+    "Name": "Build Network"
+  },
+  {
+    "Id": "T0092.001",
+    "PhaseName": "establish-assets",
+    "Name": "Create Organisations"
+  },
+  {
+    "Id": "T0092.002",
+    "PhaseName": "establish-assets",
+    "Name": "Use Follow Trains"
+  },
+  {
+    "Id": "T0092.003",
+    "PhaseName": "establish-assets",
+    "Name": "Create Community or Sub-Group"
+  },
+  {
+    "Id": "T0093",
+    "PhaseName": "establish-assets",
+    "Name": "Acquire/Recruit Network"
+  },
+  {
+    "Id": "T0093.001",
+    "PhaseName": "establish-assets",
+    "Name": "Fund Proxies"
+  },
+  {
+    "Id": "T0093.002",
+    "PhaseName": "establish-assets",
+    "Name": "Acquire Botnets"
+  },
+  {
+    "Id": "T0094",
+    "PhaseName": "establish-assets",
+    "Name": "Infiltrate Existing Networks"
+  },
+  {
+    "Id": "T0094.001",
+    "PhaseName": "establish-assets",
+    "Name": "Identify Susceptible Targets in Networks"
+  },
+  {
+    "Id": "T0094.002",
+    "PhaseName": "establish-assets",
+    "Name": "Utilise Butterfly Attacks"
+  },
+  {
+    "Id": "T0095",
+    "PhaseName": "establish-assets",
+    "Name": "Develop Owned Media Assets"
+  },
+  {
+    "Id": "T0096",
+    "PhaseName": "establish-assets",
+    "Name": "Leverage Content Farms"
+  },
+  {
+    "Id": "T0096.001",
+    "PhaseName": "establish-assets",
+    "Name": "Create Content Farms"
+  },
+  {
+    "Id": "T0096.002",
+    "PhaseName": "establish-assets",
+    "Name": "Outsource Content Creation to External Organisations"
+  },
+  {
+    "Id": "T0097",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Present Persona"
+  },
+  {
+    "Id": "T0097.100",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Individual Persona"
+  },
+  {
+    "Id": "T0097.101",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Local Persona"
+  },
+  {
+    "Id": "T0097.102",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Journalist Persona"
+  },
+  {
+    "Id": "T0097.103",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Activist Persona"
+  },
+  {
+    "Id": "T0097.104",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Hacktivist Persona"
+  },
+  {
+    "Id": "T0097.105",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Military Personnel Persona"
+  },
+  {
+    "Id": "T0097.106",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Recruiter Persona"
+  },
+  {
+    "Id": "T0097.107",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Researcher Persona"
+  },
+  {
+    "Id": "T0097.108",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Expert Persona"
+  },
+  {
+    "Id": "T0097.109",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Romantic Suitor Persona"
+  },
+  {
+    "Id": "T0097.110",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Party Official Persona"
+  },
+  {
+    "Id": "T0097.111",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Government Official Persona"
+  },
+  {
+    "Id": "T0097.112",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Government Employee Persona"
+  },
+  {
+    "Id": "T0097.200",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Institutional Persona"
+  },
+  {
+    "Id": "T0097.201",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Local Institution Persona"
+  },
+  {
+    "Id": "T0097.202",
+    "PhaseName": "establish-legitimacy",
+    "Name": "News Outlet Persona"
+  },
+  {
+    "Id": "T0097.203",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Fact Checking Organisation Persona"
+  },
+  {
+    "Id": "T0097.204",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Think Tank Persona"
+  },
+  {
+    "Id": "T0097.205",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Business Persona"
+  },
+  {
+    "Id": "T0097.206",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Government Institution Persona"
+  },
+  {
+    "Id": "T0097.207",
+    "PhaseName": "establish-legitimacy",
+    "Name": "NGO Persona"
+  },
+  {
+    "Id": "T0097.208",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Social Cause Persona"
+  },
+  {
+    "Id": "T0098",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Establish Inauthentic News Sites"
+  },
+  {
+    "Id": "T0098.001",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Create Inauthentic News Sites"
+  },
+  {
+    "Id": "T0098.002",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Leverage Existing Inauthentic News Sites"
+  },
+  {
+    "Id": "T0100",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Co-Opt Trusted Sources"
+  },
+  {
+    "Id": "T0100.001",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Co-Opt Trusted Individuals"
+  },
+  {
+    "Id": "T0100.002",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Co-Opt Grassroots Groups"
+  },
+  {
+    "Id": "T0100.003",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Co-Opt Influencers"
+  },
+  {
+    "Id": "T0101",
+    "PhaseName": "microtarget",
+    "Name": "Create Localised Content"
+  },
+  {
+    "Id": "T0102",
+    "PhaseName": "microtarget",
+    "Name": "Leverage Echo Chambers/Filter Bubbles"
+  },
+  {
+    "Id": "T0102.001",
+    "PhaseName": "microtarget",
+    "Name": "Use Existing Echo Chambers/Filter Bubbles"
+  },
+  {
+    "Id": "T0102.002",
+    "PhaseName": "microtarget",
+    "Name": "Create Echo Chambers/Filter Bubbles"
+  },
+  {
+    "Id": "T0102.003",
+    "PhaseName": "microtarget",
+    "Name": "Exploit Data Voids"
+  },
+  {
+    "Id": "T0107",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Bookmarking and Content Curation"
+  },
+  {
+    "Id": "T0109",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Consumer Review Networks"
+  },
+  {
+    "Id": "T0110",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Formal Diplomatic Channels"
+  },
+  {
+    "Id": "T0111",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Traditional Media"
+  },
+  {
+    "Id": "T0111.001",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "TV"
+  },
+  {
+    "Id": "T0111.002",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Newspaper"
+  },
+  {
+    "Id": "T0111.003",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Radio"
+  },
+  {
+    "Id": "T0113",
+    "PhaseName": "establish-assets",
+    "Name": "Employ Commercial Analytic Firms"
+  },
+  {
+    "Id": "T0114",
+    "PhaseName": "deliver-content",
+    "Name": "Deliver Ads"
+  },
+  {
+    "Id": "T0114.001",
+    "PhaseName": "deliver-content",
+    "Name": "Social Media"
+  },
+  {
+    "Id": "T0114.002",
+    "PhaseName": "deliver-content",
+    "Name": "Traditional Media"
+  },
+  {
+    "Id": "T0115",
+    "PhaseName": "deliver-content",
+    "Name": "Post Content"
+  },
+  {
+    "Id": "T0115.001",
+    "PhaseName": "deliver-content",
+    "Name": "Share Memes"
+  },
+  {
+    "Id": "T0115.002",
+    "PhaseName": "deliver-content",
+    "Name": "Post Violative Content to Provoke Takedown and Backlash"
+  },
+  {
+    "Id": "T0115.003",
+    "PhaseName": "deliver-content",
+    "Name": "One-Way Direct Posting"
+  },
+  {
+    "Id": "T0116",
+    "PhaseName": "deliver-content",
+    "Name": "Comment or Reply on Content"
+  },
+  {
+    "Id": "T0116.001",
+    "PhaseName": "deliver-content",
+    "Name": "Post Inauthentic Social Media Comment"
+  },
+  {
+    "Id": "T0117",
+    "PhaseName": "deliver-content",
+    "Name": "Attract Traditional Media"
+  },
+  {
+    "Id": "T0118",
+    "PhaseName": "maximise-exposure",
+    "Name": "Amplify Existing Narrative"
+  },
+  {
+    "Id": "T0119",
+    "PhaseName": "maximise-exposure",
+    "Name": "Cross-Posting"
+  },
+  {
+    "Id": "T0119.001",
+    "PhaseName": "maximise-exposure",
+    "Name": "Post across Groups"
+  },
+  {
+    "Id": "T0119.002",
+    "PhaseName": "maximise-exposure",
+    "Name": "Post across Platform"
+  },
+  {
+    "Id": "T0119.003",
+    "PhaseName": "maximise-exposure",
+    "Name": "Post across Disciplines"
+  },
+  {
+    "Id": "T0120",
+    "PhaseName": "maximise-exposure",
+    "Name": "Incentivize Sharing"
+  },
+  {
+    "Id": "T0120.001",
+    "PhaseName": "maximise-exposure",
+    "Name": "Use Affiliate Marketing Programmes"
+  },
+  {
+    "Id": "T0120.002",
+    "PhaseName": "maximise-exposure",
+    "Name": "Use Contests and Prizes"
+  },
+  {
+    "Id": "T0121",
+    "PhaseName": "maximise-exposure",
+    "Name": "Manipulate Platform Algorithm"
+  },
+  {
+    "Id": "T0121.001",
+    "PhaseName": "maximise-exposure",
+    "Name": "Bypass Content Blocking"
+  },
+  {
+    "Id": "T0122",
+    "PhaseName": "maximise-exposure",
+    "Name": "Direct Users to Alternative Platforms"
+  },
+  {
+    "Id": "T0123",
+    "PhaseName": "drive-online-harms",
+    "Name": "Control Information Environment through Offensive Cyberspace Operations"
+  },
+  {
+    "Id": "T0123.001",
+    "PhaseName": "drive-online-harms",
+    "Name": "Delete Opposing Content"
+  },
+  {
+    "Id": "T0123.002",
+    "PhaseName": "drive-online-harms",
+    "Name": "Block Content"
+  },
+  {
+    "Id": "T0123.003",
+    "PhaseName": "drive-online-harms",
+    "Name": "Destroy Information Generation Capabilities"
+  },
+  {
+    "Id": "T0123.004",
+    "PhaseName": "drive-online-harms",
+    "Name": "Conduct Server Redirect"
+  },
+  {
+    "Id": "T0124",
+    "PhaseName": "drive-online-harms",
+    "Name": "Suppress Opposition"
+  },
+  {
+    "Id": "T0124.001",
+    "PhaseName": "drive-online-harms",
+    "Name": "Report Non-Violative Opposing Content"
+  },
+  {
+    "Id": "T0124.002",
+    "PhaseName": "drive-online-harms",
+    "Name": "Goad People into Harmful Action (Stop Hitting Yourself)"
+  },
+  {
+    "Id": "T0124.003",
+    "PhaseName": "drive-online-harms",
+    "Name": "Exploit Platform TOS/Content Moderation"
+  },
+  {
+    "Id": "T0125",
+    "PhaseName": "drive-online-harms",
+    "Name": "Platform Filtering"
+  },
+  {
+    "Id": "T0126",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Encourage Attendance at Events"
+  },
+  {
+    "Id": "T0126.001",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Call to Action to Attend"
+  },
+  {
+    "Id": "T0126.002",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Facilitate Logistics or Support for Attendance"
+  },
+  {
+    "Id": "T0127",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Physical Violence"
+  },
+  {
+    "Id": "T0127.001",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Conduct Physical Violence"
+  },
+  {
+    "Id": "T0127.002",
+    "PhaseName": "drive-offline-activity",
+    "Name": "Encourage Physical Violence"
+  },
+  {
+    "Id": "T0128",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Conceal Information Assets"
+  },
+  {
+    "Id": "T0128.001",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Use Pseudonyms"
+  },
+  {
+    "Id": "T0128.002",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Conceal Network Identity"
+  },
+  {
+    "Id": "T0128.003",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Distance Reputable Individuals from Operation"
+  },
+  {
+    "Id": "T0128.004",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Launder Information Assets"
+  },
+  {
+    "Id": "T0128.005",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Change Names of Information Assets"
+  },
+  {
+    "Id": "T0129",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Conceal Operational Activity"
+  },
+  {
+    "Id": "T0129.001",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Conceal Network Identity"
+  },
+  {
+    "Id": "T0129.002",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Generate Content Unrelated to Narrative"
+  },
+  {
+    "Id": "T0129.003",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Break Association with Content"
+  },
+  {
+    "Id": "T0129.004",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Delete URLs"
+  },
+  {
+    "Id": "T0129.005",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Coordinate on Encrypted/Closed Networks"
+  },
+  {
+    "Id": "T0129.006",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Deny Involvement"
+  },
+  {
+    "Id": "T0129.007",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Delete Accounts/Account Activity"
+  },
+  {
+    "Id": "T0129.009",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Remove Post Origins"
+  },
+  {
+    "Id": "T0129.010",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Misattribute Activity"
+  },
+  {
+    "Id": "T0130",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Conceal Infrastructure"
+  },
+  {
+    "Id": "T0130.001",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Conceal Sponsorship"
+  },
+  {
+    "Id": "T0130.002",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Utilise Bulletproof Hosting"
+  },
+  {
+    "Id": "T0130.003",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Use Shell Organisations"
+  },
+  {
+    "Id": "T0130.004",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Use Cryptocurrency"
+  },
+  {
+    "Id": "T0130.005",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Obfuscate Payment"
+  },
+  {
+    "Id": "T0131",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Exploit TOS/Content Moderation"
+  },
+  {
+    "Id": "T0131.001",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Legacy Web Content"
+  },
+  {
+    "Id": "T0131.002",
+    "PhaseName": "persist-in-the-information-environment",
+    "Name": "Post Borderline Content"
+  },
+  {
+    "Id": "T0132",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Measure Performance"
+  },
+  {
+    "Id": "T0132.001",
+    "PhaseName": "assess-effectiveness",
+    "Name": "People Focused"
+  },
+  {
+    "Id": "T0132.002",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Content Focused"
+  },
+  {
+    "Id": "T0132.003",
+    "PhaseName": "assess-effectiveness",
+    "Name": "View Focused"
+  },
+  {
+    "Id": "T0133",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Measure Effectiveness"
+  },
+  {
+    "Id": "T0133.001",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Behaviour Changes"
+  },
+  {
+    "Id": "T0133.002",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Content"
+  },
+  {
+    "Id": "T0133.003",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Awareness"
+  },
+  {
+    "Id": "T0133.004",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Knowledge"
+  },
+  {
+    "Id": "T0133.005",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Action/Attitude"
+  },
+  {
+    "Id": "T0134",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Measure Effectiveness Indicators (or KPIs)"
+  },
+  {
+    "Id": "T0134.001",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Message Reach"
+  },
+  {
+    "Id": "T0134.002",
+    "PhaseName": "assess-effectiveness",
+    "Name": "Social Media Engagement"
+  },
+  {
+    "Id": "T0135",
+    "PhaseName": "plan-objectives",
+    "Name": "Undermine"
+  },
+  {
+    "Id": "T0135.001",
+    "PhaseName": "plan-objectives",
+    "Name": "Smear"
+  },
+  {
+    "Id": "T0135.002",
+    "PhaseName": "plan-objectives",
+    "Name": "Thwart"
+  },
+  {
+    "Id": "T0135.003",
+    "PhaseName": "plan-objectives",
+    "Name": "Subvert"
+  },
+  {
+    "Id": "T0135.004",
+    "PhaseName": "plan-objectives",
+    "Name": "Polarise"
+  },
+  {
+    "Id": "T0136",
+    "PhaseName": "plan-objectives",
+    "Name": "Cultivate Support"
+  },
+  {
+    "Id": "T0136.001",
+    "PhaseName": "plan-objectives",
+    "Name": "Defend Reputaton"
+  },
+  {
+    "Id": "T0136.002",
+    "PhaseName": "plan-objectives",
+    "Name": "Justify Action"
+  },
+  {
+    "Id": "T0136.003",
+    "PhaseName": "plan-objectives",
+    "Name": "Energise Supporters"
+  },
+  {
+    "Id": "T0136.004",
+    "PhaseName": "plan-objectives",
+    "Name": "Boost Reputation"
+  },
+  {
+    "Id": "T0136.005",
+    "PhaseName": "plan-objectives",
+    "Name": "Cultvate Support for Initiative"
+  },
+  {
+    "Id": "T0136.006",
+    "PhaseName": "plan-objectives",
+    "Name": "Cultivate Support for Ally"
+  },
+  {
+    "Id": "T0136.007",
+    "PhaseName": "plan-objectives",
+    "Name": "Recruit Members"
+  },
+  {
+    "Id": "T0136.008",
+    "PhaseName": "plan-objectives",
+    "Name": "Increase Prestige"
+  },
+  {
+    "Id": "T0137",
+    "PhaseName": "plan-objectives",
+    "Name": "Make Money"
+  },
+  {
+    "Id": "T0137.001",
+    "PhaseName": "plan-objectives",
+    "Name": "Generate Ad Revenue"
+  },
+  {
+    "Id": "T0137.002",
+    "PhaseName": "plan-objectives",
+    "Name": "Scam"
+  },
+  {
+    "Id": "T0137.003",
+    "PhaseName": "plan-objectives",
+    "Name": "Raise Funds"
+  },
+  {
+    "Id": "T0137.004",
+    "PhaseName": "plan-objectives",
+    "Name": "Sell Items under False Pretences"
+  },
+  {
+    "Id": "T0137.005",
+    "PhaseName": "plan-objectives",
+    "Name": "Extort"
+  },
+  {
+    "Id": "T0137.006",
+    "PhaseName": "plan-objectives",
+    "Name": "Manipulate Stocks"
+  },
+  {
+    "Id": "T0138",
+    "PhaseName": "plan-objectives",
+    "Name": "Motivate to Act"
+  },
+  {
+    "Id": "T0138.001",
+    "PhaseName": "plan-objectives",
+    "Name": "Encourage"
+  },
+  {
+    "Id": "T0138.002",
+    "PhaseName": "plan-objectives",
+    "Name": "Provoke"
+  },
+  {
+    "Id": "T0138.003",
+    "PhaseName": "plan-objectives",
+    "Name": "Compel"
+  },
+  {
+    "Id": "T0139",
+    "PhaseName": "plan-objectives",
+    "Name": "Dissuade from Acting"
+  },
+  {
+    "Id": "T0139.001",
+    "PhaseName": "plan-objectives",
+    "Name": "Discourage"
+  },
+  {
+    "Id": "T0139.002",
+    "PhaseName": "plan-objectives",
+    "Name": "Silence"
+  },
+  {
+    "Id": "T0139.003",
+    "PhaseName": "plan-objectives",
+    "Name": "Deter"
+  },
+  {
+    "Id": "T0140",
+    "PhaseName": "plan-objectives",
+    "Name": "Cause Harm"
+  },
+  {
+    "Id": "T0140.001",
+    "PhaseName": "plan-objectives",
+    "Name": "Defame"
+  },
+  {
+    "Id": "T0140.002",
+    "PhaseName": "plan-objectives",
+    "Name": "Intimidate"
+  },
+  {
+    "Id": "T0140.003",
+    "PhaseName": "plan-objectives",
+    "Name": "Spread Hate"
+  },
+  {
+    "Id": "T0143",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Persona Legitimacy"
+  },
+  {
+    "Id": "T0143.001",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Authentic Persona"
+  },
+  {
+    "Id": "T0143.002",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Fabricated Persona"
+  },
+  {
+    "Id": "T0143.003",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Impersonated Persona"
+  },
+  {
+    "Id": "T0143.004",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Parody Persona"
+  },
+  {
+    "Id": "T0144",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Persona Legitimacy Evidence"
+  },
+  {
+    "Id": "T0144.001",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Present Persona across Platforms"
+  },
+  {
+    "Id": "T0144.002",
+    "PhaseName": "establish-legitimacy",
+    "Name": "Persona Template"
+  },
+  {
+    "Id": "T0145",
+    "PhaseName": "establish-assets",
+    "Name": "Establish Account Imagery"
+  },
+  {
+    "Id": "T0145.001",
+    "PhaseName": "establish-assets",
+    "Name": "Copy Account Imagery"
+  },
+  {
+    "Id": "T0145.002",
+    "PhaseName": "establish-assets",
+    "Name": "AI-Generated Account Imagery"
+  },
+  {
+    "Id": "T0145.003",
+    "PhaseName": "establish-assets",
+    "Name": "Animal Account Imagery"
+  },
+  {
+    "Id": "T0145.004",
+    "PhaseName": "establish-assets",
+    "Name": "Scenery Account Imagery"
+  },
+  {
+    "Id": "T0145.005",
+    "PhaseName": "establish-assets",
+    "Name": "Illustrated Character Account Imagery"
+  },
+  {
+    "Id": "T0145.006",
+    "PhaseName": "establish-assets",
+    "Name": "Attractive Person Account Imagery"
+  },
+  {
+    "Id": "T0145.007",
+    "PhaseName": "establish-assets",
+    "Name": "Stock Image Account Imagery"
+  },
+  {
+    "Id": "T0146",
+    "PhaseName": "establish-assets",
+    "Name": "Account Asset"
+  },
+  {
+    "Id": "T0146.001",
+    "PhaseName": "establish-assets",
+    "Name": "Free Account Asset"
+  },
+  {
+    "Id": "T0146.002",
+    "PhaseName": "establish-assets",
+    "Name": "Paid Account Asset"
+  },
+  {
+    "Id": "T0146.003",
+    "PhaseName": "establish-assets",
+    "Name": "Verified Account Asset"
+  },
+  {
+    "Id": "T0146.004",
+    "PhaseName": "establish-assets",
+    "Name": "Administrator Account Asset"
+  },
+  {
+    "Id": "T0146.005",
+    "PhaseName": "establish-assets",
+    "Name": "Lookalike Account ID"
+  },
+  {
+    "Id": "T0146.006",
+    "PhaseName": "establish-assets",
+    "Name": "Open Access Platform"
+  },
+  {
+    "Id": "T0146.007",
+    "PhaseName": "establish-assets",
+    "Name": "Automated Account Asset"
+  },
+  {
+    "Id": "T0147",
+    "PhaseName": "establish-assets",
+    "Name": "Software Asset"
+  },
+  {
+    "Id": "T0147.001",
+    "PhaseName": "establish-assets",
+    "Name": "Game Asset"
+  },
+  {
+    "Id": "T0147.002",
+    "PhaseName": "establish-assets",
+    "Name": "Game Mod Asset"
+  },
+  {
+    "Id": "T0147.003",
+    "PhaseName": "establish-assets",
+    "Name": "Malware Asset"
+  },
+  {
+    "Id": "T0147.004",
+    "PhaseName": "establish-assets",
+    "Name": "Mobile App Asset"
+  },
+  {
+    "Id": "T0148",
+    "PhaseName": "establish-assets",
+    "Name": "Financial Instrument"
+  },
+  {
+    "Id": "T0148.001",
+    "PhaseName": "establish-assets",
+    "Name": "Online Banking Platform"
+  },
+  {
+    "Id": "T0148.002",
+    "PhaseName": "establish-assets",
+    "Name": "Bank Account Asset"
+  },
+  {
+    "Id": "T0148.003",
+    "PhaseName": "establish-assets",
+    "Name": "Payment Processing Platform"
+  },
+  {
+    "Id": "T0148.004",
+    "PhaseName": "establish-assets",
+    "Name": "Payment Processing Capability"
+  },
+  {
+    "Id": "T0148.005",
+    "PhaseName": "establish-assets",
+    "Name": "Subscription Processing Capability"
+  },
+  {
+    "Id": "T0148.006",
+    "PhaseName": "establish-assets",
+    "Name": "Crowdfunding Platform"
+  },
+  {
+    "Id": "T0148.007",
+    "PhaseName": "establish-assets",
+    "Name": "eCommerce Platform"
+  },
+  {
+    "Id": "T0148.008",
+    "PhaseName": "establish-assets",
+    "Name": "Cryptocurrency Exchange Platform"
+  },
+  {
+    "Id": "T0148.009",
+    "PhaseName": "establish-assets",
+    "Name": "Cryptocurrency Wallet"
+  },
+  {
+    "Id": "T0149",
+    "PhaseName": "establish-assets",
+    "Name": "Online Infrastructure"
+  },
+  {
+    "Id": "T0149.001",
+    "PhaseName": "establish-assets",
+    "Name": "Domain Asset"
+  },
+  {
+    "Id": "T0149.002",
+    "PhaseName": "establish-assets",
+    "Name": "Email Domain Asset"
+  },
+  {
+    "Id": "T0149.003",
+    "PhaseName": "establish-assets",
+    "Name": "Lookalike Domain"
+  },
+  {
+    "Id": "T0149.004",
+    "PhaseName": "establish-assets",
+    "Name": "Redirecting Domain Asset"
+  },
+  {
+    "Id": "T0149.005",
+    "PhaseName": "establish-assets",
+    "Name": "Server Asset"
+  },
+  {
+    "Id": "T0149.006",
+    "PhaseName": "establish-assets",
+    "Name": "IP Address Asset"
+  },
+  {
+    "Id": "T0149.007",
+    "PhaseName": "establish-assets",
+    "Name": "VPN Asset"
+  },
+  {
+    "Id": "T0149.008",
+    "PhaseName": "establish-assets",
+    "Name": "Proxy IP Address Asset"
+  },
+  {
+    "Id": "T0149.009",
+    "PhaseName": "establish-assets",
+    "Name": "Internet Connected Physical Asset"
+  },
+  {
+    "Id": "T0150",
+    "PhaseName": "establish-assets",
+    "Name": "Asset Origin"
+  },
+  {
+    "Id": "T0150.001",
+    "PhaseName": "establish-assets",
+    "Name": "Newly Created Asset"
+  },
+  {
+    "Id": "T0150.002",
+    "PhaseName": "establish-assets",
+    "Name": "Dormant Asset"
+  },
+  {
+    "Id": "T0150.003",
+    "PhaseName": "establish-assets",
+    "Name": "Pre-Existing Asset"
+  },
+  {
+    "Id": "T0150.004",
+    "PhaseName": "establish-assets",
+    "Name": "Repurposed Asset"
+  },
+  {
+    "Id": "T0150.005",
+    "PhaseName": "establish-assets",
+    "Name": "Compromised Asset"
+  },
+  {
+    "Id": "T0150.006",
+    "PhaseName": "establish-assets",
+    "Name": "Purchased Asset"
+  },
+  {
+    "Id": "T0150.007",
+    "PhaseName": "establish-assets",
+    "Name": "Rented Asset"
+  },
+  {
+    "Id": "T0150.008",
+    "PhaseName": "establish-assets",
+    "Name": "Bulk Created Asset"
+  },
+  {
+    "Id": "T0151",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Digital Community Hosting Asset"
+  },
+  {
+    "Id": "T0151.001",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Social Media Platform"
+  },
+  {
+    "Id": "T0151.002",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Online Community Group"
+  },
+  {
+    "Id": "T0151.003",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Online Community Page"
+  },
+  {
+    "Id": "T0151.004",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Chat Platform"
+  },
+  {
+    "Id": "T0151.005",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Chat Community Server"
+  },
+  {
+    "Id": "T0151.006",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Chat Room"
+  },
+  {
+    "Id": "T0151.007",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Chat Broadcast Group"
+  },
+  {
+    "Id": "T0151.008",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Microblogging Platform"
+  },
+  {
+    "Id": "T0151.009",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Legacy Online Forum Platform"
+  },
+  {
+    "Id": "T0151.010",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Community Forum Platform"
+  },
+  {
+    "Id": "T0151.011",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Community Sub-Forum"
+  },
+  {
+    "Id": "T0151.012",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Image Board Platform"
+  },
+  {
+    "Id": "T0151.013",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Question and Answer Platform"
+  },
+  {
+    "Id": "T0151.014",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Comments Section"
+  },
+  {
+    "Id": "T0151.015",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Online Game Platform"
+  },
+  {
+    "Id": "T0151.016",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Online Game Session"
+  },
+  {
+    "Id": "T0151.017",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Dating Platform"
+  },
+  {
+    "Id": "T0152",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Digital Content Hosting Asset"
+  },
+  {
+    "Id": "T0152.001",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Blogging Platform"
+  },
+  {
+    "Id": "T0152.002",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Blog Asset"
+  },
+  {
+    "Id": "T0152.003",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Website Hosting Platform"
+  },
+  {
+    "Id": "T0152.004",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Website Asset"
+  },
+  {
+    "Id": "T0152.005",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Paste Platform"
+  },
+  {
+    "Id": "T0152.006",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Video Platform"
+  },
+  {
+    "Id": "T0152.007",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Audio Platform"
+  },
+  {
+    "Id": "T0152.008",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Live Streaming Platform"
+  },
+  {
+    "Id": "T0152.009",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Software Delivery Platform"
+  },
+  {
+    "Id": "T0152.010",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "File Hosting Platform"
+  },
+  {
+    "Id": "T0152.011",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Wiki Platform"
+  },
+  {
+    "Id": "T0152.012",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Subscription Service Platform"
+  },
+  {
+    "Id": "T0153",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Digital Content Delivery Asset"
+  },
+  {
+    "Id": "T0153.001",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Email Platform"
+  },
+  {
+    "Id": "T0153.002",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Link Shortening Platform"
+  },
+  {
+    "Id": "T0153.003",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Shortened Link Asset"
+  },
+  {
+    "Id": "T0153.004",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "QR Code Asset"
+  },
+  {
+    "Id": "T0153.005",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Online Advertising Platform"
+  },
+  {
+    "Id": "T0153.006",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Content Recommendation Algorithm"
+  },
+  {
+    "Id": "T0153.007",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Direct Messaging"
+  },
+  {
+    "Id": "T0154",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Digital Content Creation Asset"
+  },
+  {
+    "Id": "T0154.001",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "AI LLM Platform"
+  },
+  {
+    "Id": "T0154.002",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "AI Media Platform"
+  },
+  {
+    "Id": "T0155",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Gated Asset"
+  },
+  {
+    "Id": "T0155.001",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Password Gated Asset"
+  },
+  {
+    "Id": "T0155.002",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Invite Gated Asset"
+  },
+  {
+    "Id": "T0155.003",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Approval Gated Asset"
+  },
+  {
+    "Id": "T0155.004",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Geoblocked Asset"
+  },
+  {
+    "Id": "T0155.005",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Paid Access Asset"
+  },
+  {
+    "Id": "T0155.006",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Subscription Access Asset"
+  },
+  {
+    "Id": "T0155.007",
+    "PhaseName": "select-channels-and-affordances",
+    "Name": "Encrypted Communication Channel"
+  }
+]

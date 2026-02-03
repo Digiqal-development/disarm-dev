@@ -56,9 +56,30 @@ export async function searchTechniques() {
   }
 }
 
+export async function insertCode(request) {
+  try {
+    const result = await $.ajax({
+      type: "POST",
+      url: url1 + "/code-store",
+      data: JSON.stringify(request),
+      contentType: "application/json",
+      dataType: "json",
+      headers: {
+        "Cache-Control": "no-cache",
+        Pragma: "no-cache",
+        Expires: "0",
+      },
+    });
+    return result;
+  } catch (error) {
+    console.error("Error inserting code:", error);
+  }
+}
+
 export function createUrlWithValuesArray(endpoint, inputArray) {
     const jsonArrayString = JSON.stringify(inputArray);
     const encodedJson = encodeURIComponent(jsonArrayString);
     const queryParameter = `value=${encodedJson}`;
     return `${url}${endpoint}?${queryParameter}`;
 }
+

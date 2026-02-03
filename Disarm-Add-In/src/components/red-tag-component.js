@@ -66,9 +66,9 @@ function showTacticOptions(phase, insertTag) {
   const uiField = insertTag ? tacticChooseField : tacticSearchField;
   techniqueChooseCheckboxField.innerHTML = "";
   uiField.innerHTML = "";
-
+console.log("phase",phase);
   let tacticsArray = jsonTechniques[phase];
-
+  console.log("Tactics",jsonTechniques);
   Object.keys(tacticsArray).forEach((tactic, index) => {
     const row = document.createElement("tr");
 
