@@ -25,3 +25,6 @@ export const colorPicker = document.getElementById('colorPicker');
 export const carouselPage1 = document.getElementById('carousel-page-1');
 export const carouselPage2 = document.getElementById('carousel-page-2');
 export const carouselPage3 = document.getElementById('carousel-page-3');
+
+//object tag
+export const insertObjectPopup = document.getElementById('popup-insert-object-tag');

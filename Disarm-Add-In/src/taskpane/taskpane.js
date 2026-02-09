@@ -19,6 +19,16 @@ import { carouselPage1, carouselPage2, carouselPage3, carouselSkip } from "../co
 import { searchTechniques } from "../services/api-services.js";
 import { getRedTagColor } from "../components/formatting-component.js";
 
+import {
+    insertObjectTag,
+    saveObjectTag,
+    addObjectManually,
+} from "../components/object-tag-component.js";
+
+import {
+    insertObjectSummaryTables,
+} from "../components/object-summary-table-component.js";
+
 Office.onReady(async (info) => {
   if (info.host !== Office.HostType.Word) {
     return;
@@ -88,8 +98,20 @@ Office.onReady(async (info) => {
   document.getElementById("insert-red-tag").onclick = () => tryCatch(insertRedTag);
   document.getElementById("search-red-tag").onclick = () => tryCatch(searchRedTag);
 
-  //summaries
+  // object tag
+  document.getElementById("insert-object-tag").onclick = () => tryCatch(insertObjectTag);
+  document.getElementById("save-object-tag").onclick = () => tryCatch(saveObjectTag);
+    document.getElementById("add-object-button").onclick = () => {
+        document.getElementById("popup-add-object").style.display = "block";
+    };
+    document.getElementById("confirm-add-object").onclick = () => tryCatch(addObjectManually);
+
+    //summaries
   document.getElementById("insert-red-table").onclick = () => tryCatch(insertRedTable);
+
+  //object summary table
+  document.getElementById("insert-object-summary-table").onclick = () => tryCatch(insertObjectSummaryTables);
+
   //formatting
   document.getElementById("format-red-tag-color").onclick = () => tryCatch(changeRedTagColor);
 
@@ -233,6 +255,6 @@ const insertTextIntoWord = async (text, query) => {
 };
 
 function isWordDelimiter(char) {
-  const delimiterRegex = /[\s.,;!?\")\\\]{}:<>-]/;
-  return delimiterRegex.test(char);
+    const delimiterRegex = /[\s.,;!?\")\\\]{}:<>-]/;
+    return delimiterRegex.test(char);
 }

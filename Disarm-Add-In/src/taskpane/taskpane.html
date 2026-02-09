@@ -166,9 +166,97 @@
         <button class="save-btn" id="save-btn3">Select</button>
     </div>
 
-      <p class="lines">Summaries</p> 
+    <p class="lines">Tag Other Objects</p>
+
+    <button class="ms-Button" id="insert-object-tag">
+        <i class="ms-Icon ms-font-l ms-Icon--Tag ms-fontColor-neutralSecondary"></i>
+        Choose Object Type
+    </button>
+
+    <div id="popup-insert-object-tag" class="popup">
+        <span class="close" id="close-object"></span>
+
+        <p>Which object type do you want to tag?</p>
+        <div class="scrollable-box">
+            <table id="object-type-table">
+                <tr class="list opinion1"><td>Threat Actor</td></tr>
+                <tr class="list opinion1"><td>Intrusion Set</td></tr>
+                <tr class="list opinion1"><td>Campaign</td></tr>
+                <tr class="list opinion1"><td>Incident</td></tr>
+                <tr class="list opinion1"><td>Channel</td></tr>
+                <tr class="list opinion1"><td>Narrative</td></tr>
+                <tr class="list opinion1"><td>Event</td></tr>
+                <tr class="list opinion1"><td>Course of Action</td></tr>
+                <tr class="list opinion1"><td>External Reference</td></tr>
+                <tr class="list opinion1"><td>Observable</td></tr>
+            </table>
+        </div>
+
+        <button class="ms-Button" id="add-object-button"><i  class="ms-Icon ms-font-l ms-Icon--Add"></i>Add Object</button>
+
+        <div id="popup-add-object" class="popup">
+            <span class="close" id="close-add-object"></span>
+
+            <p>Object name</p>
+            <input
+                    type="text"
+                    id="new-object-name"
+                    placeholder="Enter object name..."
+                    style="width: 100%; margin-bottom: 10px;"
+            />
+
+            <p>Object type</p>
+            <select
+                    id="new-object-type"
+                    style="width: 100%; margin-bottom: 15px;"
+            >
+                <option value="Threat Actor">Threat Actor</option>
+                <option value="Intrusion Set">Intrusion Set</option>
+                <option value="Campaign">Campaign</option>
+                <option value="Incident">Incident</option>
+                <option value="Channel">Channel</option>
+                <option value="Narrative">Narrative</option>
+                <option value="Event">Event</option>
+                <option value="Course of Action">Course of Action</option>
+                <option value="External Reference">External Reference</option>
+                <option value="Observable">Observable</option>
+            </select>
+
+            <button class="ms-Button" id="confirm-add-object">
+                Confirm Add Object
+            </button>
+        </div>
+        <button class="save-btn" id="save-object-tag">Save</button>
+    </div>
+
+    <!-- central node picker popup -->
+    <div id="popup-central-node" class="popup" style="display:none;">
+        <span class="close" id="close-central-node"></span>
+        <p><b>Select the central node</b></p>
+        <div class="scrollable-box">
+            <table id="central-node-table"></table>
+        </div>
+
+        <button class="save-btn" id="select-central-node-btn">Select</button>
+    </div>
+
+      <p class="lines">Summaries</p>
+
+    <div id="object-summary-selection" style="margin-bottom:10px;">
+        <label><input type="checkbox" value="Threat Actor"> Threat Actor</label><br>
+        <label><input type="checkbox" value="Intrusion Set"> Intrusion Set</label><br>
+        <label><input type="checkbox" value="Campaign"> Campaign</label><br>
+        <label><input type="checkbox" value="Incident"> Incident</label><br>
+        <label><input type="checkbox" value="Channel"> Channel</label><br>
+        <label><input type="checkbox" value="Narrative"> Narrative</label><br>
+        <label><input type="checkbox" value="Event"> Event</label><br>
+        <label><input type="checkbox" value="Course of Action"> Course of Action</label><br>
+        <label><input type="checkbox" value="External Reference"> External Reference</label><br>
+        <label><input type="checkbox" value="Observable"> Observable</label>
+    </div>
 
     <button class="ms-Button" id="insert-red-table"><i class="ms-Icon ms-font-l ms-Icon--Table ms-fontColor-neutralSecondary"></i>Insert Summary Red Table</button>
+    <button class="ms-Button" id="insert-object-summary-table"><i class="ms-Icon ms-font-l ms-Icon--Table ms-fontColor-neutralSecondary"></i>Insert Summary Other Objects Table</button>
     <p class="lines">Format Red</p>
 
     <button class="ms-Button" id="format-red-tag-color" ><i class="ms-Icon ms-font-m ms-Icon--Brush ms-fontColor-neutralSecondary"></i>Red Tag</button>
@@ -183,7 +271,6 @@
         <button class="save-btn" id="save-btn2">Save</button>
     </div>   
     <p class="empty"></p>
-    <a id="json-url"></a>
 </div>
 </body>
 </html>

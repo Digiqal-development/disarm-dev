@@ -27,6 +27,7 @@ export function closeAllFields() {
   UI.textBox.value = "";
   UI.checkbox.checked = "";
   UI.alertSearchBox.innerHTML = "";
+  UI.insertObjectPopup.style.display = "none";
 }
 
 export function handleColorOnClickPhaseTactic(this_) {
