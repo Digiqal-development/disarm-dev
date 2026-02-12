@@ -329,8 +329,6 @@ tr:last-child {
     background-color: #005a9e;
 }
 
-
- 
   .carousel-dots {
     display: flex;
     justify-content: center;
@@ -464,6 +462,16 @@ tr:last-child {
     pointer-events: none;
 }
 
-#central-node-table tr.selected {
-    background: #cce5ff;
+#central-node-table tr.list.option1.selected td,
+#central-node-table tr.selected td,
+#central-node-table tbody tr.selected td {
+    background-color: #55ace3 !important;
+    color: white !important;
 }
+
+#central-node-table tr.list.option1.selected,
+#central-node-table tr.selected {
+    background-color: #55ace3 !important;
+}
+
+

@@ -9,6 +9,36 @@ export async function insertObjectSummaryTables() {
     await Word.run(async (context) => {
         const body = context.document.body;
 
+        // clear memory
+        Object.keys(taggedObjects).forEach(k => delete taggedObjects[k]);
+
+        body.load("text");
+        await context.sync();
+
+        const fullText = body.text;
+        const tagRegex = /(\b[^\s]+)\s*\[([A-Za-z ]+)\]/g;
+
+        let match;
+
+        while ((match = tagRegex.exec(fullText)) !== null) {
+            const value = match[1].trim();
+            const type = match[2].trim();
+
+            if (!taggedObjects[type]) taggedObjects[type] = [];
+
+            const existing = taggedObjects[type].find(o => o.value === value);
+
+            if (existing) {
+                existing.occurrences++;
+            } else {
+                taggedObjects[type].push({
+                    value,
+                    use: extractSentenceContaining(fullText, value),
+                    occurrences: 1
+                });
+            }
+        }
+
         const centralTypes = ["Threat Actor", "Campaign", "Incident"];
 
         const centralCandidates = [];
@@ -83,40 +113,61 @@ function openCentralNodePicker(candidates) {
 
     const popup = document.getElementById("popup-central-node");
     const table = document.getElementById("central-node-table");
-    const selectBtn = document.getElementById("select-central-node-btn");
-    const closeBtn = document.getElementById("close-central-node");
+    const tableBody = table.tBodies[0] || table.appendChild(document.createElement("tbody"));
 
-    table.innerHTML = "";
+    tableBody.innerHTML = "";
 
-    candidates.forEach((c) => {
+    candidates.forEach((c, index) => {
         const tr = document.createElement("tr");
         tr.classList.add("list", "option1");
+        tr.dataset.index = index;
         tr.innerHTML = `<td>${c.value} <span style="opacity:.7">[${c.type}]</span></td>`;
 
-        tr.onclick = () => {
-            Array.from(table.querySelectorAll("tr")).forEach(r => r.classList.remove("selected"));
-            tr.classList.add("selected");
+        tr.addEventListener('click', function (e) {
+            Array.from(tableBody.querySelectorAll("tr")).forEach(r => {
+                r.classList.remove("selected");
+            });
+
+            this.classList.add("selected");
             selectedCentralNode = c;
             centralNode = c;
-        };
+            console.log("Selected:", c);
+        });
 
-        table.appendChild(tr);
+        tr.addEventListener('mouseenter', function () {
+            if (!this.classList.contains('selected')) {
+                this.style.backgroundColor = '#f5f5f5';
+            }
+        });
+
+        tr.addEventListener('mouseleave', function () {
+            if (!this.classList.contains('selected')) {
+                this.style.backgroundColor = '';
+            }
+        });
+
+        tableBody.appendChild(tr);
     });
 
-    // wire buttons
+    const selectBtn = document.getElementById("select-central-node-btn");
     selectBtn.onclick = () => {
-        if (!selectedCentralNode) return;
+        console.log("Attempting to select, current:", selectedCentralNode);
+        if (!selectedCentralNode) {
+            alert("Please select a central node first!");
+            return;
+        }
         centralNode = selectedCentralNode;
-        selectedCentralNode = centralNode;
-        console.log("central node set:", centralNode);
+        console.log("Final central node:", centralNode);
         popup.style.display = "none";
         insertObjectSummaryTables();
     };
-    closeBtn.onclick = () => popup.style.display = "none";
+
+    document.getElementById("close-central-node").onclick = () => {
+        popup.style.display = "none";
+    };
 
     popup.style.display = "block";
 }
-
 
 function closeCentralNodePicker() {
     const popup = document.getElementById("popup-central-node");
@@ -129,3 +180,7 @@ function getSelectedObjectTypes() {
     ).map(cb => cb.value);
 }
 
+function extractSentenceContaining(text, value) {
+    const sentences = text.split(/(?<=[.!?])/);
+    return sentences.find(s => s.includes(value))?.trim() || value;
+}

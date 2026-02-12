@@ -45,21 +45,28 @@ export async function saveObjectTag() {
 
         if (paragraphs.items.length === 0) return;
 
-        const firstPara = paragraphs.items[0];
-        firstPara.load("text");
+        const range = selection.getRange();
+        range.load("text");
         await context.sync();
         const raw = selection.text.trim();
-        const paraText = firstPara.text;
+        const paraText = range.text;
 
         const idx = paraText.indexOf(raw);
 
         let useText = "";
 
         if (idx !== -1) {
-            useText = paraText.substring(idx).trim();
+            const rest = paraText.substring(idx);
+            const end = rest.search(/[.!?]/);
+
+            useText = end !== -1
+                ? rest.substring(0, end + 1).trim()
+                : rest.trim();
         } else {
             useText = paraText.trim();
         }
+
+        const cleanUseText = useText.replace(/\s*\[[^\]]+]/g, "");
 
         try {
             const firstPara = paragraphs.items[0];
@@ -104,11 +111,11 @@ export async function saveObjectTag() {
 
             if (existing) {
                 existing.occurrences++;
-                existing.use = useText;
+                existing.use = cleanUseText;
             } else {
                 taggedObjects[objectType].push({
                     value: val,
-                    use: useText,
+                    use: cleanUseText,
                     occurrences: 1,
                 });
             }
