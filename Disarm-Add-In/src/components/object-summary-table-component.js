@@ -129,6 +129,12 @@ function openCentralNodePicker(candidates) {
             });
 
             this.classList.add("selected");
+            this.style.backgroundColor = '#55ace3';
+            this.style.color = 'white';
+            Array.from(this.cells).forEach(cell => {
+                cell.style.backgroundColor = '#55ace3';
+                cell.style.color = 'white';
+            });
             selectedCentralNode = c;
             centralNode = c;
             console.log("Selected:", c);
@@ -170,14 +176,7 @@ function openCentralNodePicker(candidates) {
 }
 
 function closeCentralNodePicker() {
-    const popup = document.getElementById("popup-central-node");
-    popup.style.display = "none";
-}
-
-function getSelectedObjectTypes() {
-    return Array.from(
-        document.querySelectorAll("#object-summary-selection input[type=checkbox]:checked")
-    ).map(cb => cb.value);
+    document.querySelectorAll("#object-summary-selection input[type=checkbox]:checked").map(cb => cb.value);
 }
 
 function extractSentenceContaining(text, value) {
