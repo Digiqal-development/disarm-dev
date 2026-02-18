@@ -26,7 +26,7 @@ export async function insertRedTable() {
     let table = [["Technique title", "ID", "Text", "Use"]];
 
     for (const matches of foundSmallBrackets) {
-      foundMiddleBrackets = matches[0].match(middleBracketRegex);
+      foundMiddleBrackets = matches[0].match(middleBracketRegex) || [];
       const commasNumber = (matches[0].match(/,/g) || []).length;
       let selectedText = helpers.extractTextFromBrackets(text, matches.index);
 
@@ -50,7 +50,7 @@ export async function insertRedTable() {
     table = helpers.sortRedSummariesTable(table, reverseJsonTechniques);
     const { processedData, headerIndexRows } = extractHeaderRows(table);
     drawTable(processedData, headerIndexRows);
-    attachJsonLink();
+    //attachJsonLink();
   });
 }
 
