@@ -53,6 +53,7 @@ export async function insertObjectSummaryTables() {
 
         if (centralCandidates.length === 1) {
             console.log("AUTO CENTRAL NODE:", centralCandidates[0]);
+            centralNode = centralCandidates[0];
         }
         console.log("CHECK popup condition", {
             count: centralCandidates.length,
@@ -104,6 +105,7 @@ export async function insertObjectSummaryTables() {
         });
 
         await context.sync();
+        await sendGraphToBackend();
     });
 }
 
@@ -182,4 +184,61 @@ function closeCentralNodePicker() {
 function extractSentenceContaining(text, value) {
     const sentences = text.split(/(?<=[.!?])/);
     return sentences.find(s => s.includes(value))?.trim() || value;
+}
+
+async function sendGraphToBackend() {
+    if(!centralNode) {
+        console.log("No central node selected.");
+        return;
+    }
+    
+    const objects = [];
+    
+    Object.keys(taggedObjects).forEach(type => {
+        taggedObjects[type].forEach(obj => {
+            if (obj.value !== centralNode.value) {
+                objects.push({
+                    name: obj.value,
+                    type: type.replace(/\s/g, "")
+                });
+            }
+        });
+    });
+    
+    const payload = {
+        centralNode: centralNode.value,
+        objects: objects,
+    };
+    
+    console.log("GRAPH PAYLOAD:", payload);
+    
+    try {
+        const response = await fetch("https://localhost:7225/knowledge-graph", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload)
+        });
+        
+        const result = await response.text();
+        console.log("GRAPH RESULT:", result);
+        
+        //opet browser 
+        window.open(
+            "http://localhost:7474/browser/?cmd=MATCH%20(n)-[r]->(m)%20RETURN%20n,r,m",
+            "_blank"
+        );
+        
+    } catch (error) {
+        console.log("Graph API Error:", error);
+    }
+}
+
+function getSelectedObjectTypes() {
+    const checkboxes = document.querySelectorAll(
+        "#object-summary-selection input[type=checkbox]:checked"
+    );
+
+    return Array.from(checkboxes).map(cb => cb.value);
 }

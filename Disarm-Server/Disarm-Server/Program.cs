@@ -4,6 +4,7 @@ using Disarm_Server.Services;
 using System.Diagnostics;
 using System.Text.Json;
 using System.Web;
+using Neo4j.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 var codes = new Dictionary<string, string>();
@@ -19,6 +20,10 @@ builder.Services.AddScoped<IAttackNavigatorService, AttackNavigatorService>();
 
 builder.Services.AddCors();
 
+builder.Services.AddSingleton<IDriver>(_ => GraphDatabase.Driver(
+    "bolt://localhost:7687",
+    AuthTokens.Basic("neo4j", "disarm123")
+));
 
 var app = builder.Build();
 
@@ -88,6 +93,38 @@ app.MapPost("/code-store", (CreateCodeRequest request) =>
 {
     codes.Add(request.Code, request.Ids);
     return Results.Ok();
+});
+
+app.MapPost("/knowledge-graph", async (IDriver driver, GraphRequest request) =>
+{
+    await using var session = driver.AsyncSession(o => o.WithDatabase("neo4j"));
+
+    //CENTRAL NODE
+    await session.RunAsync(
+        "MERGE (c {name:$name})",
+        new { name = request.CentralNode }
+    );
+
+    foreach (var obj in request.Objects)
+    {
+        await session.RunAsync(
+            $"MERGE (n:{obj.Type} {{name:$name}})",
+            new { name = obj.Name }
+        );
+    }
+
+    foreach (var obj in request.Objects)
+    {
+        await session.RunAsync(@"
+            MATCH (a {name:$central})
+            MATCH (b {name:$target})
+            WHERE a <> b
+            MERGE (a)-[:RELATED_TO]->(b)",
+            new { central = request.CentralNode, target = obj.Name }
+        );
+    }
+
+    return Results.Ok("Knowledge graph created");
 });
 
 app.Run();
