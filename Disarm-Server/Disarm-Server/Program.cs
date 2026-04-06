@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Text.Json;
 using System.Web;
 using Neo4j.Driver;
+using System.Linq;
 
 var builder = WebApplication.CreateBuilder(args);
 var codes = new Dictionary<string, string>();
@@ -124,7 +125,11 @@ app.MapPost("/knowledge-graph", async (IDriver driver, GraphRequest request) =>
         );
     }
 
-    return Results.Ok("Knowledge graph created");
+    return Results.Ok(new
+    {
+        nodes = request.Objects.Select(o => new { name = o.Name }).Append(new { name = request.CentralNode }),
+        edges = request.Objects.Select(o => new { source = request.CentralNode, target = o.Name })
+    });
 });
 
 app.Run();

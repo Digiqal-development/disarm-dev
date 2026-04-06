@@ -1,6 +1,8 @@
 /* global Word */
 
 import { taggedObjects } from "./object-tag-component.js";
+import cytoscape from "cytoscape";
+
 export let centralNode = null;
 let selectedCentralNode = null;
 
@@ -92,6 +94,28 @@ export async function insertObjectSummaryTables() {
                 3,
                 Word.InsertLocation.end
             );
+
+            table.horizontalAlignment = "Centered";
+
+            table.getCell(0, 0).columnWidth = 130;
+            table.getCell(0, 1).columnWidth = 350;
+            table.getCell(0, 2).columnWidth = 80;
+
+            const headerRow = table.rows.getFirst();
+            headerRow.set({
+                font: {
+                    bold: true,
+                    color: "#ffffff"
+                },
+                shadingColor: "#2E86C1", 
+                horizontalAlignment: "Centered"
+            });
+
+            for (let i = 1; i < items.length + 1; i++) {
+                table.getCell(i, 1).horizontalAlignment = "Left";
+                table.getCell(i, 0).verticalAlignment = "Center";
+                table.getCell(i, 2).verticalAlignment = "Center";
+            }
 
             table.getCell(0, 0).value = objectType;
             table.getCell(0, 1).value = "Use";
@@ -210,8 +234,6 @@ async function sendGraphToBackend() {
         objects: objects,
     };
     
-    console.log("GRAPH PAYLOAD:", payload);
-    
     try {
         const response = await fetch("https://localhost:7225/knowledge-graph", {
             method: "POST",
@@ -221,15 +243,123 @@ async function sendGraphToBackend() {
             body: JSON.stringify(payload)
         });
         
-        const result = await response.text();
-        console.log("GRAPH RESULT:", result);
+        const result = await response.json();
         
-        //opet browser 
-        window.open(
-            "http://localhost:7474/browser/?cmd=MATCH%20(n)-[r]->(m)%20RETURN%20n,r,m",
-            "_blank"
-        );
-        
+        const hiddenDiv = document.createElement("div");
+        hiddenDiv.style.width = "800px";
+        hiddenDiv.style.height = "600px";
+        hiddenDiv.style.position = "absolute";
+        hiddenDiv.style.left = "-9999px";
+        document.body.appendChild(hiddenDiv);
+
+        const cy = cytoscape({
+            container: hiddenDiv,
+            elements: [
+                { data: { id: centralNode.value, label: centralNode.value } },
+                ...objects.map(o => ({
+                    data: { id: o.name, label: o.name }
+                })),
+                ...objects.map(o => ({
+                    data: { source: centralNode.value, target: o.name, label: o.type }
+                }))
+            ],
+            style: [
+                {
+                    selector: "node",
+                    style: {
+                        label: "data(label)",
+
+                        "background-color": "#ffffff",   
+                        "border-width": 3,
+                        "border-color": "#0074D9",       
+
+                        color: "#0074D9",                
+
+                        "text-valign": "center",
+                        "text-halign": "center",
+
+                        width: ele => Math.max(40, ele.data("label").length * 8),
+                        height: ele => Math.max(40, ele.data("label").length * 8),
+
+                        "font-size": 10,
+                        "text-wrap": "wrap",
+                        "text-max-width": 80
+                    }
+                },
+                {
+                    selector: `node[id = "${centralNode.value}"]`,
+                    style: {
+                        "background-color": "#ffffff",   
+
+                        "border-width": 4,
+                        "border-color": "#FF4136",       
+
+                        color: "#FF4136",                
+
+                        width: 90,
+                        height: 90,
+
+                        "font-size": 16
+                    }
+                },
+                {
+                    selector: "edge",
+                    style: {
+                        width: 2,
+
+                        "line-color": "#7FB3D5",           
+                        "target-arrow-color": "#7FB3D5",
+
+                        "target-arrow-shape": "triangle",  
+                        "curve-style": "bezier",           
+
+                        label: "data(label)",
+                        "font-size": 10,
+                        "text-rotation": "autorotate",
+
+                        "text-margin-y": -5,               
+                        "text-background-color": "#ffffff",
+                        "text-background-opacity": 0.7,
+                        "text-background-padding": 2
+                    }
+                }
+            ],
+            layout: {
+                name: "cose"
+            }
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        const imageData = cy.png({
+            output: "base64",
+            bg: "#ffffff",
+        });
+
+        await Word.run(async (context) => {
+            const body = context.document.body;
+
+            const base64 = imageData.replace(/^data:image\/png;base64,/, "");
+            
+            const space = body.insertParagraph("", Word.InsertLocation.end);
+            space.spaceAfter = 20;
+            
+            const paragraph = body.insertParagraph("", Word.InsertLocation.end);
+
+            paragraph.set({
+                alignment: "Centered"
+            });
+
+            const image = paragraph.insertInlinePictureFromBase64(
+                base64,
+                Word.InsertLocation.end
+            );
+
+            image.width = 350;
+            image.height = 250;
+
+            await context.sync();
+        });
     } catch (error) {
         console.log("Graph API Error:", error);
     }
